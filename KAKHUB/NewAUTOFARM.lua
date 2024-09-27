@@ -1,4 +1,4 @@
-local Versionxx = "1.1.7"
+local Versionxx = "1.1.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -662,7 +662,7 @@ do
 
     local Section = Tabs.Spam:AddSection("Spam Skill")
 
-    local Dropdown = Tabs.Playerss:AddDropdown("DropdownPlayerrrSpam", {
+    local Dropdown = Tabs.Spam:AddDropdown("DropdownPlayerrrSpam", {
         Title = "Select Players",
         Values = players,
         Multi = false,
