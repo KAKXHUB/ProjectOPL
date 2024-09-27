@@ -1,3 +1,8 @@
+local Versionxx = "1"
+print(Versionxx)
+---------------
+
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -15,7 +20,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "gem" }),
     Quest = Window:AddTab({ Title = "Quest", Icon = "clipboard" }),
-    Start = Window:AddTab({ Title = "Stats", Icon = "list" }),
+    Start = Window:AddTab({ Title = "Stats", Icon = "barcode" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
@@ -440,7 +445,7 @@ do
     end)
 
 
-    local Section = Tabs.Misc:AddSection("Spawn")
+    --[[local Section = Tabs.Misc:AddSection("Spawn")
 
     local Toggle = Tabs.Misc:AddToggle("MyToggleLATSPW", {Title = "Auto Respawn", Default = false })
 
