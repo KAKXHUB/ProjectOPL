@@ -1,4 +1,4 @@
-local Versionxx = "1.9"
+local Versionxx = "1.1.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -641,6 +641,7 @@ do
             pcall(function()
                 if Options.MyToggleATRequirHaki.Value then
                     game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("On", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
+                    wait(0.6)
                     game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("Off", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
                 end
             end)
