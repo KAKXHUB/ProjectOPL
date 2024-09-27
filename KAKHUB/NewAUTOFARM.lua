@@ -1,4 +1,4 @@
-local Versionxx = "1.1.1"
+local Versionxx = "1.1.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -20,7 +20,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "gem" }),
     Quest = Window:AddTab({ Title = "Quest", Icon = "clipboard" }),
-    Start = Window:AddTab({ Title = "Stats", Icon = "chart-line" }),
+    Start = Window:AddTab({ Title = "Stats", Icon = "flame" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
@@ -641,7 +641,7 @@ do
             pcall(function()
                 if Options.MyToggleATRequirHaki.Value then
                     game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("On", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
-                    wait(0.6)
+                    wait(0.1)
                     game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("Off", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
                 end
             end)
