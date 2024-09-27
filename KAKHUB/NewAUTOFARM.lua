@@ -1,4 +1,4 @@
-local Versionxx = "1.2.7"
+local Versionxx = "1.2.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -495,7 +495,7 @@ do
         Title = "Refresh",
         Description = "Refresh Tool list",
         Callback = function()
-            Options.DropdownWTool:NewList(Weaponlist);
+            Options.DropdownWTool:NewList(Cache.DevConfig["ListOfBox"]);
         end
     })
 
