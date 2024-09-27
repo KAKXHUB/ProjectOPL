@@ -1,4 +1,4 @@
-local Versionxx = "1.8"
+local Versionxx = "1.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -584,6 +584,7 @@ do
 
     local Toggle = Tabs.Misc:AddToggle("MyToggleATUBSHK", {Title = "Auto Use Buso Haki", Default = false })
     local Toggle = Tabs.Misc:AddToggle("MyToggleATUKHK", {Title = "Auto Use Kenbunshoku Haki", Default = false })
+    local Toggle = Tabs.Misc:AddToggle("MyToggleATRequirHaki", {Title = "Auto Requir Haki", Default = false })
     spawn(function()
         while wait() do
             pcall(function()
@@ -630,6 +631,17 @@ do
                         game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("Off", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
                         wait(5)
                     end
+                end
+            end)
+        end
+    end)
+
+    spawn(function()
+        while wait(0.1) do
+            pcall(function()
+                if Options.MyToggleATRequirHaki.Value then
+                    game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("On", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
+                    game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("Off", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
                 end
             end)
         end
