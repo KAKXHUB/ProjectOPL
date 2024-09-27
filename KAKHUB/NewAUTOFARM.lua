@@ -1,4 +1,4 @@
-local Versionxx = "4"
+local Versionxx = "1.5"
 print("Version"..Versionxx)
 ---------------
 
@@ -20,7 +20,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "gem" }),
     Quest = Window:AddTab({ Title = "Quest", Icon = "clipboard" }),
-    Start = Window:AddTab({ Title = "Stats", Icon = "kanban" }),
+    Start = Window:AddTab({ Title = "Stats", Icon = "route" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
@@ -506,8 +506,40 @@ do
         end
     end)
 
+    local Section = Tabs.Misc:AddSection("Auto Keyboard")
 
-    --[[local Section = Tabs.HunterX:AddSection("Setting HunterX)
+    local Input = Tabs.Misc:AddInput("DelayINPUT", {
+        Title = "Delay",
+        Default = "",
+        Placeholder = "Placeholder",
+        Numeric = false, -- Only allows numbers
+        Finished = false, -- Only calls callback when you press enter
+        Callback = function(Value)
+            xpcall(function()
+                DelayINPUTVALUE = tonumber(Value) + 0
+            end, function()
+                DelayINPUTVALUE = 0
+            end)
+        end
+    })
+
+    InputxxKeyboardKey = {}
+    for i = 1, 5 do
+        local Input = Tabs.Misc:AddInput("KeyboardKeysInput", {
+            Title = "Keyboard Keys",
+            Default = "",
+            Placeholder = "Placeholder",
+            Numeric = false, -- Only allows numbers
+            Finished = false, -- Only calls callback when you press enter
+            Callback = function(Value)
+                InputxxKeyboardKey[i] = string.upper(tostring(Value))
+            end
+        })
+    end
+
+
+
+    local Section = Tabs.HunterX:AddSection("Setting HunterX")
 
     local Input = Tabs.HunterX:AddInput("WebHookINPUT", {
         Title = "WebHook",
@@ -587,7 +619,7 @@ do
                     loadstring(game:HttpGet('https://raw.githubusercontent.com/KAKXHUB/HunterX-KAKxHub/main/README.md', true))()
             end)
         end
-    end);]]
+    end);
 
 end
 
