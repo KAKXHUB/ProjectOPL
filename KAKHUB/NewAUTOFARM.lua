@@ -1,5 +1,5 @@
-local Versionxx = "1.7"
-print("Version"..Versionxx)
+local Versionxx = "1.8"
+print("Version: "..Versionxx)
 ---------------
 
 
@@ -20,7 +20,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "gem" }),
     Quest = Window:AddTab({ Title = "Quest", Icon = "clipboard" }),
-    Start = Window:AddTab({ Title = "Stats", Icon = "chart-pie" }),
+    Start = Window:AddTab({ Title = "Stats", Icon = "chart-line" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
@@ -555,6 +555,95 @@ do
             end)
         end
     end)
+
+    local Section = Tabs.Misc:AddSection("Auto Haki")
+
+    local Slider = Tabs.Misc:AddSlider("SliderDistanceHakiLimitMinimal", {
+        Title = "Haki Limit Minimal",
+        Description = "Haki function will stop only when haki limit more then haki energy",
+        Default = 50,
+        Min = 0,
+        Max = 99,
+        Rounding = 1,
+        Callback = function(Value)
+            HakiLimitMinimal = tonumber(Value)
+        end
+    })
+    
+    local Slider = Tabs.Misc:AddSlider("SliderDistanceHakiLimitMaximum", {
+        Title = "Haki Limit Maximum",
+        Description = "Haki function will working only when haki limit more then haki energy",
+        Default = 50,
+        Min = 0,
+        Max = 99,
+        Rounding = 1,
+        Callback = function(Value)
+            HakiLimitMaximum = tonumber(Value)
+        end
+    })
+
+    local Toggle = Tabs.Misc:AddToggle("MyToggleATUBSHK", {Title = "Auto Use Buso Haki", Default = false })
+    local Toggle = Tabs.Misc:AddToggle("MyToggleATUKHK", {Title = "Auto Use Kenbunshoku Haki", Default = false })
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if Options.MyToggleATUBSHK.Value then
+                    if not game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].UsingHaki.Value and game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].HakiBar.Value >= game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value / 100 * HakiLimitMaximum then
+                        game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
+                        wait(3)
+                    elseif game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].UsingHaki.Value and game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].HakiBar.Value <= game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value / 100 * HakiLimitMinimal then
+                        game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
+                        wait(3)
+                    end
+                end
+            end)
+        end
+    end)
+
+    spawn(function()
+        while wait(0.1) do
+            pcall(function()
+                if Options.MyToggleATUKHK.Value then
+                    if game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].HakiBar.Value >= game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value / 100 * HakiLimitMaximum then
+                        game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("On", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
+                    elseif game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].HakiBar.Value <= game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value / 100 * HakiLimitMinimal then
+                        game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("On", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
+                        game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("Off", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
+                    end
+                end
+            end)
+        end
+    end)
+    
+    spawn(function()
+        while wait(0.1) do
+            pcall(function()
+                if Options.MyToggleATUKHK.Value then
+                    local OldHaki = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].HakiBar.Value
+                    if OldHaki == game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value then
+                        return
+                    end
+                    wait(4.4)
+                    if OldHaki == game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].HakiBar.Value then
+                        game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("On", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
+                        wait(2)
+                        game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].III:FireServer("Off", game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.HakiLevel.Value)
+                        wait(5)
+                    end
+                end
+            end)
+        end
+    end)
+
+    local Section = Tabs.Misc:AddSection("Get Item")
+
+    Tabs.Misc:AddButton({
+        Title = "Get Seastone Cestus",
+        Description = "Need Max Melee",
+        Callback = function()
+            game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateMelee:FireServer("Seastone Cestus");
+        end
+    })
 
 
 
