@@ -1,4 +1,4 @@
-local Versionxx = "1.2.3"
+local Versionxx = "1.2.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -851,11 +851,8 @@ do
             Position = game.Players.LocalPlayer:GetMouse().Hit;
         elseif Options.DropdownTagSpamskill.Value == "Yourself" then
             Position = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame;
-        elseif Options.DropdownTagSpamskill.Value == "Players" then
-            for Name in pairs(Options.DropdownPlayerrrSpam.Value) do
-                Position = game.Players[Name].Character.HumanoidRootPart.CFrame;
-                break;
-            end
+        elseif Options.DropdownTagSpamskill.Value == "Players" then 
+            Position = game.Players[Options.DropdownPlayerrrSpam.Value].Character.HumanoidRootPart.CFrame;
         elseif Options.DropdownTagSpamskill.Value == "Monsters" then
             for _, Value in pairs(game.Workspace.Enemies:GetChildren()) do
                 Position = Value.HumanoidRootPart.CFrame;
@@ -873,6 +870,10 @@ do
                 pcall(function()
                     local plr = game:GetService("Players").LocalPlayer
                     plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey),"StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, SliderSkillChargeSpammm)
+                    if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+                        Options.MyToggleSpamSkillK.Value:SetValue(false);
+                    end
+                    wait(tonumber(DalaySpamskill or 1));
                 end)
             end
         end
