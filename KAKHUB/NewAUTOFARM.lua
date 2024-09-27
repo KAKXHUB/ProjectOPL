@@ -446,7 +446,7 @@ do
         end
     end);
 
-    local Section = Tabs.Misc:AddSection("Auto Attack")
+    --[[local Section = Tabs.Misc:AddSection("Auto Attack")
 
     local Toggle = Tabs.Misc:AddToggle("MyToggleATCOSK", {Title = "Click On Screen", Default = false })
 
@@ -497,7 +497,7 @@ do
     end)
 
 
-    --[[local Section = Tabs.HunterX:AddSection("Setting HunterX)
+    local Section = Tabs.HunterX:AddSection("Setting HunterX)
 
     local Input = Tabs.HunterX:AddInput("WebHookINPUT", {
         Title = "WebHook",
