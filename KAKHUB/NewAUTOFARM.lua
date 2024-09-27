@@ -1,4 +1,4 @@
-local Versionxx = "1.2.2"
+local Versionxx = "1.2.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -753,7 +753,7 @@ do
     local Toggle = Tabs.Spam:AddToggle("MyToggleSpamSkillK", {
         Title = "Spam Skill", 
         Description = "Toggle description",
-        Default = false
+        Default = false,
         Callback = function(state) 
             if FruitsSkill == "Magma" then
                 FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCmel"]
