@@ -1,5 +1,5 @@
-local Versionxx = "1"
-print(Versionxx)
+local Versionxx = "2"
+print("Version"..Versionxx)
 ---------------
 
 
@@ -20,11 +20,11 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "gem" }),
     Quest = Window:AddTab({ Title = "Quest", Icon = "clipboard" }),
-    Start = Window:AddTab({ Title = "Stats", Icon = "barcode" }),
+    Start = Window:AddTab({ Title = "Stats", Icon = "blinds" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
-    HunterX = Window:AddTab({ Title = "HunterX", Icon = "unplug" }),
+    HunterX = Window:AddTab({ Title = "HunterX", Icon = "computer" }),
     Dupe = Window:AddTab({ Title = "Dupe", Icon = "copy" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 
@@ -445,7 +445,7 @@ do
     end)
 
 
-    --[[local Section = Tabs.Misc:AddSection("Spawn")
+    local Section = Tabs.Misc:AddSection("Spawn")
 
     local Toggle = Tabs.Misc:AddToggle("MyToggleLATSPW", {Title = "Auto Respawn", Default = false })
 
@@ -510,7 +510,7 @@ do
     end)
 
 
-    local Section = Tabs.HunterX:AddSection("Setting HunterX)
+    --[[local Section = Tabs.HunterX:AddSection("Setting HunterX)
 
     local Input = Tabs.HunterX:AddInput("WebHookINPUT", {
         Title = "WebHook",
