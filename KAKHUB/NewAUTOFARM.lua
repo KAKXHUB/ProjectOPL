@@ -1,4 +1,4 @@
-local Versionxx = "1.1.6"
+local Versionxx = "1.1.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -711,9 +711,9 @@ do
         Callback = function(Value)
             FruitsSkillKey, NumberFruits = unpack(GetPowerFruitForKey(Value))
             if NumberFruits == 1 then
-                FruitsSkill= game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.DevilFruit.Value
+                FruitsSkill = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.DevilFruit.Value
             elseif NumberFruits == 2 then
-                FruitsSkill= game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.DevilFruit2.Value
+                FruitsSkill = game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.DevilFruit2.Value
             end
         end
     })
@@ -794,48 +794,6 @@ do
         FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCpwd"]
     end    
 
-    local FindFruitArgumet = loadstring(game:HttpGet'https://pastebin.com/raw/zF1YYPRL')();
-
-    local GetingSkillArgumet = function(Arg1)
-        if Arg1 == "M_H" then
-            return game.Players.LocalPlayer:GetMouse().Hit;
-        elseif Arg1 == "M_T" then
-            return game.Players.LocalPlayer:GetMouse().Target;
-        elseif Arg1 == "C" then
-            return SliderSkillChargeSpammm or 100;
-        elseif Arg1 == "nil" then
-            return false;
-        elseif Arg1 == "CM" then
-            return "Left";
-        elseif Arg1 == "M_H_P" then
-            return game.Players.LocalPlayer:GetMouse().Hit.Position;
-        elseif Arg1 == "ARM_P" then
-            return game.Players.LocalPlayer.Character["Right Arm"].Position;
-        elseif Arg1 == "HRP_P" then
-            return game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
-        elseif Arg1 == "DS_SL" then
-            return game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].Data.SniperLevel.Value;
-        elseif Arg1 == "DS_DL" then
-            return game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].Data.DefenseLevel.Value;
-        elseif Arg1 == "GT" then
-            local AllPlayers = {};
-            for i, v in pairs(game.Players:GetChildren()) do
-                if v.Name ~= game.Players.LocalPlayer.Name and  (game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < 1000 then
-                    table.insert(AllPlayers, v)
-                end
-            end
-            return AllPlayers;
-        elseif Arg1 == "C_GDP" then
-            local function GetDotPoint()
-                local v45 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 1000, 0);
-                local v46, v47, v48 = workspace:FindPartOnRay(Ray.new(v45, (game.Players.LocalPlayer:GetMouse().Hit.p - v45).unit * 5000), game.Players.LocalPlayer.Character);
-                return v47;
-            end;
-            return CFrame.new(GetDotPoint());
-        end
-    end
-
-
 
 
     local function GetPosition()
@@ -857,32 +815,34 @@ do
         return Position or game.Players.LocalPlayer:GetMouse().Hit;
     end
 
+
+
     spawn(function()
-        while wait(DalaySpamskill) do
-            pcall(function()
-                if Options.MyToggleSpamSkillK.Value and game.Players.LocalPlayer.Character:FindFirstChild("Powers") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
-                    if FruitKeyArgumet then
-                        local FuritTypeArgument = FindFruitArgumet:Get(FruitsSkill);
-                        game:GetService("Players").LocalPlayer.Character.Powers[FruitsSkill].RemoteEvent:FireServer(
-                            FruitKeyArgumet,
-                            string.format("%sPower%s", FruitsSkill, FruitsSkillKey),
-                            "StartCharging",
-                            GetPosition()
-                        )
-                        local Args = {FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging"};
-                        for i, v in pairs(FuritTypeArgument[string.format("Power%s", (Cache.Player.NumberFruit == 1 and FruitsSkillKey) or Cache.Player.NumberFruit == 2 and FruitsSkillKey - 6)]) do
-                            local Data = GetingSkillArgumet(v);
-                            table.insert(Args, Data)
-                        end
-                        game:GetService("Players").LocalPlayer.Character.Powers[FruitsSkill].RemoteEvent:FireServer(unpack(Args))
-                    end
-                    if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
-                        Options.MyToggleSpamSkillK.Value = false
-                    end
-                end
-            end)
+        while wait() do
+            if Options.MyToggleSpamSkillK.Value then
+                pcall(function()
+                    local plr = game:GetService("Players").LocalPlayer
+                    plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey),"StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, SliderSkillChargeSpammm)
+                end)
+            end
         end
     end)
+
+    Tabs.Spam:AddButton({
+        Title = "sheck",
+        Description = "Need Max Melee",
+        Callback = function()
+            print(FruitsSkill)
+            print(FruitKeyArgumet)
+            print(Options.DropdownTagSpamskill.Value)
+            print(Options.DropdownPlayerrrSpam.Value)
+            print(string.format("%sPower%s", FruitsSkill, FruitsSkillKey))
+            print(FruitsSkillKey)
+            print(GetPosition())
+            print(SliderSkillChargeSpammm)
+
+        end
+    })
     
 
 
