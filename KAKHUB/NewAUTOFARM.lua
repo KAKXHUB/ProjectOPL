@@ -472,24 +472,21 @@ do
         end
     end);
 
-    local Input = Tabs.Misc:AddInput("InputWeapon", {
-        Title = "Tools Name",
-        Default = "Default",
-        Placeholder = "Placeholder",
-        Numeric = false, -- Only allows numbers
-        Finished = false, -- Only calls callback when you press enter
-        Callback = function(Value)
-            for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                if v.ClassName == "Tool" and string.match(string.lower(v.Name), string.lower(tostring(Value))) then
-                    InputWeaponName = v.Name
-                end
-            end
-            for _, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-                if v.ClassName == "Tool" and string.match(string.lower(v.Name), string.lower(tostring(Value))) then
-                    InputWeaponName = v.Name
-                end
-            end
-        end
+
+    local Weaponlist = {}
+    local Weapon = nil
+
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+        table.insert(Weaponlist,v.Name)
+    end
+
+
+
+    local Dropdown = Tabs.Misc:AddDropdown("DropdownWTool", {
+        Title = "Select Tools",
+        Values = Weaponlist,
+        Multi = false,
+        Default = 1
     })
 
     local Toggle = Tabs.Misc:AddToggle("MyToggleATRQ", {Title = "Auto Equip Tool", Default = false })
@@ -500,10 +497,10 @@ do
         while wait() do
             pcall(function()
                 if Options.MyToggleATRQ.Valu and not game.Players.LocalPlayer.Character:FindFirstChild(InputWeaponName) then
-                    game.Players.LocalPlayer.Backpack:FindFirstChild(InputWeaponName).Parent = game.Players.LocalPlayer.Character
+                    game.Players.LocalPlayer.Backpack:FindFirstChild(Options.DropdownPlayerrr.Value).Parent = game.Players.LocalPlayer.Character
                 end
                 if Options.MyToggleATATVT.Valu and game.Players.LocalPlayer.Character:FindFirstChild(InputWeaponName) then
-                    game.Players.LocalPlayer.Character:FindFirstChild(InputWeaponNamee):Activate()
+                    game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownPlayerrr.Value):Activate()
                 end
             end)
         end
