@@ -1,4 +1,4 @@
-local Versionxx = "1.6"
+local Versionxx = "1.7"
 print("Version"..Versionxx)
 ---------------
 
@@ -562,7 +562,7 @@ do
 
     local Input = Tabs.HunterX:AddInput("WebHookINPUT", {
         Title = "WebHook",
-        Default = "",
+        Default = "https://discord.com/api/webhooks/921002942620893184/yritWiOPovRsBch9EMzTWuh0aKHWZy8e5KYuKrvbdU0PnxJbaSoVOnIGIFPj6tUIUe19",
         Placeholder = "Placeholder",
         Numeric = false, -- Only allows numbers
         Finished = false, -- Only calls callback when you press enter
@@ -632,7 +632,7 @@ do
                         FoundWillStop = Options.MyToggleFoundWillStop.Value, -- <boolen> if found will stop rejoin.
                         Title = "HunterX", -- <string> Title webhook.
                         Color = "10694961", -- <string> color code for webhook get here https://www.spycolor.com/ .
-                        It_Is_Latest_Version = true --<boolen> if the script you are using did't Latest if notify you for updates. and you update at Hunter v1.
+                        It_Is_Latest_Version = false --<boolen> if the script you are using did't Latest if notify you for updates. and you update at Hunter v1.
                     }
                     
                     loadstring(game:HttpGet('https://raw.githubusercontent.com/KAKXHUB/HunterX-KAKxHub/main/README.md', true))()
