@@ -1,4 +1,4 @@
-local Versionxx = "1.1.5"
+local Versionxx = "1.1.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -796,19 +796,47 @@ do
 
     local FindFruitArgumet = loadstring(game:HttpGet'https://pastebin.com/raw/zF1YYPRL')();
 
-
-
-
-    spawn(function()
-        while wait(0.1) do
-            pcall(function()
-                if Options.MyToggleSpamSkillK.Value then
-                    local plr = game:GetService("Players").LocalPlayer
-                    plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey),"StopCharging",plr.Character.HumanoidRootPart.CFrame,workspace.IslandSnowyMountains.Stone.Stone,100)
+    local GetingSkillArgumet = function(Arg1)
+        if Arg1 == "M_H" then
+            return game.Players.LocalPlayer:GetMouse().Hit;
+        elseif Arg1 == "M_T" then
+            return game.Players.LocalPlayer:GetMouse().Target;
+        elseif Arg1 == "C" then
+            return SliderSkillChargeSpammm or 100;
+        elseif Arg1 == "nil" then
+            return false;
+        elseif Arg1 == "CM" then
+            return "Left";
+        elseif Arg1 == "M_H_P" then
+            return game.Players.LocalPlayer:GetMouse().Hit.Position;
+        elseif Arg1 == "ARM_P" then
+            return game.Players.LocalPlayer.Character["Right Arm"].Position;
+        elseif Arg1 == "HRP_P" then
+            return game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
+        elseif Arg1 == "DS_SL" then
+            return game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].Data.SniperLevel.Value;
+        elseif Arg1 == "DS_DL" then
+            return game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].Data.DefenseLevel.Value;
+        elseif Arg1 == "GT" then
+            local AllPlayers = {};
+            for i, v in pairs(game.Players:GetChildren()) do
+                if v.Name ~= game.Players.LocalPlayer.Name and  (game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < 1000 then
+                    table.insert(AllPlayers, v)
                 end
-            end)
+            end
+            return AllPlayers;
+        elseif Arg1 == "C_GDP" then
+            local function GetDotPoint()
+                local v45 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 1000, 0);
+                local v46, v47, v48 = workspace:FindPartOnRay(Ray.new(v45, (game.Players.LocalPlayer:GetMouse().Hit.p - v45).unit * 5000), game.Players.LocalPlayer.Character);
+                return v47;
+            end;
+            return CFrame.new(GetDotPoint());
         end
-    end)
+    end
+
+
+
 
     local function GetPosition()
         if Options.DropdownTagSpamskill.Value == "Mouse" then
@@ -940,6 +968,17 @@ do
             end)
         end
     end);
+
+    local Section = Tabs.Dupe:AddSection("Dupe < OPL: Anarchy >")
+
+    Tabs.Dupe:AddButton({
+        Title = "Get Seastone Cestus",
+        Description = "Need Max Melee",
+        Callback = function()
+            game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateMelee:FireServer("Seastone Cestus");
+        end
+    })
+
 
 end
 
