@@ -1,4 +1,4 @@
-local Versionxx = "1.1.3"
+local Versionxx = "1.1.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -669,6 +669,39 @@ do
         Default = 1
     })
 
+
+
+    --[[local MultiDropdown = Tabs.Spam:AddDropdown("DropdownDevillFruitsSpamskill", {
+        Title = "Devill Fruits",
+        Description = "You can select multiple values.",
+        Values = Cache.DevConfig["ListOfDevillFruit"],
+        Multi = true,
+        Default = {""},
+    })]]
+
+    local GetPowerFruitForKey = function(InputKey)
+        local Export = {};
+        local TableOfKey = {
+            A = 1,
+            B = 2,
+            C = 3,
+            D = 4,
+            E = 5,
+            F = 6
+        }
+        for _, v in pairs(game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data:GetChildren()) do
+            if v.Name:find("Basic_DF") and v.Value == string.upper(InputKey) then
+                Export[1] = TableOfKey[v.Name:split("")[10]]
+                Export[2] = 1
+                if v.Name:match("%d") == "2" then
+                    Export[1] += 6
+                    Export[2] = 2
+                end
+            end
+        end
+        return Export;
+    end
+
     local Input = Tabs.Spam:AddInput("SkillKeyINPUT", {
         Title = "Skill Key",
         Default = "",
@@ -676,7 +709,12 @@ do
         Numeric = false, -- Only allows numbers
         Finished = false, -- Only calls callback when you press enter
         Callback = function(Value)
-            SkillKeyinputtt = Value
+            FruitsSkillKey, NumberFruits = unpack(GetPowerFruitForKey(Value))
+            if NumberFruits == 1 then
+                FruitsSkill= game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.DevilFruit.Value
+            elseif NumberFruits == 2 then
+                FruitsSkill= game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.DevilFruit2.Value
+            end
         end
     })
 
@@ -712,145 +750,112 @@ do
 
     local Toggle = Tabs.Spam:AddToggle("MyToggleSpamSkillK", {Title = "Spam Skill", Default = false })
 
+
+
+
+
+    if FruitsSkill == "Magma" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCmel"]
+    elseif FruitsSkill == "Gas" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCtb"]
+    elseif FruitsSkill == "Sand" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCaufn"]
+    elseif FruitsSkill == "Dark" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjebaj"]
+    elseif FruitsSkill == "Chilly" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCewddsfe"]
+    elseif FruitsSkill == "Rumble" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCzyhf"]    
+    elseif FruitsSkill == "Snow" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCqkxtn"]
+    elseif FruitsSkill == "Light" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCrv"]
+    elseif FruitsSkill == "String" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjwbvx"]
+    elseif FruitsSkill == "Flare" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCmgwcm"]
+    elseif FruitsSkill == "Love" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCwxt"]
+    elseif FruitsSkill == "Phoenix" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCytb"]
+    elseif FruitsSkill == "Quake" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCebvc"]
+    elseif FruitsSkill == "Candy" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCdhabvd"]
+    elseif FruitsSkill == "Bomb" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCcpkghc"]
+    elseif FruitsSkill == "Venom" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCiuew"]
+    elseif FruitsSkill == "Rumble1" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCwnuy"]
+    elseif FruitsSkill == "Gravity" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjh"]
+    elseif FruitsSkill == "Plasma" then
+        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCpwd"]
+    end    
+
+    local FindFruitArgumet = loadstring(game:HttpGet'https://pastebin.com/raw/zF1YYPRL')();
+
+
+
+
     spawn(function()
-        local GetingSkillArgumet = function(Arg1)
-            if Arg1 == "M_H" then
-                local Position;
-                if Options.DropdownTagSpamskill.Value == "Mouse" then
-                    Position = game.Players.LocalPlayer:GetMouse().Hit;
-                elseif Options.DropdownTagSpamskill.Valuee == "Yourself" then
-                    Position = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame;
-                elseif Options.DropdownTagSpamskill.Value == "Players" then
-                    for Name in pairs(Options.DropdownPlayerrrSpam.Value) do
-                        local Ply =  game.Players[Name];
-                        if Ply and Ply.Character and Ply.Character:FindFirstChild("HumanoidRootPart") and Ply.Character:FindFirstChild("Humanoid") and Ply.Character.Humanoid.Health > 0 then
-                            Position = Ply.Character.HumanoidRootPart.CFrame;
-                            break;
-                        end
-                    end
-                elseif Options.DropdownTagSpamskill.Value == "Monsters" then
-                    for _, Value in pairs(game.Workspace.Enemies:GetChildren()) do
-                        if Value:FindFirstChild("HumanoidRootPart") and Value:FindFirstChild("Humanoid") and Value.Humanoid.Health > 0 then
-                            Position = Value.HumanoidRootPart.CFrame;
-                            break;
-                        end
-                    end
-                end
-                if not Position then
-                    Position = game.Players.LocalPlayer:GetMouse().Hit;
-                end
-                return  Position;
-            elseif Arg1 == "M_T" then
-                return game.Players.LocalPlayer:GetMouse().Target;
-            elseif Arg1 == "C" then
-                return tonumber(SliderSkillChargeSpammm or 100);
-            elseif Arg1 == "nil" then
-                return false;
-            elseif Arg1 == "CM" then
-                return "Left";
-            elseif Arg1 == "M_H_P" then
-                return game.Players.LocalPlayer:GetMouse().Hit.Position;
-            elseif Arg1 == "ARM_P" then
-                return game.Players.LocalPlayer.Character["Right Arm"].Position;
-            elseif Arg1 == "HRP_P" then
-                return game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
-            elseif Arg1 == "DS_SL" then
-                return game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].Data.SniperLevel.Value;
-            elseif Arg1 == "DS_DL" then
-                return game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].Data.DefenseLevel.Value;
-            elseif Arg1 == "GT" then
-                local AllPlayers = {};
-                for i, v in pairs(game.Players:GetChildren()) do
-                    if v.Name ~= game.Players.LocalPlayer.Name and  (game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position - v.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < 1000 then
-                        table.insert(AllPlayers, v)
-                    end
-                end
-                return AllPlayers;
-            elseif Arg1 == "C_GDP" then
-                local function GetDotPoint()
-                    local v45 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0, 1000, 0);
-                    local v46, v47, v48 = workspace:FindPartOnRay(Ray.new(v45, (game.Players.LocalPlayer:GetMouse().Hit.p - v45).unit * 5000), game.Players.LocalPlayer.Character);
-                    return v47;
-                end;
-                return CFrame.new(GetDotPoint());
-            end
-        end;
-        local GetPowerFruitForKey = function(InputKey)
-            local Export = {};
-            local TableOfKey = {
-                A = 1,
-                B = 2,
-                C = 3,
-                D = 4,
-                E = 5,
-                F = 6
-            }
-            for _, v in pairs(game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data:GetChildren()) do
-                if v.Name:find("Basic_DF") and v.Value == string.upper(InputKey) then
-                    Export[1] = TableOfKey[v.Name:split("")[10]]
-                    Export[2] = 1
-                    if v.Name:match("%d") == "2" then
-                        Export[1] += 6
-                        Export[2] = 2
-                    end
-                end
-            end
-            return Export;
-        end;
-        local function GetPosition()
-            if Options.DropdownTagSpamskill.Value == "Mouse" then
-                Position = game.Players.LocalPlayer:GetMouse().Hit;
-            elseif Options.DropdownTagSpamskill.Value == "Yourself" then
-                Position = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame;
-            elseif Options.DropdownTagSpamskill.Value == "Players" then
-                for Name in pairs(Options.DropdownPlayerrrSpam.Value) do
-                    Position = game.Players[Name].Character.HumanoidRootPart.CFrame;
-                    break;
-                end
-            elseif Options.DropdownTagSpamskill.Value == "Monsters" then
-                for _, Value in pairs(game.Workspace.Enemies:GetChildren()) do
-                    Position = Value.HumanoidRootPart.CFrame;
-                    break;
-                end
-            end
-            return Position or game.Players.LocalPlayer:GetMouse().Hit;
-        end
-        while wait() do
+        while wait(0.1) do
             pcall(function()
-                if not Options.MyToggleSpamSkillK.Value or not game.Players.LocalPlayer.Character:FindFirstChild("Powers") or not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or not game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then return end;
-                local KeyList = {"Z", "X", "C", "V", "B", "N"};
-                local DevilFruit_Name;
-                for Key in pairs(SkillKeyinputtt) do
-                    if table.find(KeyList, Key) then
-                        DevilFruit_Name = game:GetService("Workspace").UserData["User_" .. game.Players.LocalPlayer.UserId].Data.DevilFruit.Value;
-                    else
-                        DevilFruit_Name = game:GetService("Workspace").UserData["User_" .. game.Players.LocalPlayer.UserId].Data.DevilFruit2.Value;
-                    end
-                    print(DevilFruit_Name);
-                    local KeyOfFruit, CountOfFruit = unpack(GetPowerFruitForKey(Key));
-                    local FuritTypeArgument = Cache.DevConfig["FindFruitArgumet"]:Get(DevilFruit_Name);
-                    local KeyOfArgument = getsenv(game.Players.LocalPlayer.Character.Powers[DevilFruit_Name])["VTC"];
-                    game:GetService("Players").LocalPlayer.Character.Powers[DevilFruit_Name].RemoteEvent:FireServer(
-                        KeyOfArgument,
-                        string.format("%sPower%s", DevilFruit_Name, KeyOfFruit),
-                        "StartCharging",
-                        GetPosition()
-                    );
-                    local Args = {KeyOfArgument, string.format("%sPower%s", DevilFruit_Name, KeyOfFruit), "StopCharging"};
-    
-                    for _, Value in pairs(FuritTypeArgument[string.format("Power%s", (CountOfFruit == 1 and KeyOfFruit) or CountOfFruit == 2 and KeyOfFruit - 6)]) do
-                        local Data = GetingSkillArgumet(Value);
-                        table.insert(Args, Data);
-                    end
-                    game:GetService("Players").LocalPlayer.Character.Powers[DevilFruit_Name].RemoteEvent:FireServer(unpack(Args));
-                    if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
-                        Options.MyToggleSpamSkillK.Value:SetValue(false);
-                    end
+                if Options.MyToggleSpamSkillK.Value then
+                    local plr = game:GetService("Players").LocalPlayer
+                    plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey),"StopCharging",plr.Character.HumanoidRootPart.CFrame,workspace.IslandSnowyMountains.Stone.Stone,100)
                 end
-                wait(tonumber(DalaySpamskill or 1));
             end)
         end
-    end);
+    end)
+
+    local function GetPosition()
+        if Options.DropdownTagSpamskill.Value == "Mouse" then
+            Position = game.Players.LocalPlayer:GetMouse().Hit;
+        elseif Options.DropdownTagSpamskill.Value == "Yourself" then
+            Position = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame;
+        elseif Options.DropdownTagSpamskill.Value == "Players" then
+            for Name in pairs(Options.DropdownPlayerrrSpam.Value) do
+                Position = game.Players[Name].Character.HumanoidRootPart.CFrame;
+                break;
+            end
+        elseif Options.DropdownTagSpamskill.Value == "Monsters" then
+            for _, Value in pairs(game.Workspace.Enemies:GetChildren()) do
+                Position = Value.HumanoidRootPart.CFrame;
+                break;
+            end
+        end
+        return Position or game.Players.LocalPlayer:GetMouse().Hit;
+    end
+
+    spawn(function()
+        while wait(DalaySpamskill) do
+            pcall(function()
+                if Options.MyToggleSpamSkillK.Value and game.Players.LocalPlayer.Character:FindFirstChild("Powers") and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+                    if FruitKeyArgumet then
+                        local FuritTypeArgument = FindFruitArgumet:Get(FruitsSkill);
+                        game:GetService("Players").LocalPlayer.Character.Powers[FruitsSkill].RemoteEvent:FireServer(
+                            FruitKeyArgumet,
+                            string.format("%sPower%s", FruitsSkill, FruitsSkillKey),
+                            "StartCharging",
+                            GetPosition()
+                        )
+                        local Args = {FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging"};
+                        for i, v in pairs(FuritTypeArgument[string.format("Power%s", (Cache.Player.NumberFruit == 1 and FruitsSkillKey) or Cache.Player.NumberFruit == 2 and FruitsSkillKey - 6)]) do
+                            local Data = GetingSkillArgumet(v);
+                            table.insert(Args, Data)
+                        end
+                        game:GetService("Players").LocalPlayer.Character.Powers[FruitsSkill].RemoteEvent:FireServer(unpack(Args))
+                    end
+                    if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
+                        Options.MyToggleSpamSkillK.Value = false
+                    end
+                end
+            end)
+        end
+    end)
+    
 
 
 
