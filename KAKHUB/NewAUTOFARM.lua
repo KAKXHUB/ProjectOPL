@@ -1,4 +1,4 @@
-local Versionxx = "1.5"
+local Versionxx = "1.6"
 print("Version"..Versionxx)
 ---------------
 
@@ -20,7 +20,7 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "gem" }),
     Quest = Window:AddTab({ Title = "Quest", Icon = "clipboard" }),
-    Start = Window:AddTab({ Title = "Stats", Icon = "route" }),
+    Start = Window:AddTab({ Title = "Stats", Icon = "chart-pie" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
@@ -536,6 +536,25 @@ do
             end
         })
     end
+
+    local Toggle = Tabs.Misc:AddToggle("MyToggleATKBB", {Title = "Auto Keyboard", Default = false })
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if Options.MyToggleATKBB.Value then
+                    wait(DelayINPUTVALUE)
+                    for _, Value in pairs(InputxxKeyboardKey) do
+                        if Value ~= " " or Value ~= "" then
+                            game:GetService("VirtualInputManager"):SendKeyEvent(true, Value, false, game)
+                            game:GetService("VirtualInputManager"):SendKeyEvent(false, Value, false, game)                  
+                        end
+                        wait(0.1)
+                    end
+                end
+            end)
+        end
+    end)
 
 
 
