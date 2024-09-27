@@ -1,4 +1,4 @@
-local Versionxx = "1.2.0"
+local Versionxx = "1.2.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -755,7 +755,7 @@ do
     FruitKeyArgumet = {}
 
 
-    function FruitsVTC()
+
         if FruitsSkill == "Magma" then
             table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCmel"])
         elseif FruitsSkill == "Gas" then
@@ -795,7 +795,7 @@ do
         elseif FruitsSkill == "Plasma" then
             table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCpwd"])
         end    
-    end
+
 
 
 
