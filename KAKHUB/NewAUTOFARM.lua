@@ -1,4 +1,4 @@
-local Versionxx = "2"
+local Versionxx = "3"
 print("Version"..Versionxx)
 ---------------
 
@@ -496,11 +496,11 @@ do
     spawn(function()
         while wait() do
             pcall(function()
-                if Options.MyToggleATRQ.Valu and not game.Players.LocalPlayer.Character:FindFirstChild(InputWeaponName) then
-                    game.Players.LocalPlayer.Backpack:FindFirstChild(Options.DropdownPlayerrr.Value).Parent = game.Players.LocalPlayer.Character
+                if Options.MyToggleATRQ.Valu and not game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value) then
+                    game.Players.LocalPlayer.Backpack:FindFirstChild(Options.DropdownWTool.Value).Parent = game.Players.LocalPlayer.Character
                 end
-                if Options.MyToggleATATVT.Valu and game.Players.LocalPlayer.Character:FindFirstChild(InputWeaponName) then
-                    game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownPlayerrr.Value):Activate()
+                if Options.MyToggleATATVT.Valu and game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value) then
+                    game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value):Activate()
                 end
             end)
         end
