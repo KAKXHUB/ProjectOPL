@@ -1,4 +1,4 @@
-local Versionxx = "1.2.6"
+local Versionxx = "1.2.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -489,6 +489,14 @@ do
         Values = Weaponlist,
         Multi = false,
         Default = 1
+    })
+
+    Tabs.Misc:AddButton({
+        Title = "Refresh",
+        Description = "Refresh Tool list",
+        Callback = function()
+            Options.DropdownWTool:NewList(Weaponlist);
+        end
     })
 
     local Toggle = Tabs.Misc:AddToggle("MyToggleATRQ", {Title = "Auto Equip Tool", Default = false })
