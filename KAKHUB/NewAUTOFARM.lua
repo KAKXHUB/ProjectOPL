@@ -1,4 +1,4 @@
-local Versionxx = "3"
+local Versionxx = "4"
 print("Version"..Versionxx)
 ---------------
 
@@ -8,7 +8,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "AUTOFARM " .. Fluent.Version,
+    Title = "AUTOFARM " .. Versionxx,
     SubTitle = "by PeetJKA",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
@@ -20,11 +20,11 @@ local Window = Fluent:CreateWindow({
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "gem" }),
     Quest = Window:AddTab({ Title = "Quest", Icon = "clipboard" }),
-    Start = Window:AddTab({ Title = "Stats", Icon = "blinds" }),
+    Start = Window:AddTab({ Title = "Stats", Icon = "kanban" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
-    HunterX = Window:AddTab({ Title = "HunterX", Icon = "computer" }),
+    HunterX = Window:AddTab({ Title = "HunterX", Icon = "radio" }),
     Dupe = Window:AddTab({ Title = "Dupe", Icon = "copy" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 
@@ -496,10 +496,10 @@ do
     spawn(function()
         while wait() do
             pcall(function()
-                if Options.MyToggleATRQ.Valu and not game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value) then
+                if Options.MyToggleATRQ.Value and not game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value) then
                     game.Players.LocalPlayer.Backpack:FindFirstChild(Options.DropdownWTool.Value).Parent = game.Players.LocalPlayer.Character
                 end
-                if Options.MyToggleATATVT.Valu and game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value) then
+                if Options.MyToggleATATVT.Value and game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value) then
                     game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value):Activate()
                 end
             end)
