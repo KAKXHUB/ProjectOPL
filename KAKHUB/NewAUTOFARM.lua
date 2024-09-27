@@ -1,4 +1,4 @@
-local Versionxx = "1.1.8"
+local Versionxx = "1.1.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -752,47 +752,51 @@ do
 
 
 
+    FruitKeyArgumet = {}
 
 
-    if FruitsSkill == "Magma" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCmel"]
-    elseif FruitsSkill == "Gas" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCtb"]
-    elseif FruitsSkill == "Sand" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCaufn"]
-    elseif FruitsSkill == "Dark" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjebaj"]
-    elseif FruitsSkill == "Chilly" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCewddsfe"]
-    elseif FruitsSkill == "Rumble" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCzyhf"]    
-    elseif FruitsSkill == "Snow" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCqkxtn"]
-    elseif FruitsSkill == "Light" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCrv"]
-    elseif FruitsSkill == "String" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjwbvx"]
-    elseif FruitsSkill == "Flare" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCmgwcm"]
-    elseif FruitsSkill == "Love" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCwxt"]
-    elseif FruitsSkill == "Phoenix" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCytb"]
-    elseif FruitsSkill == "Quake" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCebvc"]
-    elseif FruitsSkill == "Candy" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCdhabvd"]
-    elseif FruitsSkill == "Bomb" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCcpkghc"]
-    elseif FruitsSkill == "Venom" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCiuew"]
-    elseif FruitsSkill == "Rumble1" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCwnuy"]
-    elseif FruitsSkill == "Gravity" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjh"]
-    elseif FruitsSkill == "Plasma" then
-        FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCpwd"]
-    end    
+    function FruitsVTC()
+        if FruitsSkill == "Magma" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCmel"])
+        elseif FruitsSkill == "Gas" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCtb"])
+        elseif FruitsSkill == "Sand" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCaufn"])
+        elseif FruitsSkill == "Dark" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjebaj"])
+        elseif FruitsSkill == "Chilly" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCewddsfe"])
+        elseif FruitsSkill == "Rumble" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCzyhf"])    
+        elseif FruitsSkill == "Snow" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCqkxtn"])
+        elseif FruitsSkill == "Light" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCrv"])
+        elseif FruitsSkill == "String" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjwbvx"])
+        elseif FruitsSkill == "Flare" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCmgwcm"])
+        elseif FruitsSkill == "Love" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCwxt"])
+        elseif FruitsSkill == "Phoenix" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCytb"])
+        elseif FruitsSkill == "Quake" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCebvc"])
+        elseif FruitsSkill == "Candy" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCdhabvd"])
+        elseif FruitsSkill == "Bomb" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCcpkghc"])
+        elseif FruitsSkill == "Venom" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCiuew"])
+        elseif FruitsSkill == "Rumble1" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCwnuy"])
+        elseif FruitsSkill == "Gravity" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCjh"])
+        elseif FruitsSkill == "Plasma" then
+            table.insert(FruitKeyArgumet, getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCpwd"])
+        end    
+    end
+
 
 
 
