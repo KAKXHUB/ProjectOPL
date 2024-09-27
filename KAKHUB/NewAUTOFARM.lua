@@ -1,4 +1,4 @@
-local Versionxx = "1.1.9"
+local Versionxx = "1.2.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -844,7 +844,9 @@ do
             print(FruitsSkillKey)
             print(GetPosition())
             print(SliderSkillChargeSpammm)
-
+            for i, v in pairs(FruitKeyArgumet) do
+                print(i, v)
+            end
         end
     })
     
