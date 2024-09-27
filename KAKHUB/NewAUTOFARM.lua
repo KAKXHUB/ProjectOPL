@@ -1,4 +1,4 @@
-local Versionxx = "1.1.4"
+local Versionxx = "1.1.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -740,8 +740,8 @@ do
         Title = "Skill Charge",
         Description = "",
         Default = 100,
-        Min = 100,
-        Max = 1,
+        Min = 1,
+        Max = 100,
         Rounding = 1,
         Callback = function(Value)
             SliderSkillChargeSpammm = tonumber(Value)
