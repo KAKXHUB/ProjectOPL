@@ -426,20 +426,19 @@ do
         end
     end)
 
-
     spawn(function()
         while wait() do
             pcall(function()
-                local Ply = Options.DropdownPlayerrr.Value
                 if Options.MyToggleBPLY.Value then
-                    Ply.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 2) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * DistancePlayer
+                    game.Players[Options.DropdownPlayerrr.Value].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 2) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.lookVector * DistancePlayer
                 end
                 if Options.MyToggleLTLPP.Value then
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  Ply.Character.HumanoidRootPart.CFrame * CFrame.new(2, 0, 0) + Ply.Character.HumanoidRootPart.CFrame.lookVector * DistancePlayer
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  game.Players[Options.DropdownPlayerrr.Value].Character.HumanoidRootPart.CFrame * CFrame.new(2, 0, 0) + game.Players[Options.DropdownPlayerrr.Value].Character.HumanoidRootPart.CFrame.lookVector * DistancePlayer
                 end
             end)
         end
     end)
+
 
     local Section = Tabs.Misc:AddSection("Spawn")
 
