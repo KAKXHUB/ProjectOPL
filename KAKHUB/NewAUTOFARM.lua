@@ -1,4 +1,4 @@
-local Versionxx = "1.4.0"
+local Versionxx = "1.4.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -496,6 +496,7 @@ do
         print(newOptions)
         print(newOptions[1])
         DropdownWTool:SetValue(newOptions[1])
+        DropdownWTool.Values = newOptions
     end
 
 
