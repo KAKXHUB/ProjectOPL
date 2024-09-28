@@ -1,4 +1,4 @@
-local Versionxx = "1.2.8"
+local Versionxx = "1.2.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -491,11 +491,18 @@ do
         Default = 1
     })
 
+    local function updateDropdownOptions()
+    local newOptions = {Weaponlist}
+    DropdownWTool:SetValue(newOptions[1]) 
+    DropdownWTool.Values = newOptions
+    end
+
+
     Tabs.Misc:AddButton({
         Title = "Refresh",
         Description = "Refresh Tool list",
         Callback = function()
-            Options.DropdownWTool:NewList(Cache.DevConfig["ListOfBox"]);
+            updateDropdownOptions()
         end
     })
 
