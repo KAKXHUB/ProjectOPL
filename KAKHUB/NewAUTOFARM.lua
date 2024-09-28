@@ -1,4 +1,4 @@
-local Versionxx = "1.5.2"
+local Versionxx = "1.5.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -23,6 +23,7 @@ local Tabs = {
     Start = Window:AddTab({ Title = "Stats", Icon = "flame" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
+    --Teleport = Window:AddTab({ Title = "Teleport", Icon = "house" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
     HunterX = Window:AddTab({ Title = "HunterX", Icon = "radio" }),
     Dupe = Window:AddTab({ Title = "Dupe", Icon = "copy" }),
@@ -686,6 +687,9 @@ do
         end
     })
 
+
+
+
     local Section = Tabs.Spam:AddSection("Spam Skill")
 
     local DropdownPlayerrrSpam = Tabs.Spam:AddDropdown("DropdownPlayerrrSpam", {
@@ -1146,32 +1150,7 @@ do
     end);
 
 
-    spawn(function()
-        while wait(0.4) do
-            if not Options.MyToggleIncreaseC.Value then
-                pcall(function()
-                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Compass") then
-                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack["Compass"])
-                    end
-                    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-                        if v.Name == "Compass" then
-                            if not workspace.UserData["User"..game.Players.LocalPlayer.UserId].Data.QQQ_Weekly3.Value == true then
-                                local args = {[1] = "Claim",[2] = "Weekly3"}workspace:WaitForChild("UserData"):WaitForChild("User"..game.Players.LocalPlayer.UserId):WaitForChild("ChallengesRemote"):FireServer(unpack(args))
-                            else
-                                workspace:WaitForChild("UserData"):WaitForChild("User_"..game.Players.LocalPlayer.UserId):WaitForChild("Stats"):FireServer()
-                            end
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Poser.Value) * CFrame.new(0,-0,0)
-                            if game.Players.LocalPlayer.Character:FindFirstChild("Compass") then
-                                game.Players.LocalPlayer.Character.Compass:Activate()
-                            end
-                        else
-                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4831, 570, -7070)
-                        end
-                    end
-                end)
-            end
-        end
-    end)
+
     local Section = Tabs.Dupe:AddSection("Dupe Drink Water!!")
     local SelectWaterDropdown = Tabs.Dupe:AddDropdown("SelectWaterDropdown", {
         Title = "Select Water",
