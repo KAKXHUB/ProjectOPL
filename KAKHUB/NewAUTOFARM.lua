@@ -1,4 +1,4 @@
-local Versionxx = "1.4.9"
+local Versionxx = "1.5.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1029,12 +1029,210 @@ do
     local Section = Tabs.Dupe:AddSection("Dupe < OPL: Anarchy >")
 
     Tabs.Dupe:AddButton({
-        Title = "Get Seastone Cestus",
-        Description = "Need Max Melee",
+        Title = "No Save Data",
+        Description = "",
         Callback = function()
-            game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateMelee:FireServer("Seastone Cestus");
+            workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateClothing_Extras:FireServer("A", "\255", 34)
+            game:GetService("Players").LocalPlayer.Character.CharacterTrait.ClothingTrigger:FireServer() 
         end
     })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleDestroyBox", {Title = "Destroy Common box", Default = false })
+    local player = game.Players.LocalPlayer -- ใช้ใน LocalScript
+    local backpack = player:FindFirstChildOfClass("Backpack")
+    local function removeTools()
+        local toolsToRemove = {"Common Box", "Uncommon Box"} -- รายชื่อ Tool ที่ต้องการลบ
+        for _, toolName in ipairs(toolsToRemove) do
+            local tool = backpack:FindFirstChild(toolName) -- ค้นหา Tool ตามชื่อ
+            if tool then
+                tool:Destroy() -- ลบ Tool ออกจาก Backpack
+                print(toolName .. " has been removed.")
+            else
+                print(toolName .. " not found.")
+            end
+        end
+    end
+    
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleDestroyBox.Value then return end;
+                removeTools() 
+            end)
+        end
+    end);
+
+    local Section = Tabs.Dupe:AddSection("Dupe Compass!!")
+    local Input = Tabs.Dupe:AddInput("TimeToCompassINPUT", {
+        Title = "Time To Compass",
+        Default = 0.5,
+        Placeholder = "Placeholder",
+        Numeric = false,
+        Finished = false, 
+    })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoSamQuest", {Title = "Sam Quest", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoCompassQ", {Title = "Compass Quest", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoUbf", {Title = "Unbox", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoDropC", {Title = "Drop Compass", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoLootC", {Title = "Loot Compass", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleIncreaseC", {Title = "Increase Compass but starts reset!!", Default = false })
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoSamQuest.Value then return end;
+                game.Workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer("Claim10");
+                game.Workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer("Claim10");
+                game.Workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer("Claim10");
+                game.Workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer("Claim10");
+            end)
+        end
+    end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoCompassQ.Value then return end;
+                local Compass = game.Players.LocalPlayer.Backpack:FindFirstChild("Compass");
+                local Compass2 = game.Players.LocalPlayer.Character:FindFirstChild("Compass");
+                if Compass or Compass2 then
+                    local OldPostiton = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
+                    game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+                    Compass.Parent = game.Players.LocalPlayer.Character;
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Compass.Poser.Value);
+                    Compass:Activate();
+                    wait(Options.TimeToCompassINPUT.Value);
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(OldPostiton);
+                end
+            end)
+        end
+    end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoUbf.Value then return end;
+                for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if table.find(Cache.DevConfig["ListOfBox"], Value.Name) then
+                        game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+                        Value.Parent = game.Players.LocalPlayer.Character;
+                        Value:Activate();
+                    end
+                end
+            end)
+        end
+    end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoDropC.Value then return end;
+                for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+                    Value.Parent = game.Players.LocalPlayer.Character;
+                    Value.Parent = game.Workspace;
+                end
+            end)
+        end
+    end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoLootC.Value then return end;
+                for _, Item in pairs(game.Workspace:GetChildren()) do
+                    if Item.Name == "Compass" and Item:FindFirstChild("Handle") then
+                        Item.Handle.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position);
+                    end
+                end
+            end)
+        end
+    end);
+
+    while Options.MyToggleIncreaseC.Value do wait(0.4)
+        if game.Players.LocalPlayer.Backpack:FindFirstChild("Compass") then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack["Compass"])
+        end
+        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            if v.Name == "Compass" then
+                if not workspace.UserData["User"..game.Players.LocalPlayer.UserId].Data.QQQ_Weekly3.Value == true then
+                    local args = {[1] = "Claim",[2] = "Weekly3"}workspace:WaitForChild("UserData"):WaitForChild("User"..game.Players.LocalPlayer.UserId):WaitForChild("ChallengesRemote"):FireServer(unpack(args))
+                else
+                    workspace:WaitForChild("UserData"):WaitForChild("User_"..game.Players.LocalPlayer.UserId):WaitForChild("Stats"):FireServer()
+                end
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Poser.Value) * CFrame.new(0,-0,0)
+                if game.Players.LocalPlayer.Character:FindFirstChild("Compass") then
+                    game.Players.LocalPlayer.Character.Compass:Activate()
+                end
+            else
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4831, 570, -7070)
+            end
+        end
+    end
+    local Section = Tabs.Dupe:AddSection("Dupe Drink Water!!")
+    local SelectWaterDropdown = Tabs.Dupe:AddDropdown("SelectWaterDropdown", {
+        Title = "Select Water",
+        Values = Cache.DevConfig["ListOfDrink"],
+        Multi = false,
+        Default = ""
+    })
+    local Input = Tabs.Dupe:AddInput("AmountDrinkINPUT", {
+        Title = "Amount Drink",
+        Default = 1,
+        Placeholder = "Placeholder",
+        Numeric = false,
+        Finished = false, 
+    })
+    Tabs.Dupe:AddButton({
+        Title = "Buy Drink",
+        Description = "Buy Drink",
+        Callback = function()
+            if not Options.AmountDrinkINPUT.Value or not string.match(Options.AmountDrinkINPUT.Value, "%d+") or tonumber(string.match(Options.AmountDrinkINPUT.Value, "%d+")) < 0 then return end;
+            for _ = 1, tonumber(string.match(Options.AmountDrinkINPUT.Value, "%d+")) do
+                game.Workspace.Merchants.BetterDrinkMerchant.Clickable.Retum:FireServer(Options.SelectWaterDropdown.Value)
+            end
+        end
+    })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoDrinkWater", {Title = "Drink", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoDrinkDrop", {Title = "Drop", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoDrinkLoot", {Title = "Loot", Default = false })
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoDrinkWater.Value then return end;
+                for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if table.find(Cache.DevConfig["ListOfDrink"], Value.Name) then
+                        game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+                        Value.Parent = game.Players.LocalPlayer.Character;
+                        Value:Activate();
+                    end
+                end
+            end)
+        end
+    end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoDrinkDrop.Value then return end;
+                for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if table.find(Cache.DevConfig["ListOfDrink"], Value.Name) then
+                        game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+                        Value.Parent = game.Players.LocalPlayer.Character;
+                        Value.Parent = game.Workspace;
+                    end
+                end
+            end)
+        end
+    end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoDrinkLoot.Value then return end;
+                for _, Item in pairs(game.Workspace:GetChildren()) do
+                    if table.find(Cache.DevConfig["ListOfDrink"], Item.Name) and Item:FindFirstChild("Handle") then
+                        Item.Handle.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position);
+                    end
+                end
+            end)
+        end
+    end);
 
 
 end
