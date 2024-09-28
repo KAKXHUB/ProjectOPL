@@ -1,4 +1,4 @@
-local Versionxx = "1.4.7"
+local Versionxx = "1.4.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -158,27 +158,29 @@ do
 
     end
     
-    local Dropdown = Tabs.Main:AddDropdown("DropdownPlayer", {
+    local DropdownPlayer = Tabs.Main:AddDropdown("DropdownPlayer", {
         Title = "Select Players",
         Values = players,
         Multi = false,
         Default = 1
     })
 
+    local function updateDropdownPlayerOptions()
+        players = {}
+        for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        table.insert(players,v.Name)
+        end
+        DropdownPlayer.Values = players
+        DropdownPlayer:SetValue(Options.DropdownPlayer.Value)
+    end
+
 
 
     Tabs.Main:AddButton({
-        Title = "Reset Player",
-        Description = "Reset player list",
+        Title = "Refresh Player",
+        Description = "Refresh player list",
         Callback = function()
-            players = {}
-
-            for i,v in pairs(game:GetService("Players"):GetChildren()) do
-        
-            table.insert(players,v.Name)
-        
-            end
-            Dropdown:SetValue(players)
+            updateDropdownPlayerOptions()
         end
     })
 
@@ -358,28 +360,28 @@ do
     local Section = Tabs.Playerss:AddSection("Setting Taget")
 
     
-    local Dropdown = Tabs.Playerss:AddDropdown("DropdownPlayerrr", {
+    local DropdownPlayerrr = Tabs.Playerss:AddDropdown("DropdownPlayerrr", {
         Title = "Select Players",
         Values = players,
         Multi = false,
         Default = 1
     })
 
-
+    local function updateDropdownPlayerrrOptions()
+        players = {}
+        for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        table.insert(players,v.Name)
+        end
+        DropdownPlayerrr.Values = players
+        DropdownPlayerrr:SetValue(Options.DropdownPlayerrr.Value)
+    end
 
 
     Tabs.Playerss:AddButton({
-        Title = "Reset Player",
-        Description = "Reset Player List",
+        Title = "Refresh Player",
+        Description = "Refresh Player List",
         Callback = function()
-            players = {}
-
-            for i,v in pairs(game:GetService("Players"):GetChildren()) do
-        
-            table.insert(players,v.Name)
-        
-            end
-            Dropdown:SetValue(players)
+            updateDropdownPlayerrrOptions()
         end
     })
 
@@ -493,7 +495,7 @@ do
 
 
 
-    local function updateDropdownOptions()
+    local function updateDropdownWToolOptions()
         local WeaponlistNew = {}
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             table.insert(WeaponlistNew,v.Name)
@@ -508,7 +510,7 @@ do
         Title = "Refresh",
         Description = "Refresh Tool list",
         Callback = function()
-            updateDropdownOptions()
+            updateDropdownWToolOptions()
         end
     })
 
@@ -691,6 +693,23 @@ do
         Values = players,
         Multi = false,
         Default = 1
+    })
+
+    local function updateDropdownPlayerrrSpamOptions()
+        players = {}
+        for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        table.insert(players,v.Name)
+        end
+        DropdownPlayerrrSpam.Values = players
+        DropdownPlayerrrSpam:SetValue(Options.DropdownPlayerrrSpam.Value)
+    end
+
+    Tabs.Spam:AddButton({
+        Title = "Refresh Player",
+        Description = "Refresh Player List",
+        Callback = function()
+            updateDropdownPlayerrrSpamOptions()
+        end
     })
 
 
