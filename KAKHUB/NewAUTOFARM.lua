@@ -1,4 +1,4 @@
-local Versionxx = "1.3.6"
+local Versionxx = "1.3.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -492,12 +492,20 @@ do
     })
 
     local function updateDropdownOptions()
-    DropdownWTool.Values = Weaponlist
+    print(Weaponlist)
     end
 
 
     Tabs.Misc:AddButton({
         Title = "Refresh",
+        Description = "Refresh Tool list",
+        Callback = function()
+            updateDropdownOptions()
+        end
+    })
+
+    Tabs.Misc:AddButton({
+        Title = "check",
         Description = "Refresh Tool list",
         Callback = function()
             updateDropdownOptions()
