@@ -1,4 +1,4 @@
-local Versionxx = "1.3.0"
+local Versionxx = "1.3.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -484,7 +484,7 @@ do
 
 
 
-    local Dropdown = Tabs.Misc:AddDropdown("DropdownWTool", {
+    local DropdownWTool = Tabs.Misc:AddDropdown("DropdownWTool", {
         Title = "Select Tools",
         Values = Weaponlist,
         Multi = false,
