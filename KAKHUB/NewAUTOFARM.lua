@@ -1,4 +1,4 @@
-local Versionxx = "1.5.4"
+local Versionxx = "1.5.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1080,7 +1080,8 @@ do
                 if not Options.MyToggleFrezMob.Value then return end;
                 for _, monster in pairs(workspace.Enemies:GetDescendants()) do
                     if monster:IsA("Model") and monster:FindFirstChild("Humanoid") then
-                        monster:SetPrimaryPartCFrame(CFrame.new(1063, 217, 3353)))
+                        --monster:SetPrimaryPartCFrame(CFrame.new(1063, 217, 3353)))
+                        print(monster)
                     end
                 end
             end)
