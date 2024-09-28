@@ -1,4 +1,4 @@
-local Versionxx = "1.5.9"
+local Versionxx = "1.6.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -948,7 +948,7 @@ do
             if Options.MyToggleSpamSkillK.Value then
                 pcall(function()
                     local plr = game:GetService("Players").LocalPlayer
-                    plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging", game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging") --, game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                     plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, SliderSkillChargeSpammm)
                     if game.Players.LocalPlayer.Character.Humanoid.Health <= 0 then
                         Options.MyToggleSpamSkillK.Value:SetValue(false);
