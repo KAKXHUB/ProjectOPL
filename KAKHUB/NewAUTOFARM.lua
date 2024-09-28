@@ -871,7 +871,7 @@ do
             elseif FruitsSkill == "Plasma" then
                 FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCpwd"]
             elseif FruitsSkill == "Quake" then
-                FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCebvc]
+                FruitKeyArgumet = getsenv(game.Players.LocalPlayer.Character.Powers[FruitsSkill])["VTCebvc"]
             end   
         end 
     })
