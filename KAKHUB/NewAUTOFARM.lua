@@ -1,4 +1,4 @@
-local Versionxx = "1.3.8"
+local Versionxx = "1.3.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -492,9 +492,10 @@ do
     })
 
     local function updateDropdownOptions()
-        for i, value in ipairs(Weaponlist) do
-            print(i, value) -- แสดงดัชนีและค่าในตาราง
-        end
+        local newOptions = {Weaponlist}
+        print(newOptions)
+        print(newOptions[1])
+        DropdownWTool:SetValue(newOptions[1])
     end
 
 
