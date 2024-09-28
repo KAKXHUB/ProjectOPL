@@ -1,4 +1,4 @@
-local Versionxx = "1.5.3"
+local Versionxx = "1.5.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -960,6 +960,13 @@ do
             Webhookkkk = Value
         end
     })
+    Tabs.HunterX:AddButton({
+        Title = "Rejoin",
+        Description = "",
+        Callback = function()
+            game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+        end
+    })
 
     local Input = Tabs.HunterX:AddInput("DelayHunterINPUT", {
         Title = "Delay",
@@ -1041,6 +1048,7 @@ do
         end
     })
     local Toggle = Tabs.Dupe:AddToggle("MyToggleDestroyBox", {Title = "Destroy Common box", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleFrezMob", {Title = "Freeze Monters", Default = false })
     local player = game.Players.LocalPlayer -- ใช้ใน LocalScript
     local backpack = player:FindFirstChildOfClass("Backpack")
     local function removeTools()
@@ -1055,6 +1063,7 @@ do
             end
         end
     end
+
     
 
     spawn(function()
@@ -1062,6 +1071,18 @@ do
             pcall(function()
                 if not Options.MyToggleDestroyBox.Value then return end;
                 removeTools() 
+            end)
+        end
+    end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleFrezMob.Value then return end;
+                for _, monster in pairs(workspace.Enemies:GetDescendants()) do
+                    if monster:IsA("Model") and monster:FindFirstChild("Humanoid") then
+                        monster:SetPrimaryPartCFrame(CFrame.new(1063, 217, 3353)))
+                    end
+                end
             end)
         end
     end);
