@@ -1,4 +1,4 @@
-local Versionxx = "1.5.6"
+local Versionxx = "1.5.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1056,10 +1056,7 @@ do
         for _, toolName in ipairs(toolsToRemove) do
             local tool = backpack:FindFirstChild(toolName) -- ค้นหา Tool ตามชื่อ
             if tool then
-                tool:Destroy() -- ลบ Tool ออกจาก Backpack
-                print(toolName .. " has been removed.")
-            else
-                print(toolName .. " not found.")
+                tool:Destroy() 
             end
         end
     end
@@ -1075,7 +1072,7 @@ do
         end
     end);
     spawn(function()
-        while wait() do
+        while wait(1) do
             pcall(function()
                 if not Options.MyToggleFrezMob.Value then return end;
                 for _, monster in pairs(workspace.Enemies:GetDescendants()) do
