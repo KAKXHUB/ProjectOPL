@@ -1,4 +1,4 @@
-local Versionxx = "1.3.4"
+local Versionxx = "1.3.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -492,7 +492,7 @@ do
     })
 
     local function updateDropdownOptions()
-    local newOptions = {Weaponlist}
+    local newOptions = Weaponlist
     print(newOptions)
     DropdownWTool:SetValue(1) 
     DropdownWTool.Values = newOptions
