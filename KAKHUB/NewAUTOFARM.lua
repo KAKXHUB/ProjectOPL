@@ -1,4 +1,4 @@
-local Versionxx = "1.6.1"
+local Versionxx = "1.6.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -949,8 +949,7 @@ do
                 pcall(function()
                     local plr = game:GetService("Players").LocalPlayer
                     if FruitsSkill == "Quake" then
-                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging", "Right") 
-                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, SliderSkillChargeSpammm, game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", workspace.IslandSnowyMountains.Stone.Stone, GetPosition(), SliderSkillChargeSpammm, game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
                     else
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging", game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) 
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", workspace.IslandSnowyMountains.Stone.Stone, GetPosition(), SliderSkillChargeSpammm)
