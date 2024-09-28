@@ -1,4 +1,4 @@
-local Versionxx = "1.4.3"
+local Versionxx = "1.4.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -488,19 +488,16 @@ do
         Title = "Select Tools",
         Values = Weaponlist,
         Multi = false,
-        Default = 1
+        Default = ""
     })
 
     local function updateDropdownOptions()
         local WeaponlistNew = {}
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             table.insert(WeaponlistNew,v.Name)
-            print(i,v)
         end
         local newOptions = WeaponlistNew
-        print(newOptions)
-        print(newOptions[1])
-        DropdownWTool:SetValue(newOptions[1])
+        DropdownWTool:SetValue(Options.DropdownWTool.Value)
         DropdownWTool.Values = newOptions
     end
 
@@ -513,13 +510,7 @@ do
         end
     })
 
-    Tabs.Misc:AddButton({
-        Title = "check",
-        Description = "Refresh Tool list",
-        Callback = function()
-            updateDropdownOptions()
-        end
-    })
+
 
 
     local Toggle = Tabs.Misc:AddToggle("MyToggleATRQ", {Title = "Auto Equip Tool", Default = false })
