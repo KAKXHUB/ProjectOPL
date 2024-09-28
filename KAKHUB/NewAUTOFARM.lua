@@ -1,4 +1,4 @@
-local Versionxx = "1.4.4"
+local Versionxx = "1.4.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -492,13 +492,8 @@ do
     })
 
     local function updateDropdownOptions()
-        local WeaponlistNew = {}
-        for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-            table.insert(WeaponlistNew,v.Name)
-        end
-        local newOptions = WeaponlistNew
+        DropdownWTool.Values = Weaponlist
         DropdownWTool:SetValue(Options.DropdownWTool.Value)
-        DropdownWTool.Values = newOptions
     end
 
 
