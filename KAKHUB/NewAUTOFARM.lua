@@ -1,4 +1,4 @@
-local Versionxx = "1.5.7"
+local Versionxx = "1.5.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -449,6 +449,34 @@ do
         end
     end)
 
+    local Section = Tabs.Playerss:AddSection("Hitbox")
+    local Input = Tabs.Playerss:AddInput("InputHitBoxSize", {
+        Title = "Hit Box Size",
+        Default = "",
+        Placeholder = "Placeholder",
+        Numeric = false, 
+        Finished = false
+    })
+    local Toggle = Tabs.Playerss:AddToggle("MyToggleStartHitBox", {Title = "Start Hit Box", Default = false })
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleStartHitBox.Value then return end;
+                local HitBox = Options.InputHitBoxSize.Value
+                for _, v in pairs(game.Players:GetChildren()) do
+                    if v.Character:FindFirstChild("HumanoidRootPart") and v.Name ~= game.Players.LocalPlayer.Name then
+                        v.Character.HumanoidRootPart.Size = Vector3.new(HitBox, HitBox, HitBox);
+                        v.Character.HumanoidRootPart.Transparency = 0.9;
+                        v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue");
+                        v.Character.HumanoidRootPart.Material = "Neon";
+                        v.Character.HumanoidRootPart.CanCollide = false;
+                    end
+                end
+            end)
+        end
+    end)
+
+
 
     local Section = Tabs.Misc:AddSection("Spawn")
 
@@ -676,6 +704,8 @@ do
             end)
         end
     end)
+
+
 
     local Section = Tabs.Misc:AddSection("Get Item")
 
@@ -1077,7 +1107,7 @@ do
                 if not Options.MyToggleFrezMob.Value then return end;
                 for _, monster in pairs(workspace.Enemies:GetDescendants()) do
                     if monster:IsA("Model") and monster:FindFirstChild("Humanoid") then
-                        monster:SetPrimaryPartCFrame(CFrame.new(1063, 217, 3353))
+                        monster:SetPrimaryPartCFrame(CFrame.new(50000, 3500, 80000))
                     end
                 end
             end)
