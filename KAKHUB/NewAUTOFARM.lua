@@ -1,4 +1,4 @@
-local Versionxx = "1.3.2"
+local Versionxx = "1.3.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -493,7 +493,8 @@ do
 
     local function updateDropdownOptions()
     local newOptions = {Weaponlist}
-    DropdownWTool:SetValue(Weaponlist[1]) 
+    print(newOptions[1])
+    DropdownWTool:SetValue(newOptions[1]) 
     DropdownWTool.Values = newOptions
     end
 
@@ -506,13 +507,6 @@ do
         end
     })
 
-    Tabs.Misc:AddButton({
-        Title = "Check",
-        Description = "Refresh Tool list",
-        Callback = function()
-            print(Weaponlist[1]))
-        end
-    })
 
     local Toggle = Tabs.Misc:AddToggle("MyToggleATRQ", {Title = "Auto Equip Tool", Default = false })
     local Toggle = Tabs.Misc:AddToggle("MyToggleATATVT", {Title = "Auto Activate Tool", Default = false })
