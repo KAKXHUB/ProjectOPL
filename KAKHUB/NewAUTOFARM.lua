@@ -1,4 +1,4 @@
-local Versionxx = "1.6.3"
+local Versionxx = "1.6.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -108,6 +108,7 @@ do
     })
 
     local Toggle = Tabs.Main:AddToggle("MyToggleSTD", {Title = "Start Auto Die", Default = false })
+    local Toggle = Tabs.Main:AddToggle("MyToggleTlpPosit", {Title = "Teleport Position", Default = false })
 
 
     spawn(function()
@@ -133,6 +134,14 @@ do
             end)
         end
     end)
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleTlpPosit.Value then return end;
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game.Workspace.Spawns.Spawn1.CFrame)
+            end)
+        end
+    end);
 
 
     local Section = Tabs.Main:AddSection("Player2")
