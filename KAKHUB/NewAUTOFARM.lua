@@ -1,4 +1,4 @@
-local Versionxx = "1.6.5"
+local Versionxx = "1.6.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -111,7 +111,7 @@ do
     local Toggle = Tabs.Main:AddToggle("MyToggleTlpPosit", {Title = "Teleport Position", Default = false })
 
 
-    spawn(function()
+    --[[spawn(function()
         while wait(3) do
             pcall(function()
                 if Options.MyToggleSTD.Value then
@@ -132,6 +132,39 @@ do
                     end
                 end
             end)
+        end
+    end)]]
+    AutodieDebug = 0
+    spawn(function()
+        while wait(1) do
+            if Options.MyToggleSTD.Value and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid") and game.Players.LocalPlayer.Character.Humanoid ~= 0 and game.Players.LocalPlayer.PlayerGui:FindFirstChild("Blindness") then
+                pcall(function()
+                    repeat
+                        wait()
+                    until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Blindness")
+                    if game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y >= 20000 then
+                        game.Players.LocalPlayer.Character.CamScript.ClientServerClient:FireServer()
+                        game.Players.LocalPlayer.Character.Weapons:FireServer()
+                        game.Players.LocalPlayer.Character.CharacterTrait.ClothingTrigger:FireServer()
+                        AutodieDebug = 0
+                        wait(3)
+                    else
+                        wait(1)
+                        local player = game.Players.LocalPlayer
+                        local character = player.Character or player.CharacterAdded:Wait()
+                        local humanoid = character:FindFirstChildOfClass("Humanoid")
+
+                        if humanoid then
+                            humanoid.Health = 0
+                        end
+                        AutodieDebug += 1
+                        if Cache.AutoDie.Debug >= 6 then
+                            game.Players.LocalPlayer.Character.Humanoid:Destroy()
+                            AutodieDebug = 0
+                        end
+                    end
+                end)
+            end
         end
     end)
     spawn(function()
