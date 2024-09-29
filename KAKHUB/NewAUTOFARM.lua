@@ -1,4 +1,4 @@
-local Versionxx = "1.6.6"
+local Versionxx = "1.6.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -301,6 +301,18 @@ do
                             v.Handle.CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
                         end
                     end
+            end)
+        end
+    end);
+
+    local Section = Tabs.Quest:AddSection("Mission")
+    local Toggle = Tabs.Quest:AddToggle("MyToggleGetMis", {Title = "Get Mission", Default = false })
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleGetMis.Value or game:GetService("Workspace").UserData["User_"..game.Players.LocalPlayer.UserId].Data.MissionObjective.Value ~= "None" then return end;
+                game.Workspace.Merchants.ExpertiseMerchant.Clickable.Retum:FireServer();
             end)
         end
     end);
