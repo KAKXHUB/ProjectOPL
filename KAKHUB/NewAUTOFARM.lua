@@ -1,4 +1,4 @@
-local Versionxx = "1.6.7"
+local Versionxx = "1.6.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -406,8 +406,119 @@ do
         end
     end);
 
+    local Section = Tabs.Start:AddSection("Affinity")
 
+    Tabs.Start:AddButton({
+        Title = "Open Affinity",
+        Description = "Open Affinity",
+        Callback = function()
+            fireclickdetector(game:GetService("Workspace").Merchants.AffinityMerchant.Clickable.ClickDetector)
+        end
+    })
 
+    local Dropdown = Tabs.Start:AddDropdown("DropdownSelectPayWith", {
+        Title = "Pay With",
+        Values = {"Cash", "Gems"},
+        Multi = false,
+        Default = 1
+    })
+
+    local Slider = Tabs.Start:AddSlider("SliderMeleeStats", {
+        Title = "Melee Stats",
+        Description = "Melee Stats",
+        Default = 1,
+        Min = 0,
+        Max = 10,
+        Rounding = 0,
+        Callback = function(Value)
+            print("Slider was changed:", Value)
+        end
+    })
+    local Slider = Tabs.Start:AddSlider("SliderSwordStats", {
+        Title = "Sword Stats",
+        Description = "Sword Stats",
+        Default = 1,
+        Min = 0,
+        Max = 10,
+        Rounding = 0,
+        Callback = function(Value)
+            print("Slider was changed:", Value)
+        end
+    })
+    local Slider = Tabs.Start:AddSlider("SliderSniperStats", {
+        Title = "Sniper Stats",
+        Description = "Sniper Stats",
+        Default = 1,
+        Min = 0,
+        Max = 10,
+        Rounding = 0,
+        Callback = function(Value)
+            print("Slider was changed:", Value)
+        end
+    })
+    local Slider = Tabs.Start:AddSlider("SliderDefenseStats", {
+        Title = "Defense Stats",
+        Description = "Defense Stats",
+        Default = 1,
+        Min = 0,
+        Max = 10,
+        Rounding = 0,
+        Callback = function(Value)
+            print("Slider was changed:", Value)
+        end
+    })
+    local MultiDropdown = Tabs.Start:AddDropdown("MultiDropdownLockStats", {
+        Title = "Lock Stats",
+        Description = "You can select multiple values.",
+        Values = {"Melee", "Sword", "Sniper", "Defense"},
+        Multi = true,
+        Default = {},
+    })
+
+    local Toggle = Tabs.Start:AddToggle("MyToggleRandomFruit1", {Title = "Random Fruit 1", Default = false })
+    local Toggle = Tabs.Start:AddToggle("MyToggleRandomFruit2", {Title = "Random Fruit 2", Default = false })
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleRandomFruit1.Value or not Options.DropdownSelectPayWith.Value then return end;
+                local Count = 0;
+                for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options.Slider" .. Value .. "Stats.Value ~= 0 then continue end;
+                    Count += 1;
+                end
+                if Count == 4 then
+                    game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT1", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
+                    wait(10);
+                else
+                    Fluent:Notify({Title = "Done!", OptioDuration = 5});
+                    Options.MyToggleRandomFruit1:SetValue(false);
+                    wait(1);
+                end
+            end)
+        end
+    end);
+    
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Toggles["Miscellaneous:Right 2:Fruit Stats:Random Fruit 2"].Value or Options["Miscellaneous:Right 2:Fruit Stats:Pay With"].Value then return end;
+                local Count = 0;
+                for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT2" .. Value].Value, 1) * 10) >= Options["Miscellaneous:Right 2:Fruit Stats:" .. Value .. " Stats"].Value and Options["Miscellaneous:Right 2:Fruit Stats:" .. Value .. " Stats"].Value ~= 0 then continue end;
+                    Count += 1;
+                end
+                if Count == 4 then
+                    game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT2", Options["Miscellaneous:Right 2:Fruit Stats:Lock Stats"].Value["Defense"] or false, Options["Miscellaneous:Right 2:Fruit Stats:Lock Stats"].Value["Melee"] or false, Options["Miscellaneous:Right 2:Fruit Stats:Lock Stats"].Value["Sniper"] or false, Options["Miscellaneous:Right 2:Fruit Stats:Lock Stats"].Value["Sword"] or false, Options["Miscellaneous:Right 2:Fruit Stats:Pay With"].Value)
+                    wait(10);
+                else
+                    Library:Notify("Done!");
+                    Toggles["Miscellaneous:Right 2:Fruit Stats:Random Fruit 2"]:SetValue(false);
+                    wait(1);
+                end
+            end)
+        end
+    end);
 
 
     -------------------------------
