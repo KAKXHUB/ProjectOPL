@@ -1,4 +1,4 @@
-local Versionxx = "1.9.3"
+local Versionxx = "1.9.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -273,6 +273,15 @@ do
             end)
         end
     end);
+
+    Tabs.Main:AddButton({
+        Title = "Check",
+        Description = "Buy Drink",
+        Callback = function()
+            print(game.Players:FindFirstChild(Options.DropdownPlayer.Value))
+            print(InputxxKeyboardKeyTagetdie)
+        end
+    })
 
 
 
