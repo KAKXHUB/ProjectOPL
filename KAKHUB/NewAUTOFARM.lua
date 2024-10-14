@@ -1,4 +1,4 @@
-local Versionxx = "1.6.8"
+local Versionxx = "1.6.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -499,7 +499,7 @@ do
         end
     end);
     
-    spawn(function()
+   --[[ spawn(function()
         while wait() do
             pcall(function()
                 if not Toggles["Miscellaneous:Right 2:Fruit Stats:Random Fruit 2"].Value or Options["Miscellaneous:Right 2:Fruit Stats:Pay With"].Value then return end;
@@ -518,7 +518,7 @@ do
                 end
             end)
         end
-    end);
+    end);]]
 
 
     -------------------------------
