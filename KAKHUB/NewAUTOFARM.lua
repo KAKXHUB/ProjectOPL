@@ -1,4 +1,4 @@
-local Versionxx = "1.7.9"
+local Versionxx = "1.8.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -429,7 +429,7 @@ do
         Default = 1,
         Min = 0,
         Max = 10,
-        Rounding = 0,
+        Rounding = 1,
         Callback = function(Value)
             print("Slider was changed:", Value)
         end
@@ -440,7 +440,7 @@ do
         Default = 1,
         Min = 0,
         Max = 10,
-        Rounding = 0,
+        Rounding = 1,
         Callback = function(Value)
             print("Slider was changed:", Value)
         end
@@ -451,7 +451,7 @@ do
         Default = 1,
         Min = 0,
         Max = 10,
-        Rounding = 0,
+        Rounding = 1,
         Callback = function(Value)
             print("Slider was changed:", Value)
         end
@@ -462,7 +462,7 @@ do
         Default = 1,
         Min = 0,
         Max = 10,
-        Rounding = 0,
+        Rounding = 1,
         Callback = function(Value)
             print("Slider was changed:", Value)
         end
