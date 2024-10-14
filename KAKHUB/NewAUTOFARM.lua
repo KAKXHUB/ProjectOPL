@@ -1,4 +1,4 @@
-local Versionxx = "1.9.6"
+local Versionxx = "1.9.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -236,7 +236,7 @@ do
     })
 
     local Section = Tabs.Main:AddSection("Auto Keybord when Taget die")
-    InputxxKeyboardKeyTagetdie = {}
+    --[[InputxxKeyboardKeyTagetdie = {}
     local Input = Tabs.Main:AddInput("KeyboardKeyTagetdieInput", {
         Title = "Keyboard Keys",
         Default = "",
@@ -273,7 +273,53 @@ do
                 end
             end)
         end
-    end);
+    end);]]
+
+
+    InputxxKeyboardKeyTagetdie = {}
+
+    local Input = Tabs.Main:AddInput("KeyboardKeyTagetdieInput", {
+        Title = "Keyboard Keys",
+        Default = "",
+        Placeholder = "Placeholder",
+        Numeric = false,
+        Finished = false,
+        Callback = function(Value)
+            table.insert(InputxxKeyboardKeyTagetdie, string.upper(tostring(Value)))  -- ใช้ table.insert เพื่อเก็บคีย์
+        end
+    })
+
+    local Toggle = Tabs.Main:AddToggle("MyToggleStartKeyboardKeyTagetdie", {Title = "Start", Default = false })
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleStartKeyboardKeyTagetdie.Value then return end
+                
+                local player = game.Players:FindFirstChild(Options.DropdownPlayer.Value)
+                if player then
+                    local character = player.Character or player.CharacterAdded:Wait()
+                    local humanoid = character:FindFirstChild("Humanoid")
+                    
+                    if humanoid then
+                        if humanoid.Health == 0 then
+                            for _, Value in pairs(InputxxKeyboardKeyTagetdie) do
+                                if Value ~= " " and Value ~= "" then  -- แก้ไขที่นี่
+                                    game:GetService("VirtualInputManager"):SendKeyEvent(true, Value, false, game)
+                                    game:GetService("VirtualInputManager"):SendKeyEvent(false, Value, false, game)                  
+                                end
+                            end
+                            wait(2)
+                        end
+                    else
+                        print("No Humanoid found for player: " .. player.Name)
+                    end
+                end
+            end)
+        end
+    end)
+
+
 
     Tabs.Main:AddButton({
         Title = "Check",
