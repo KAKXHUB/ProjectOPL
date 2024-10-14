@@ -1,4 +1,4 @@
-local Versionxx = "1.8.6"
+local Versionxx = "1.8.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -517,7 +517,7 @@ do
                     Count += 1;
                 end
                 if Count == 4 then
-                    game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT1", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
+                    workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT1", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
                     wait(10);
                 else
                     Fluent:Notify({Title = "Done!", OptioDuration = 5});
@@ -538,7 +538,7 @@ do
                     Count += 1;
                 end
                 if Count == 4 then
-                    game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT2", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
+                    workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT2", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
                     wait(10);
                 else
                     Fluent:Notify({Title = "Done!", OptioDuration = 5});
