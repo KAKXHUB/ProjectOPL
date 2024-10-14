@@ -1,4 +1,4 @@
-local Versionxx = "1.9.4"
+local Versionxx = "1.9.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -258,12 +258,13 @@ do
                     local humanoid = character:FindFirstChild("Humanoid")
                     if humanoid then
                         if humanoid.Health == 0 then
-                            for _, Value in pairs(InputxxKeyboardKeyTagetdie) do
+                            --[[for _, Value in pairs(InputxxKeyboardKeyTagetdie) do
                                 if Value ~= " " or Value ~= "" then
                                     game:GetService("VirtualInputManager"):SendKeyEvent(true, Value, false, game)
                                     game:GetService("VirtualInputManager"):SendKeyEvent(false, Value, false, game)                  
                                 end
-                            end
+                            end]]
+                            print("Die")
                             wait(2)
                         end
                     else
