@@ -1,4 +1,4 @@
-local Versionxx = "1.7.8"
+local Versionxx = "1.7.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -526,7 +526,7 @@ do
         Callback = function()
             for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
                 print(math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10))
-                print("Options.Slider" .. Value .. "Stats.Value") 
+                print(Options["Slider" .. Value .. "Stats"].Value) 
             end
         end
     })
