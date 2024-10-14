@@ -1,4 +1,4 @@
-local Versionxx = "1.9.0"
+local Versionxx = "1.9.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -467,8 +467,9 @@ do
             print("Slider was changed:", Value)
         end
     })]]
+
     
-    local Input = Tabs.Start:AddInput("InputMeleeStats", {
+    --[[local Input = Tabs.Start:AddInput("InputMeleeStats", {
         Title = "Melee Stats",
         Default = 1,
         Placeholder = "Max 10",
@@ -495,6 +496,31 @@ do
         Placeholder = "Max 10",
         Numeric = false, 
         Finished = false
+    })]]
+
+    local Dropdown = Tabs.Start:AddDropdown("DropdownMeleeStats", {
+        Title = "Melee Stats",
+        Values = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+        Multi = false,
+        Default = 1
+    })
+    local Dropdown = Tabs.Start:AddDropdown("DropdownSwordStats", {
+        Title = "Sword Stats",
+        Values = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+        Multi = false,
+        Default = 1
+    })
+    local Dropdown = Tabs.Start:AddDropdown("DropdownSniperStats", {
+        Title = "Sniper Stats",
+        Values = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+        Multi = false,
+        Default = 1
+    })
+    local Dropdown = Tabs.Start:AddDropdown("DropdownDefenseStats", {
+        Title = "Defense Stats",
+        Values = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+        Multi = false,
+        Default = 1
     })
     local MultiDropdown = Tabs.Start:AddDropdown("MultiDropdownLockStats", {
         Title = "Lock Stats",
@@ -513,14 +539,9 @@ do
                 if not Options.MyToggleRandomFruit1.Value or not Options.DropdownSelectPayWith.Value then return end;
                 local Count = 0;
                 for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                    if Options["Input" .. Value .. "Stats"].Value ~= 0 or math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) < Options["Input" .. Value .. "Stats"].Value then
-                        Count += 1
-                    end
-                end
-                --[[for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options["Input" .. Value .. "Stats"].Value and Options["Input" .. Value .. "Stats"].Value ~= 0 then continue end;
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options["Dropdown" .. Value .. "Stats"].Value and Options["Dropdown" .. Value .. "Stats"].Value ~= 0 then continue end;
                     Count += 1;
-                end]]
+                end
                 print(Count)
                 if Count == 4 then
                     game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT1", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
@@ -540,7 +561,7 @@ do
                 if not Options.MyToggleRandomFruit2.Value or Options.DropdownSelectPayWith.Value then return end;
                 local Count = 0;
                 for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT2" .. Value].Value, 1) * 10) >= Options["Input" .. Value .. "Stats"].Value and Options["Input" .. Value .. "Stats"].Value ~= 0 then continue end;
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT2" .. Value].Value, 1) * 10) >= Options["Dropdown" .. Value .. "Stats"].Value and Options["Dropdown" .. Value .. "Stats"].Value ~= 0 then continue end;
                     Count += 1;
                 end
                 if Count == 4 then
@@ -561,7 +582,7 @@ do
         Callback = function()
             for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
                 print(math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10))
-                print(Options["Input" .. Value .. "Stats"].Value) 
+                print(Options["Dropdown" .. Value .. "Stats"].Value) 
                 print(Options.MultiDropdownLockStats.Value["Defense"] or false)
                 print(Options.DropdownSelectPayWith.Value)
                 Fluent:Notify({Title = "Done!", OptioDuration = 5});
