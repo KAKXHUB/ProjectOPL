@@ -1,4 +1,4 @@
-local Versionxx = "1.8.8"
+local Versionxx = "1.8.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -513,15 +513,15 @@ do
                 if not Options.MyToggleRandomFruit1.Value or not Options.DropdownSelectPayWith.Value then return end;
                 local Count = 0;
                 for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options["Input" .. Value .. "Stats"].Value and Options["Input" .. Value .. "Stats"].Value ~= 0 then goto continue end;
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options["Input" .. Value .. "Stats"].Value and Options["Input" .. Value .. "Stats"].Value ~= 0 then continue end;
                     Count += 1;
-                    ::continue::
                 end
+                print(Count)
                 if Count == 4 then
-                    workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT1", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
+                    game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT1", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
                     wait(10);
                 else
-                    Fluent:Notify({Title = "Done!", OptioDuration = 5});
+                    Fluent:Notify({Title = "Done!", Content = "This is a notification", SubContent = "SubContent", OptioDuration = 5});
                     Options.MyToggleRandomFruit1:SetValue(false);
                     wait(1);
                 end
@@ -539,10 +539,10 @@ do
                     Count += 1;
                 end
                 if Count == 4 then
-                    workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT2", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
+                    game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT2", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
                     wait(10);
                 else
-                    Fluent:Notify({Title = "Done!", OptioDuration = 5});
+                    Fluent:Notify({Title = "Done!", Content = "This is a notification", SubContent = "SubContent", OptioDuration = 5});
                     Options.MyToggleRandomFruit2:SetValue(false);
                     wait(1);
                 end
