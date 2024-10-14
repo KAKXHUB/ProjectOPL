@@ -1,4 +1,4 @@
-local Versionxx = "1.9.5"
+local Versionxx = "1.9.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -244,7 +244,7 @@ do
         Numeric = false, -- Only allows numbers
         Finished = false, -- Only calls callback when you press enter
         Callback = function(Value)
-            InputxxKeyboardKeyTagetdie = string.upper(tostring(Value))
+            InputxxKeyboardKeyTagetdie[i] = string.upper(tostring(Value))
         end
     })
     local Toggle = Tabs.Main:AddToggle("MyToggleStartKeyboardKeyTagetdie", {Title = "Start", Default = false })
@@ -258,13 +258,13 @@ do
                     local humanoid = character:FindFirstChild("Humanoid")
                     if humanoid then
                         if humanoid.Health == 0 then
-                            --[[for _, Value in pairs(InputxxKeyboardKeyTagetdie) do
+                            for _, Value in pairs(InputxxKeyboardKeyTagetdie) do
                                 if Value ~= " " or Value ~= "" then
                                     game:GetService("VirtualInputManager"):SendKeyEvent(true, Value, false, game)
                                     game:GetService("VirtualInputManager"):SendKeyEvent(false, Value, false, game)                  
                                 end
-                            end]]
-                            print("Die")
+                            end
+
                             wait(2)
                         end
                     else
