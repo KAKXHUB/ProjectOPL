@@ -1,4 +1,4 @@
-local Versionxx = "1.7.3"
+local Versionxx = "1.7.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -525,7 +525,6 @@ do
         Description = "Open Affinity",
         Callback = function()
             for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options.Slider" .. Value .. "Stats.Value ~= 0 then continue end;
                 print(math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10))
             end
         end
