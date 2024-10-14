@@ -1,4 +1,4 @@
-local Versionxx = "1.8.3"
+local Versionxx = "1.8.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -556,6 +556,8 @@ do
             for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
                 print(math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10))
                 print(Options["Input" .. Value .. "Stats"].Value) 
+                print(Options.MultiDropdownLockStats.Value["Defense"])
+                Fluent:Notify({Title = "Done!", OptioDuration = 5});
             end
         end
     })
