@@ -1,4 +1,4 @@
-local Versionxx = "1.7.4"
+local Versionxx = "1.7.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -478,13 +478,13 @@ do
     local Toggle = Tabs.Start:AddToggle("MyToggleRandomFruit1", {Title = "Random Fruit 1", Default = false })
     local Toggle = Tabs.Start:AddToggle("MyToggleRandomFruit2", {Title = "Random Fruit 2", Default = false })
 
-    --[[spawn(function()
+    spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleRandomFruit1.Value or not Options.DropdownSelectPayWith.Value then return end;
                 local Count = 0;
                 for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options.Slider" .. Value .. "Stats.Value ~= 0 then continue end;
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options."Slider" .. Value .. "Stats".Value ~= 0 then continue end;
                     Count += 1;
                 end
                 if Count == 4 then
@@ -497,7 +497,7 @@ do
                 end
             end)
         end
-    end);]]
+    end);
     
    --[[ spawn(function()
         while wait() do
@@ -526,6 +526,7 @@ do
         Callback = function()
             for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
                 print(math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10))
+                print("Slider" ..Value.. "Stats")
             end
         end
     })
