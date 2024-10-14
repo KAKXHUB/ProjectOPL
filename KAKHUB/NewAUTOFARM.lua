@@ -1,4 +1,4 @@
-local Versionxx = "1.9.1"
+local Versionxx = "1.9.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -235,7 +235,54 @@ do
         end
     })
 
-        local Section = Tabs.Quest:AddSection("Sam Quest")
+    local Section = Tabs.Main:AddSection("Auto Keybord when Taget die")
+    InputxxKeyboardKeyTagetdie = {}
+    local Input = Tabs.Main:AddInput("KeyboardKeyTagetdieInput", {
+        Title = "Keyboard Keys",
+        Default = "",
+        Placeholder = "Placeholder",
+        Numeric = false, -- Only allows numbers
+        Finished = false, -- Only calls callback when you press enter
+        Callback = function(Value)
+            InputxxKeyboardKeyTagetdie = string.upper(tostring(Value))
+        end
+    })
+    local Toggle = Tabs.Main:AddToggle("MyToggleStartKeyboardKeyTagetdie", {Title = "Start", Default = false })
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleStartKeyboardKeyTagetdie.Value then return end;
+                local player = game.Players:FindFirstChild(Options.DropdownPlayer.Value)
+                if player then
+                    local character = player.Character or player.CharacterAdded:Wait()
+                    local humanoid = character:FindFirstChild("Humanoid")
+                    if humanoid then
+                        if humanoid.Health == 0 then
+                            for _, Value in pairs(InputxxKeyboardKeyTagetdie) do
+                                if Value ~= " " or Value ~= "" then
+                                    game:GetService("VirtualInputManager"):SendKeyEvent(true, Value, false, game)
+                                    game:GetService("VirtualInputManager"):SendKeyEvent(false, Value, false, game)                  
+                                end
+                            end
+                            wait(2)
+                        end
+                    else
+                        print("No Humanoid found for player: " .. player.Name)
+                    end
+                end
+            end)
+        end
+    end);
+    for _, Value in pairs(InputxxKeyboardKey) do
+        if Value ~= " " or Value ~= "" then
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, Value, false, game)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, Value, false, game)                  
+        end
+        wait(0.1)
+    end
+
+
+    local Section = Tabs.Quest:AddSection("Sam Quest")
 
 
     local Toggle = Tabs.Quest:AddToggle("MyToggleASQ", {Title = "Auto Sam Quest", Default = false })
