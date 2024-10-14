@@ -1,4 +1,4 @@
-local Versionxx = "1.8.7"
+local Versionxx = "1.8.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -513,8 +513,9 @@ do
                 if not Options.MyToggleRandomFruit1.Value or not Options.DropdownSelectPayWith.Value then return end;
                 local Count = 0;
                 for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options["Input" .. Value .. "Stats"].Value and Options["Input" .. Value .. "Stats"].Value ~= 0 then continue end;
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options["Input" .. Value .. "Stats"].Value and Options["Input" .. Value .. "Stats"].Value ~= 0 then goto continue end;
                     Count += 1;
+                    ::continue::
                 end
                 if Count == 4 then
                     workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT1", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
