@@ -1,4 +1,4 @@
-local Versionxx = "1.6.9"
+local Versionxx = "1.7.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -467,13 +467,13 @@ do
             print("Slider was changed:", Value)
         end
     })
-    local MultiDropdown = Tabs.Start:AddDropdown("MultiDropdownLockStats", {
+    --[[local MultiDropdown = Tabs.Start:AddDropdown("MultiDropdownLockStats", {
         Title = "Lock Stats",
         Description = "You can select multiple values.",
         Values = {"Melee", "Sword", "Sniper", "Defense"},
         Multi = true,
         Default = {},
-    })
+    })]]
 
     local Toggle = Tabs.Start:AddToggle("MyToggleRandomFruit1", {Title = "Random Fruit 1", Default = false })
     local Toggle = Tabs.Start:AddToggle("MyToggleRandomFruit2", {Title = "Random Fruit 2", Default = false })
