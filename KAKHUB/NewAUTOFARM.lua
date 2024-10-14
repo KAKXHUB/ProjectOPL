@@ -1,4 +1,4 @@
-local Versionxx = "1.9.2"
+local Versionxx = "1.9.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -273,13 +273,7 @@ do
             end)
         end
     end);
-    for _, Value in pairs(InputxxKeyboardKey) do
-        if Value ~= " " or Value ~= "" then
-            game:GetService("VirtualInputManager"):SendKeyEvent(true, Value, false, game)
-            game:GetService("VirtualInputManager"):SendKeyEvent(false, Value, false, game)                  
-        end
-        wait(0.1)
-    end
+
 
 
     local Section = Tabs.Quest:AddSection("Sam Quest")
