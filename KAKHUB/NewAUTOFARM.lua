@@ -1,4 +1,4 @@
-local Versionxx = "1.8.2"
+local Versionxx = "1.8.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -507,13 +507,13 @@ do
     local Toggle = Tabs.Start:AddToggle("MyToggleRandomFruit1", {Title = "Random Fruit 1", Default = false })
     local Toggle = Tabs.Start:AddToggle("MyToggleRandomFruit2", {Title = "Random Fruit 2", Default = false })
 
-    --[[spawn(function()
+    spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleRandomFruit1.Value or not Options.DropdownSelectPayWith.Value then return end;
                 local Count = 0;
                 for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options."Slider" .. Value .. "Stats".Value ~= 0 then continue end;
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10) >= Options["Input" .. Value .. "Stats"].Value and Options["Input" .. Value .. "Stats"].Value ~= 0 then continue end;
                     Count += 1;
                 end
                 if Count == 4 then
@@ -526,28 +526,28 @@ do
                 end
             end)
         end
-    end);]]
+    end);
     
-   --[[ spawn(function()
+   spawn(function()
         while wait() do
             pcall(function()
-                if not Toggles["Miscellaneous:Right 2:Fruit Stats:Random Fruit 2"].Value or Options["Miscellaneous:Right 2:Fruit Stats:Pay With"].Value then return end;
+                if not Options.MyToggleRandomFruit2.Value or Options.DropdownSelectPayWith.Value then return end;
                 local Count = 0;
                 for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
-                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT2" .. Value].Value, 1) * 10) >= Options["Miscellaneous:Right 2:Fruit Stats:" .. Value .. " Stats"].Value and Options["Miscellaneous:Right 2:Fruit Stats:" .. Value .. " Stats"].Value ~= 0 then continue end;
+                    if math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT2" .. Value].Value, 1) * 10) >= Options["Input" .. Value .. "Stats"].Value and Options["Input" .. Value .. "Stats"].Value ~= 0 then continue end;
                     Count += 1;
                 end
                 if Count == 4 then
-                    game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT2", Options["Miscellaneous:Right 2:Fruit Stats:Lock Stats"].Value["Defense"] or false, Options["Miscellaneous:Right 2:Fruit Stats:Lock Stats"].Value["Melee"] or false, Options["Miscellaneous:Right 2:Fruit Stats:Lock Stats"].Value["Sniper"] or false, Options["Miscellaneous:Right 2:Fruit Stats:Lock Stats"].Value["Sword"] or false, Options["Miscellaneous:Right 2:Fruit Stats:Pay With"].Value)
+                    game.Workspace.Merchants.AffinityMerchant.Clickable.Retum:FireServer("DFT2", Options.MultiDropdownLockStats.Value["Defense"] or false, Options.MultiDropdownLockStats.Value["Melee"] or false, Options.MultiDropdownLockStats.Value["Sniper"] or false, Options.MultiDropdownLockStats.Value["Sword"] or false, Options.DropdownSelectPayWith.Value)
                     wait(10);
                 else
-                    Library:Notify("Done!");
-                    Toggles["Miscellaneous:Right 2:Fruit Stats:Random Fruit 2"]:SetValue(false);
+                    Fluent:Notify({Title = "Done!", OptioDuration = 5});
+                    Options.MyToggleRandomFruit2:SetValue(false);
                     wait(1);
                 end
             end)
         end
-    end);]]
+    end);
 
     Tabs.Start:AddButton({
         Title = "Check",
