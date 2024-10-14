@@ -1,4 +1,4 @@
-local Versionxx = "1.8.1"
+local Versionxx = "1.8.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -423,7 +423,7 @@ do
         Default = 1
     })
 
-    local Slider = Tabs.Start:AddSlider("SliderMeleeStats", {
+    --[[local Slider = Tabs.Start:AddSlider("SliderMeleeStats", {
         Title = "Melee Stats",
         Description = "Melee Stats",
         Default = 1,
@@ -466,6 +466,35 @@ do
         Callback = function(Value)
             print("Slider was changed:", Value)
         end
+    })]]
+    
+    local Input = Tabs.Start:AddInput("InputMeleeStats", {
+        Title = "Melee Stats",
+        Default = 1,
+        Placeholder = "Max 10",
+        Numeric = false, 
+        Finished = false
+    })
+    local Input = Tabs.Start:AddInput("InputSwordStats", {
+        Title = "Sword Stats",
+        Default = 1,
+        Placeholder = "Max 10",
+        Numeric = false, 
+        Finished = false
+    })
+    local Input = Tabs.Start:AddInput("InputSniperStats", {
+        Title = "Sniper Stats",
+        Default = 1,
+        Placeholder = "Max 10",
+        Numeric = false, 
+        Finished = false
+    })
+    local Input = Tabs.Start:AddInput("InputDefenseStats", {
+        Title = "Defense Stats",
+        Default = 1,
+        Placeholder = "Max 10",
+        Numeric = false, 
+        Finished = false
     })
     local MultiDropdown = Tabs.Start:AddDropdown("MultiDropdownLockStats", {
         Title = "Lock Stats",
@@ -526,7 +555,7 @@ do
         Callback = function()
             for _, Value in pairs({"Melee", "Sword", "Sniper", "Defense"}) do
                 print(math.floor(math.fmod(game.Workspace.UserData["User_" .. game.Players.LocalPlayer.UserId].Data["DFT1" .. Value].Value, 1) * 10))
-                print(Options["Slider" .. Value .. "Stats"].Value) 
+                print(Options["Input" .. Value .. "Stats"].Value) 
             end
         end
     })
