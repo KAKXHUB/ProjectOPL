@@ -1,4 +1,4 @@
-local Versionxx = "1.9.8"
+local Versionxx = "1.9.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -39,6 +39,7 @@ Cache.DevConfig["ListOfDrinkFormMixer"] = {"Cider", "Lemonade", "Juice", "Smooth
 Cache.DevConfig["ListOfDevillFruit"] = {"Magma", "Gas", "Sand", "Dark", "Chilly", "Rumble", "Snow", "Light", "String", "Flare", "Love", "Phoenix", "Quake", "Candy", "Bomb", "Venom", "Rumble1", "Gravity", "Plasma"};
 Cache.DevConfig["ListOfTypeSkillTaget"] = {"Mouse", "Yourself", "Monsters", "Players"};
 Cache.DevConfig["FindFruitArgumet"] = loadstring(game:HttpGet"https://raw.githubusercontent.com/KangKung02/The-Last-Krypton/master/Back-End/src/public/api/UWU.lua")();
+Cache.DevConfig["ListOfDveilFruit"] = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://raw.githubusercontent.com/KangKung02/just-bin/main/OPL_ALF.json"));
 
 
 
@@ -1622,6 +1623,36 @@ do
             workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer( "Claim", "Daily4")
             game.Workspace.Merchants.ExpertiseMerchant.Clickable.Retum:FireServer();
             workspace.Merchants.SniperMerchant.Clickable.Retum:FireServer("Slingshot", 1000)
+            local Compass = game.Players.LocalPlayer.Backpack:FindFirstChild("Compass");
+            local Compass2 = game.Players.LocalPlayer.Character:FindFirstChild("Compass");
+            if Compass or Compass2 then
+                local OldPostiton = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
+                game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+                Compass.Parent = game.Players.LocalPlayer.Character;
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Compass.Poser.Value);
+                Compass:Activate();
+                wait(1);
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(OldPostiton);
+            end
+            for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if table.find(Cache.DevConfig["ListOfBox"], Value.Name) then
+                    game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+                    Value.Parent = game.Players.LocalPlayer.Character;
+                    Value:Activate();
+                end
+            end
+            local Players = game:GetService("Players")
+            local LocalPlayer = Players.LocalPlayer
+            local fruitList = Cache.DevConfig["ListOfDveilFruit"]
+            for _, fruitName in ipairs(fruitList) do
+                local fruit = LocalPlayer.Character:FindFirstChild(fruitName)
+                if fruit and fruit:FindFirstChild("Relay") then
+                    fruit.Relay:FireServer(0)
+                else
+                    warn(fruitName .. " not found in character or has no Relay")
+                end
+            end
+            workspace.UserData.User_1447571569.ChallengesRemote:FireServer("Claim", "Challenge9")
         end
     })
 
