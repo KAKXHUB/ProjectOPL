@@ -1,4 +1,4 @@
-local Versionxx = "2.0.0"
+local Versionxx = "2.0.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1634,6 +1634,7 @@ do
                 wait(1);
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(OldPostiton);
             end
+            wait(1)
             for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                 if table.find(Cache.DevConfig["ListOfBox"], Value.Name) then
                     game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
@@ -1641,12 +1642,22 @@ do
                     Value:Activate();
                 end
             end
+            for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if table.find(Cache.DevConfig["ListOfDveilFruit"], Value.Name) then
+                    game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+                    Value.Parent = game.Players.LocalPlayer.Character;
+                end
+            end
             local Players = game:GetService("Players")
             local LocalPlayer = Players.LocalPlayer
             local fruitList = Cache.DevConfig["ListOfDveilFruit"]
             for _, fruitName in ipairs(fruitList) do
                 local fruit = LocalPlayer.Character:FindFirstChild(fruitName)
-                fruit.Relay:FireServer(0)
+                if fruit and fruit:FindFirstChild("Relay") then
+                    fruit.Relay:FireServer(0)
+                else
+                    warn(fruitName .. " not found in character or has no Relay")
+                end
             end
             workspace.UserData.User_1447571569.ChallengesRemote:FireServer("Claim", "Challenge9")
         end
