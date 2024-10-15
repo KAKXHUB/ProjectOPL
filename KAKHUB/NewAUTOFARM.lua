@@ -1,4 +1,4 @@
-local Versionxx = "2.0.4"
+local Versionxx = "2.0.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1666,9 +1666,26 @@ do
                 end
             end
             wait(1)
-            workspace.UserData.User_1447571569.ChallengesRemote:FireServer("Claim", "Challenge9")
+            workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer("Claim", "Challenge9")
         end
     })
+
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoClaimDaily", {Title = "Claim Daily", Default = false })
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoClaimDaily.Value then return end;
+                workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer("Claim", "Daily1")
+                workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer("Claim", "Daily2")
+                workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer("Claim", "Daily3")
+                workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer("Claim", "Daily4")
+                workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer("Claim", "AllDaily")
+                wait(3)
+            end)
+        end
+    end);
+
 
 
 
