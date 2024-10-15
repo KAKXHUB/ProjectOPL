@@ -1,4 +1,4 @@
-local Versionxx = "1.9.7"
+local Versionxx = "1.9.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1611,6 +1611,20 @@ do
             end)
         end
     end);
+
+    local Section = Tabs.Dupe:AddSection("Quest Gems")
+    Tabs.Dupe:AddButton({
+        Title = "Quest Day",
+        Description = "eee",
+        Callback = function()
+            game.Workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer("Claim1");
+            wait(1)
+            workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer( "Claim", "Daily4")
+            game.Workspace.Merchants.ExpertiseMerchant.Clickable.Retum:FireServer();
+            workspace.Merchants.SniperMerchant.Clickable.Retum:FireServer("Slingshot", 1000)
+        end
+    })
+
 
 
 end
