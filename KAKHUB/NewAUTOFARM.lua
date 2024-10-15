@@ -1,4 +1,4 @@
-local Versionxx = "2.0.3"
+local Versionxx = "2.0.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1618,6 +1618,10 @@ do
         Title = "Quest Day",
         Description = "eee",
         Callback = function()
+            game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
+            wait(1)
+            workspace:WaitForChild("UserData"):WaitForChild("User_"..game.Players.LocalPlayer.UserId):WaitForChild("Stats"):FireServer()
+            wait(1)
             game.Workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer("Claim1");
             wait(1)
             workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer( "Claim", "Daily4")
