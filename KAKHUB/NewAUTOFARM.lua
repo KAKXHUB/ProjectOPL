@@ -1,4 +1,4 @@
-local Versionxx = "1.9.9"
+local Versionxx = "2.0.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1646,11 +1646,7 @@ do
             local fruitList = Cache.DevConfig["ListOfDveilFruit"]
             for _, fruitName in ipairs(fruitList) do
                 local fruit = LocalPlayer.Character:FindFirstChild(fruitName)
-                if fruit and fruit:FindFirstChild("Relay") then
-                    fruit.Relay:FireServer(0)
-                else
-                    warn(fruitName .. " not found in character or has no Relay")
-                end
+                fruit.Relay:FireServer(0)
             end
             workspace.UserData.User_1447571569.ChallengesRemote:FireServer("Claim", "Challenge9")
         end
