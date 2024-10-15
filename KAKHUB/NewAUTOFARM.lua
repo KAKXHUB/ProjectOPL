@@ -1,4 +1,4 @@
-local Versionxx = "2.0.1"
+local Versionxx = "2.0.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1642,12 +1642,14 @@ do
                     Value:Activate();
                 end
             end
+            wait(1)
             for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                 if table.find(Cache.DevConfig["ListOfDveilFruit"], Value.Name) then
                     game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
                     Value.Parent = game.Players.LocalPlayer.Character;
                 end
             end
+            wait(1)
             local Players = game:GetService("Players")
             local LocalPlayer = Players.LocalPlayer
             local fruitList = Cache.DevConfig["ListOfDveilFruit"]
@@ -1659,6 +1661,7 @@ do
                     warn(fruitName .. " not found in character or has no Relay")
                 end
             end
+            wait(1)
             workspace.UserData.User_1447571569.ChallengesRemote:FireServer("Claim", "Challenge9")
         end
     })
