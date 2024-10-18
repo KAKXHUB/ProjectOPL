@@ -1,4 +1,4 @@
-local Versionxx = "2.0.9"
+local Versionxx = "2.1.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -23,6 +23,7 @@ local Tabs = {
     Start = Window:AddTab({ Title = "Stats", Icon = "flame" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
+    Farming = Window:AddTab({ Title = "Farming", Icon = "wheat" }),
     --Teleport = Window:AddTab({ Title = "Teleport", Icon = "house" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
     HunterX = Window:AddTab({ Title = "HunterX", Icon = "radio" }),
@@ -40,7 +41,11 @@ Cache.DevConfig["ListOfDevillFruit"] = {"Magma", "Gas", "Sand", "Dark", "Chilly"
 Cache.DevConfig["ListOfTypeSkillTaget"] = {"Mouse", "Yourself", "Monsters", "Players"};
 Cache.DevConfig["FindFruitArgumet"] = loadstring(game:HttpGet"https://raw.githubusercontent.com/KangKung02/The-Last-Krypton/master/Back-End/src/public/api/UWU.lua")();
 Cache.DevConfig["ListOfDveilFruit"] = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://raw.githubusercontent.com/KangKung02/just-bin/main/OPL_ALF.json"));
+Cache.DevConfig["ListOfMonter"] = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://raw.githubusercontent.com/KangKung02/just-bin/main/OPL_MT.lua"));
 
+local function IsSpawned()
+    return not game.Players.LocalPlayer.PlayerGui.Load.Frame.Visible;
+end
 
 
 local Options = Fluent.Options
@@ -1055,6 +1060,78 @@ do
         wait()
         game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)    
     end)
+
+    local Section = Tabs.Farming:AddSection("Farming Only With Gun")
+    local Input = Tabs.Farming:AddInput("InputDistanceMonter", {
+        Title = "Distance",
+        Default = "8",
+        Placeholder = "Placeholder",
+        Numeric = true, -- Only allows numbers
+        Finished = false, -- Only calls callback when you press enter
+    })
+    local Dropdown = Tabs.Farming:AddDropdown("DropdownXYMonter", {
+        Title = "Type Position"",
+        Values = {"X", "Y"},
+        Multi = false,
+        Default = 1
+    })
+    local Toggle = Tabs.Farming:AddToggle("MyToggleOneHitMonter", {Title = "One Hit", Description = "Only OPL: Anarchy", Default = false })
+    local DropdownWToolMonter = Tabs.Farming:AddDropdown("DropdownWTooMonterl", {
+        Title = "Select Tools",
+        Values = Weaponlist,
+        Multi = false,
+        Default = ""
+    })
+    local function updateDropdownWToolMonterOptions()
+        local WeaponlistNew = {}
+        for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+            table.insert(WeaponlistNew,v.Name)
+        end
+        DropdownWToolMonter.Values = WeaponlistNew
+        DropdownWToolMonter:SetValue(Options.DropdownWTooMonterl.Value)
+    end
+    Tabs.Farming:AddButton({
+        Title = "Refresh",
+        Description = "Refresh Tool list",
+        Callback = function()
+            updateDropdownWToolMonterOptions()
+        end
+    })
+    local Section = Tabs.Farming:AddSection("Farming Monter)
+    local MultiDropdown = Tabs.Farming:AddDropdown("MultiDropdownBringMonter", {
+        Title = "Select Bring",
+        Description = "You can select multiple values.",
+        Values = Cache.DevConfig["ListOfMonter"],
+        Multi = true,
+        Default = {},
+    })
+    local MultiDropdown = Tabs.Farming:AddDropdown("MultiDropdownTeleportMonter", {
+        Title = "Select Teleport,
+        Description = "You can select multiple values.",
+        Values = Cache.DevConfig["ListOfMonter"],
+        Multi = true,
+        Default = {},
+    })
+    local Toggle = Tabs.Farming:AddToggle("MyToggleBringMonter", {Title = "Bring Monter", Default = false })
+    local Toggle = Tabs.Farming:AddToggle("MyToggleTeleportgMonter", {Title = "Teleport Monter", Default = false })
+
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleBringMonter.Value or not IsSpawned() then return end;
+                for _, Value in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    if Options.MultiDropdownBringMonter.Value[Value.Name] then
+                        Value.HumanoidRootPart.CanCollide = false;
+                        Value.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, 0) + game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector * Options.InputDistanceMonter.Value;
+                    end
+                end
+            end)
+        end
+    end);
+
+
+
+
 
 
 
