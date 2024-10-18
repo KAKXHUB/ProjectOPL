@@ -1,4 +1,4 @@
-local Versionxx = "2.1.1"
+local Versionxx = "2.1.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1070,7 +1070,7 @@ do
         Finished = false, -- Only calls callback when you press enter
     })
     local Dropdown = Tabs.Farming:AddDropdown("DropdownXYMonter", {
-        Title = "Type Position"",
+        Title = "Type Position",
         Values = {"X", "Y"},
         Multi = false,
         Default = 1
@@ -1115,7 +1115,7 @@ do
     local Toggle = Tabs.Farming:AddToggle("MyToggleBringMonter", {Title = "Bring Monter", Default = false })
     local Toggle = Tabs.Farming:AddToggle("MyToggleTeleportgMonter", {Title = "Teleport Monter", Default = false })
 
-    --[[spawn(function()
+    --spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleBringMonter.Value or not IsSpawned() then return end;
@@ -1127,7 +1127,7 @@ do
                 end
             end)
         end
-    end);]]
+    end);
 
 
 
