@@ -1,4 +1,4 @@
-local Versionxx = "2.2.1"
+local Versionxx = "2.2.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1083,7 +1083,7 @@ do
         Title = "Select Tools",
         Values = Weaponlist,
         Multi = false,
-        Default = ""
+        Default = 1
     })
     local function updateDropdownWToolMonterOptions()
         local WeaponlistNew = {}
@@ -1108,7 +1108,7 @@ do
         Multi = true,
         Default = {},
     })
-    local MultiDropdown = Tabs.Farming:AddDropdown("MultiDropdownTeleportMonter", {
+    local MultiTeleportMonterDropdown = Tabs.Farming:AddDropdown("MultiDropdownTeleportMonter", {
         Title = "Select Teleport",
         Description = "You can select multiple values.",
         Values = Cache.DevConfig["ListOfMonter"],
@@ -1886,8 +1886,11 @@ do
     spawn(function()
         while wait() do
             pcall(function()
-                if not Options.MyToggleAutoKillMonter.Value and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_3.Claim.TextLabel.Text == "Completed" then return end;
-                print("Work")
+                if Options.MyToggleAutoKillMonter.Value and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_3.Claim.TextLabel.Text == "Claim" then 
+                    Options.MyToggleTeleportgMonter:SetValue(true)
+                else
+                    Options.MyToggleTeleportgMonter:SetValue(false)
+                end
             end)
         end
     end);
