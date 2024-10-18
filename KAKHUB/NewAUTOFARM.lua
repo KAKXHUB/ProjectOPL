@@ -1,4 +1,4 @@
-local Versionxx = "2.1.2"
+local Versionxx = "2.1.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1106,7 +1106,7 @@ do
         Default = {},
     })
     local MultiDropdown = Tabs.Farming:AddDropdown("MultiDropdownTeleportMonter", {
-        Title = "Select Teleport,
+        Title = "Select Teleport",
         Description = "You can select multiple values.",
         Values = Cache.DevConfig["ListOfMonter"],
         Multi = true,
