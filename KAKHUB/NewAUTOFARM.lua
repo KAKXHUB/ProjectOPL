@@ -1,4 +1,4 @@
-local Versionxx = "2.2.0"
+local Versionxx = "2.2.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1886,7 +1886,7 @@ do
     spawn(function()
         while wait() do
             pcall(function()
-                if not Options.MyToggleAutoKillMonter.Value and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_3.Claim.TextLabel.Text == "Claim" then return end;
+                if not Options.MyToggleAutoKillMonter.Value and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_3.Claim.TextLabel.Text == "Completed" then return end;
                 print("Work")
             end)
         end
