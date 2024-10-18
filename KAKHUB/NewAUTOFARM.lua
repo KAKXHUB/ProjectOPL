@@ -1,4 +1,4 @@
-local Versionxx = "2.1.8"
+local Versionxx = "2.1.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1863,59 +1863,11 @@ do
         Description = "eee",
         Callback = function()
             performActions()
-            --[[game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
-            wait(1)
-            workspace:WaitForChild("UserData"):WaitForChild("User_"..game.Players.LocalPlayer.UserId):WaitForChild("Stats"):FireServer()
-            wait(1)
-            game.Workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer("Claim1");
-            wait(1)
-            workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer( "Claim", "Daily4")
-            game.Workspace.Merchants.ExpertiseMerchant.Clickable.Retum:FireServer();
-            workspace.Merchants.SniperMerchant.Clickable.Retum:FireServer("Slingshot", 1000)
-            local Compass = game.Players.LocalPlayer.Backpack:FindFirstChild("Compass");
-            local Compass2 = game.Players.LocalPlayer.Character:FindFirstChild("Compass");
-            if Compass or Compass2 then
-                local OldPostiton = game.Players.LocalPlayer.Character.HumanoidRootPart.Position;
-                game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
-                Compass.Parent = game.Players.LocalPlayer.Character;
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Compass.Poser.Value);
-                Compass:Activate();
-                wait(1);
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(OldPostiton);
-            end
-            wait(1)
-            for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                if table.find(Cache.DevConfig["ListOfBox"], Value.Name) then
-                    game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
-                    Value.Parent = game.Players.LocalPlayer.Character;
-                    Value:Activate();
-                end
-            end
-            wait(1)
-            for _, Value in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                if table.find(Cache.DevConfig["ListOfDveilFruit"], Value.Name) then
-                    game.Players.LocalPlayer.Character.Humanoid:UnequipTools();
-                    Value.Parent = game.Players.LocalPlayer.Character;
-                end
-            end
-            wait(1)
-            local Players = game:GetService("Players")
-            local LocalPlayer = Players.LocalPlayer
-            local fruitList = Cache.DevConfig["ListOfDveilFruit"]
-            for _, fruitName in ipairs(fruitList) do
-                local fruit = LocalPlayer.Character:FindFirstChild(fruitName)
-                if fruit and fruit:FindFirstChild("Relay") then
-                    fruit.Relay:FireServer(0)
-                else
-                    warn(fruitName .. " not found in character or has no Relay")
-                end
-            end
-            wait(1)
-            workspace.UserData["User_"..game.Players.LocalPlayer.UserId].ChallengesRemote:FireServer("Claim", "Challenge9")]]
         end
     })
 
     local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoClaimDaily", {Title = "Claim Daily", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoKillMonter", {Title = "Kill Monter Quest", Default = false })
 
 
     spawn(function()
@@ -1931,6 +1883,18 @@ do
             end)
         end
     end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoKillMonter.Value and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_3.Claim.AutoButtonColor == false then return end;
+                print("Work")
+
+            end)
+        end
+    end);
+
+
+
 
 
 
