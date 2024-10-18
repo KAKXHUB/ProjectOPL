@@ -1,4 +1,4 @@
-local Versionxx = "2.1.4"
+local Versionxx = "2.1.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -23,7 +23,7 @@ local Tabs = {
     Start = Window:AddTab({ Title = "Stats", Icon = "flame" }),
     Playerss = Window:AddTab({ Title = "Players", Icon = "users" }),
     Misc = Window:AddTab({ Title = "Misc", Icon = "database" }),
-    Farming = Window:AddTab({ Title = "Farming", Icon = "wheat" }),
+    Farming = Window:AddTab({ Title = "Farming", Icon = "pickaxe" }),
     --Teleport = Window:AddTab({ Title = "Teleport", Icon = "house" }),
     Spam = Window:AddTab({ Title = "Spam", Icon = "locate" }),
     HunterX = Window:AddTab({ Title = "HunterX", Icon = "radio" }),
@@ -1115,7 +1115,7 @@ do
     local Toggle = Tabs.Farming:AddToggle("MyToggleBringMonter", {Title = "Bring Monter", Default = false })
     local Toggle = Tabs.Farming:AddToggle("MyToggleTeleportgMonter", {Title = "Teleport Monter", Default = false })
 
-    pawn(function()
+    spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleBringMonter.Value or not IsSpawned() then return end;
