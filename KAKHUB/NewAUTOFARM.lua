@@ -1,4 +1,4 @@
-local Versionxx = "2.1.3"
+local Versionxx = "2.1.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1088,7 +1088,7 @@ do
             table.insert(WeaponlistNew,v.Name)
         end
         DropdownWToolMonter.Values = WeaponlistNew
-        DropdownWToolMonter:SetValue(Options.DropdownWTooMonterl.Value)
+        DropdownWTooMonterl:SetValue(Options.DropdownWTooMonterl.Value)
     end
     Tabs.Farming:AddButton({
         Title = "Refresh",
@@ -1097,7 +1097,7 @@ do
             updateDropdownWToolMonterOptions()
         end
     })
-    local Section = Tabs.Farming:AddSection("Farming Monter)
+    local Section = Tabs.Farming:AddSection("Farming Monter")
     local MultiDropdown = Tabs.Farming:AddDropdown("MultiDropdownBringMonter", {
         Title = "Select Bring",
         Description = "You can select multiple values.",
@@ -1115,7 +1115,7 @@ do
     local Toggle = Tabs.Farming:AddToggle("MyToggleBringMonter", {Title = "Bring Monter", Default = false })
     local Toggle = Tabs.Farming:AddToggle("MyToggleTeleportgMonter", {Title = "Teleport Monter", Default = false })
 
-    --spawn(function()
+    pawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleBringMonter.Value or not IsSpawned() then return end;
