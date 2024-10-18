@@ -1,4 +1,4 @@
-local Versionxx = "2.1.5"
+local Versionxx = "2.1.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -11,7 +11,7 @@ local Window = Fluent:CreateWindow({
     Title = "AUTOFARM " .. Versionxx,
     SubTitle = "by PeetJKA",
     TabWidth = 160,
-    Size = UDim2.fromOffset(464, 368),
+    Size = UDim2.fromOffset(487.2, 404.8),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
     Theme = "Dark",
     MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
