@@ -1,4 +1,4 @@
-local Versionxx = "2.0.8"
+local Versionxx = "2.0.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1619,15 +1619,33 @@ do
         workspace:WaitForChild("UserData"):WaitForChild("User_"..game.Players.LocalPlayer.UserId):WaitForChild("Stats"):FireServer()
         game.Workspace.Merchants.ExpertiseMerchant.Clickable.Retum:FireServer()
         
-        local Text = game:GetService("Players").LocalPlayer.PlayerGui.MissionGui.Frame.Frame.Description.Text
+        local errorWords = {"Players", "damage", "damage.", "Deal"}
+        local found = true 
+        wait(1)
+        while found do
         
-        while string.find(Text, "Players") and string.find(Text, "damage") do
-            print("พบคำว่า 'Players' และ 'damage' ในข้อความ")
+            local Text = game:GetService("Players").LocalPlayer.PlayerGui.MissionGui.Frame.Frame.Description.Text
             
-            workspace:WaitForChild("UserData"):WaitForChild("User_"..game.Players.LocalPlayer.UserId):WaitForChild("Stats"):FireServer()
-            game.Workspace.Merchants.ExpertiseMerchant.Clickable.Retum:FireServer()
-
-            Text = game:GetService("Players").LocalPlayer.PlayerGui.MissionGui.Frame.Frame.Description.Text
+            found = false 
+        
+        
+            for _, word in ipairs(errorWords) do
+                if string.find(Text, word) then
+                    print("พบคำว่า '" .. word .. "' -> ทำงานต่อ")
+                    found = true 
+                    break
+                end
+            end
+        
+        
+            if not found then
+                print("ไม่พบคำแล้ว")
+                break
+            else
+                workspace:WaitForChild("UserData"):WaitForChild("User_"..game.Players.LocalPlayer.UserId):WaitForChild("Stats"):FireServer()
+                game.Workspace.Merchants.ExpertiseMerchant.Clickable.Retum:FireServer()
+                wait(1)
+            end
         end
         
         game.Workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer("Claim1")
