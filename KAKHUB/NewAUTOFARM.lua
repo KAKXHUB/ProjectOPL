@@ -1,4 +1,4 @@
-local Versionxx = "2.3.1"
+local Versionxx = "2.3.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1445,12 +1445,8 @@ do
                     if FruitsSkill == "Quake" then
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", workspace.IslandSnowyMountains.Stone.Stone, GetPosition(), SliderSkillChargeSpammm, game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
                     elseif FruitsSkill == "Rumble" then
-                        local positiond = GetPosition()
-                        if typeof(position) == "CFrame" then
-                            positionnn = positiond.Position -- เปลี่ยน CFrame เป็น Vector3
-                        end
-                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, "Left")
-                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", positionnn, workspace.IslandSnowyMountains.Stone.Stone, 200, positionnn)
+                        
+                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, 200, GetPosition())
                     else
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging", game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) 
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, SliderSkillChargeSpammm)
@@ -1776,6 +1772,7 @@ do
     end);
 
     local function performActions()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4831, 570, -7070)
         game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
         wait(1)
         workspace:WaitForChild("UserData"):WaitForChild("User_"..game.Players.LocalPlayer.UserId):WaitForChild("Stats"):FireServer()
