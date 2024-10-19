@@ -1,4 +1,4 @@
-local Versionxx = "2.2.4"
+local Versionxx = "2.2.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1896,7 +1896,7 @@ do
             end)
         end
     end);
-    spawn(function()
+    --[[spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleAutoAllGems.Value then return end
@@ -1917,7 +1917,7 @@ do
                 end
             end)
         end
-    end);
+    end);]]
 
 
 
