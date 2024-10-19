@@ -1,4 +1,4 @@
-local Versionxx = "2.2.7"
+local Versionxx = "2.2.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1444,6 +1444,8 @@ do
                     local plr = game:GetService("Players").LocalPlayer
                     if FruitsSkill == "Quake" then
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", workspace.IslandSnowyMountains.Stone.Stone, GetPosition(), SliderSkillChargeSpammm, game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+                    elseif FruitsSkill == "Rumble" then
+                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, 200, GetPosition())
                     else
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging", game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) 
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, SliderSkillChargeSpammm)
@@ -1908,7 +1910,6 @@ do
                         performActions()
                     end
                 else
-                    print("เควชยังไม่เสร็จ")
                     Options.MyToggleTeleportgMonter:SetValue(false)
                     if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_4.Claim.TextLabel.Text == "Completed" and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.CompletionFrame.Claim.TextLabel.Text ~= "Complete" then
                         Options.MyToggleTeleportgMonter:SetValue(true)
