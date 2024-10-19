@@ -1,4 +1,4 @@
-local Versionxx = "2.2.2"
+local Versionxx = "2.2.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1091,7 +1091,7 @@ do
             table.insert(WeaponlistNew,v.Name)
         end
         DropdownWToolMonter.Values = WeaponlistNew
-        DropdownWTooMonterl:SetValue(Options.DropdownWTooMonterl.Value)
+        DropdownWToolMonter:SetValue(Options.DropdownWTooMonterl.Value)
     end
     Tabs.Farming:AddButton({
         Title = "Refresh",
@@ -1868,6 +1868,7 @@ do
 
     local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoClaimDaily", {Title = "Claim Daily", Default = false })
     local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoKillMonter", {Title = "Kill Monter Quest", Default = false })
+    local Toggle = Tabs.Dupe:AddToggle("MyToggleAutoAllGems", {Title = "Auto All", Default = false })
 
 
     spawn(function()
@@ -1886,7 +1887,8 @@ do
     spawn(function()
         while wait() do
             pcall(function()
-                if Options.MyToggleAutoKillMonter.Value and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_3.Claim.TextLabel.Text == "Claim" then 
+                if not Options.MyToggleAutoKillMonter.Value then return end;
+                if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_3.Claim.TextLabel.Text == "Claim" then
                     Options.MyToggleTeleportgMonter:SetValue(true)
                 else
                     Options.MyToggleTeleportgMonter:SetValue(false)
@@ -1894,6 +1896,28 @@ do
             end)
         end
     end);
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleAutoAllGems.Value then return end
+                if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.CompletionFrame.Claim.TextLabel.Text == "Completed" then
+                    Options.MyToggleTeleportgMonter:SetValue(false)
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_4.Claim.TextLabel.Text == "Completed" then
+                        Options.MyToggleTeleportgMonter:SetValue(true)
+                    else
+                        performActions()
+                    end
+                else
+                    Options.MyToggleTeleportgMonter:SetValue(false)
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_4.Claim.TextLabel.Text == "Completed" then
+                        Options.MyToggleTeleportgMonter:SetValue(true)
+                    else
+                        performActions()
+                    end
+            end)
+        end
+    end);
+
 
 
 
