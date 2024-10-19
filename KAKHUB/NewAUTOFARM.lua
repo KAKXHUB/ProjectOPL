@@ -1,4 +1,4 @@
-local Versionxx = "2.2.9"
+local Versionxx = "2.3.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1445,7 +1445,12 @@ do
                     if FruitsSkill == "Quake" then
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", workspace.IslandSnowyMountains.Stone.Stone, GetPosition(), SliderSkillChargeSpammm, game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
                     elseif FruitsSkill == "Rumble" then
-                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, 200, GetPosition())
+                        local positiond = GetPosition()
+                        if typeof(position) == "CFrame" then
+                            positionnn = positiond.Position -- เปลี่ยน CFrame เป็น Vector3
+                        end
+                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, "Left")
+                        plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", positionnn, workspace.IslandSnowyMountains.Stone.Stone, 200, positionnn)
                     else
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StartCharging", game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) 
                         plr.Character.Powers[FruitsSkill].RemoteEvent:FireServer(FruitKeyArgumet, string.format("%sPower%s", FruitsSkill, FruitsSkillKey), "StopCharging", GetPosition(), workspace.IslandSnowyMountains.Stone.Stone, SliderSkillChargeSpammm)
