@@ -1,4 +1,4 @@
-local Versionxx = "2.2.6"
+local Versionxx = "2.2.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1902,14 +1902,15 @@ do
                 if not Options.MyToggleAutoAllGems.Value then return end
                 if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.CompletionFrame.Claim.TextLabel.Text == "Complete" then
                     Options.MyToggleTeleportgMonter:SetValue(false)
-                    if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_4.Claim.TextLabel.Text == "Completed" then
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_4.Claim.TextLabel.Text == "Completed" and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.CompletionFrame.Claim.TextLabel.Text ~= "Complete" then
                         Options.MyToggleTeleportgMonter:SetValue(true)
                     else
                         performActions()
                     end
                 else
+                    print("เควชยังไม่เสร็จ")
                     Options.MyToggleTeleportgMonter:SetValue(false)
-                    if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_4.Claim.TextLabel.Text == "Completed" then
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.ScrollingFrame.Challenge_4.Claim.TextLabel.Text == "Completed" and game:GetService("Players").LocalPlayer.PlayerGui.Challenges.Frame.Frame.DailyFrame.CompletionFrame.Claim.TextLabel.Text ~= "Complete" then
                         Options.MyToggleTeleportgMonter:SetValue(true)
                     else
                         performActions()
