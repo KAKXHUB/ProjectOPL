@@ -1,4 +1,4 @@
-local Versionxx = "2.2.8"
+local Versionxx = "2.2.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1421,7 +1421,7 @@ do
 
     local function GetPosition()
         if Options.DropdownTagSpamskill.Value == "Mouse" then
-            Position = game.Players.LocalPlayer:GetMouse().Hit;
+            Position = game.Players.LocalPlayer:GetMouse().Hit.Position;
         elseif Options.DropdownTagSpamskill.Value == "Yourself" then
             Position = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame;
         elseif Options.DropdownTagSpamskill.Value == "Players" then 
