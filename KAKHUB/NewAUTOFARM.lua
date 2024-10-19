@@ -1,4 +1,4 @@
-local Versionxx = "2.2.3"
+local Versionxx = "2.2.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1914,6 +1914,7 @@ do
                     else
                         performActions()
                     end
+                end
             end)
         end
     end);
