@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.4"
+local Versionxx = "2.4.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1356,74 +1356,40 @@ do
 
 
 
-    local function attack(target)
-        local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
-        local plr = game:GetService("Players").LocalPlayer
-        local humanoid = target:FindFirstChildOfClass("Humanoid")
-        local humanoidRootPart = target:FindFirstChild("HumanoidRootPart")
-        
-        if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
-            warn("Powers.Light ไม่พบใน Character")
-            return
-        end
-        if humanoid and humanoidRootPart then
-            local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 20, 0)
-            plr.Character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
-            wait(0.1)
 
-            while humanoid.Health > 0 do
-                humanoid.Health = 0  
-                plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StartCharging", humanoidRootPart.CFrame, workspace.Cave.Stone)
-                plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StopCharging", humanoidRootPart.CFrame, workspace.IslandSnowyMountains.Stone.Stone, 100)
-                wait(0.1)
-            end
-        else
-            warn("เป้าหมาย " .. target.Name .. " ไม่มี Humanoid หรือ HumanoidRootPart")
-        end
-    end
     spawn(function()
         while wait() do
             if not Options.MyToggleLightFarm.Value then return end;
                 pcall(function()
-                   --[[ local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
+                    local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
                     local plr = game:GetService("Players").LocalPlayer
-
+                    
                     if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
                         warn("Powers.Light ไม่พบใน Character")
                         return
                     end
-
+                    
                     for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                         local humanoid = enemy:FindFirstChildOfClass("Humanoid")
                         local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
-
+                        
                         if humanoid and humanoidRootPart then
-                            -- คำนวณตำแหน่งใหม่สำหรับวาปขึ้นไปอยู่บนหัวของศัตรู
-                            local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 100, 0)
-
-                            -- วาปไปยังตำแหน่งที่คำนวณ
+                            
+                            local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 20, 0)
+                    
                             plr.Character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
-
-                            wait(0.1)  -- รอให้ตัวละครวาป
-
-                            -- ส่งคำสั่งไปยังศัตรูจนกว่าจะตาย
+                    
+                            wait(0.1)
+                    
+                    
                             while humanoid.Health > 0 do
+                                humanoid.Health = 0
                                 plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StartCharging", humanoidRootPart.CFrame, workspace.Cave.Stone)
                                 plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StopCharging", humanoidRootPart.CFrame, workspace.IslandSnowyMountains.Stone.Stone, 100)
-
-                                wait(0.1)  -- รอระยะเวลาหนึ่งก่อนส่งคำสั่งใหม่
+                                wait(0.1)
                             end
                         else
                             warn("ศัตรู " .. enemy.Name .. " ไม่มี Humanoid หรือ HumanoidRootPart")
-                        end
-                    end
-                    end]]
-                    for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        attack(enemy)
-                    end
-                    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
-                        if player ~= game:GetService("Players").LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                            attack(player.Character)
                         end
                     end
                 end)
@@ -1434,7 +1400,7 @@ do
 
 
     local Section = Tabs.Teleport:AddSection("Open GUI")
---[[
+
     local DropdownOpenGUIII = Tabs.Teleport:AddDropdown("DropdownOpenGUI", {
         Title = "Open GUI NPC",
         Values = InstanceToName(game:GetService("Workspace").Merchants:GetChildren()),
@@ -1467,7 +1433,7 @@ do
     DropdownTeleportISLANDD:OnChanged(function(Value)
         if not Options.DropdownTeleportIsland.Value or not Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value];
-    end);]]
+    end);
     
 
 
