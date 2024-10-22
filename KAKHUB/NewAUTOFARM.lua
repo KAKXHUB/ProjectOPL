@@ -1,4 +1,4 @@
-local Versionxx = "2.3.2"
+local Versionxx = "2.3.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -813,6 +813,72 @@ do
             end)
         end
     end)
+    local function handleCannonBall()
+        local playersWithCannonBall = {}
+    
+        -- ค้นหาผู้เล่นที่ถือ Cannon Ball
+        for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+            local character = player.Character
+            if character and player ~= game.Players.LocalPlayer then  
+                local tool = character:FindFirstChild("Cannon Ball")
+                if tool then
+                    local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                    if humanoidRootPart then
+                        table.insert(playersWithCannonBall, player) 
+                    end
+                end
+            end
+        end
+    
+        -- เช็คว่ามีผู้เล่นที่ถือ CannonBall หรือไม่
+        if #playersWithCannonBall > 0 then
+            game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
+            game.Players.LocalPlayer.Backpack:FindFirstChild("Cannon Ball").Parent = game.Players.LocalPlayer.Character
+    
+            -- ส่งข้อความไปยังผู้เล่นที่ถือ CannonBall
+            for _, player in ipairs(playersWithCannonBall) do
+                local message = "/w " .. player.Name .. " Banned Cannon Ball"  -- ข้อความที่ต้องการส่ง
+                local args = {
+                    [1] = message,
+                    [2] = "All"
+                }
+    
+                -- ส่งข้อความ
+                game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+            end
+    
+            -- ใช้ CFrame ของผู้เล่นคนแรกที่ถือ CannonBall
+            local playerCFrame = playersWithCannonBall[1].Character.HumanoidRootPart.CFrame
+    
+            local userId = game.Players.LocalPlayer.UserId  -- ใช้ UserId ของผู้เล่น
+            local resourceName = "Resources_" .. userId  -- สร้างชื่อ Resource
+    
+            local args = {
+                [1] = playerCFrame,
+                [2] = workspace.IslandPirate.Stones.Part
+            }
+    
+            game:GetService("Players").LocalPlayer.Character:FindFirstChild("Cannon Ball").RemoteEvent:FireServer(unpack(args))
+    
+            -- ตั้งค่า CFrame ของ CannonBall ให้ตรงกับผู้เล่นที่ถือ CannonBall
+            while wait() do
+                workspace.ResourceHolder[resourceName].CannonBall.CFrame = playerCFrame
+            end
+        else
+            print("ไม่มีผู้เล่นที่ถือ CannonBall")
+        end
+    end
+    local Section = Tabs.Playerss:AddSection("Anti Cannon")
+    local Toggle = Tabs.Playerss:AddToggle("MyToggleStartanticannon", {Title = "Anti Cannon Ball", Default = false })
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleStartanticannon.Value then return end;
+                handleCannonBall()
+            end)
+        end
+    end)
+
 
 
 
