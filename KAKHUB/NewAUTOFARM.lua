@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.1"
+local Versionxx = "2.4.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1357,10 +1357,6 @@ do
     local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
     local plr = game:GetService("Players").LocalPlayer
 
-    if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
-        warn("Powers.Light ไม่พบใน Character")
-        return
-    end
 
 
     local function attack(target)
