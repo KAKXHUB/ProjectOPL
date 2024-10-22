@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.6"
+local Versionxx = "2.4.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -61,7 +61,7 @@ Cache.DevConfig["FindFruitArgumet"] = loadstring(game:HttpGet"https://raw.github
 Cache.DevConfig["ListOfDveilFruit"] = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://raw.githubusercontent.com/KangKung02/just-bin/main/OPL_ALF.json"));
 Cache.DevConfig["ListOfMonter"] = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://raw.githubusercontent.com/KangKung02/just-bin/main/OPL_MT.lua"));
 
---[[local Allset = { DevSetting = {} };
+local Allset = { DevSetting = {} };
 Allset.DevSetting["ListTeleportIsland"] = {
     ["Crab island"] = CFrame.new(-6.00764561, 215.999954, -304.312866);
     ["Vokun"] = CFrame.new(4564.3999, 526, 5712.5);
@@ -83,7 +83,7 @@ Allset.DevSetting["ListTeleportIsland"] = {
     ["Boss Aura"] = CFrame.new(-1575.63281, 219.278564, 9939.50684);
 }
 Allset.DevSetting["ListTeleportIslandIndex"] = {"Crab island", "Vokun", "Purple", "Rocky", "Boss", "Sand Castle", "Boss sniper", "Snow", "Drink", "Tree", "Big Snow", "Cave", "Forest", "Pyramid", "Sam", "Fish Man", "Mountain", "Boss Aura" };
-]]
+
 
 local function IsSpawned()
     return not game.Players.LocalPlayer.PlayerGui.Load.Frame.Visible;
@@ -1360,40 +1360,39 @@ do
     spawn(function()
         while wait() do
             if not Options.MyToggleLightFarm.Value then return end;
-                pcall(function()
-                    local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
-                    local plr = game:GetService("Players").LocalPlayer
+            pcall(function()
+                local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
+                local plr = game:GetService("Players").LocalPlayer
+                
+                if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
+                    warn("Powers.Light ไม่พบใน Character")
+                    return
+                end
+                
+                for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                    local humanoid = enemy:FindFirstChildOfClass("Humanoid")
+                    local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
                     
-                    if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
-                        warn("Powers.Light ไม่พบใน Character")
-                        return
-                    end
-                    
-                    for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        local humanoid = enemy:FindFirstChildOfClass("Humanoid")
-                        local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
+                    if humanoid and humanoidRootPart then
                         
-                        if humanoid and humanoidRootPart then
-                            
-                            local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 20, 0)
-                    
-                            plr.Character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
-                    
+                        local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 20, 0)
+                
+                        plr.Character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
+                
+                        wait(0.1)
+                
+                
+                        while humanoid.Health > 0 do
+                            humanoid.Health = 0
+                            plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StartCharging", humanoidRootPart.CFrame, workspace.Cave.Stone)
+                            plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StopCharging", humanoidRootPart.CFrame, workspace.IslandSnowyMountains.Stone.Stone, 100)
                             wait(0.1)
-                    
-                    
-                            while humanoid.Health > 0 do
-                                humanoid.Health = 0
-                                plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StartCharging", humanoidRootPart.CFrame, workspace.Cave.Stone)
-                                plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StopCharging", humanoidRootPart.CFrame, workspace.IslandSnowyMountains.Stone.Stone, 100)
-                                wait(0.1)
-                            end
-                        else
-                            warn("ศัตรู " .. enemy.Name .. " ไม่มี Humanoid หรือ HumanoidRootPart")
                         end
+                    else
+                        warn("ศัตรู " .. enemy.Name .. " ไม่มี Humanoid หรือ HumanoidRootPart")
                     end
-                end)
-            end
+                end
+            end)
         end
     end)
 
@@ -1410,7 +1409,7 @@ do
     DropdownOpenGUIII:OnChanged(function(Value)
         if not Options.DropdownOpenGUI.Value or not game:GetService("Workspace").Merchants[Options.DropdownOpenGUI.Value] or not CheckPath(game:GetService("Workspace").Merchants[Options.DropdownOpenGUI.Value], "Clickable", "ClickDetector") then return end;
         fireclickdetector(game:GetService("Workspace").Merchants[Options.DropdownOpenGUI.Value].Clickable.ClickDetector);
-    end);
+    end)
 
     local Section = Tabs.Teleport:AddSection("Teleport")
     local DropdownTeleportNPCC = Tabs.Teleport:AddDropdown("DropdownTeleportNPC", {
@@ -1422,9 +1421,9 @@ do
     DropdownTeleportNPCC:OnChanged(function(Value)
         if not Options.DropdownTeleportNPC.Value or not game:GetService("Workspace").Merchants[Options.DropdownTeleportNPC.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").Merchants[Options.DropdownTeleportNPC.Value].HumanoidRootPart.Position + Vector3.new(0, 5, 0));
-    end);
+    end)
 
-    --[[local DropdownTeleportISLANDD = Tabs.Teleport:AddDropdown("DropdownTeleportIsland", {
+    local DropdownTeleportISLANDD = Tabs.Teleport:AddDropdown("DropdownTeleportIsland", {
         Title = "Teleport Island",
         Values = Allset.DevSetting["ListTeleportIslandIndex"],
         Multi = false,
@@ -1433,7 +1432,7 @@ do
     DropdownTeleportISLANDD:OnChanged(function(Value)
         if not Options.DropdownTeleportIsland.Value or not Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value];
-    end);]]
+    end);
     
 
 
