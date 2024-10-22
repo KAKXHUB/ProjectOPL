@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.0"
+local Versionxx = "2.4.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1354,11 +1354,39 @@ do
     local Section = Tabs.Farming:AddSection("Farming Only With Fruits")
     local Toggle = Tabs.Farming:AddToggle("MyToggleLightFarm", {Title = "Light Fruit", Default = false })
 
+    local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
+    local plr = game:GetService("Players").LocalPlayer
+
+    if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
+        warn("Powers.Light ไม่พบใน Character")
+        return
+    end
+
+
+    local function attack(target)
+        local humanoid = target:FindFirstChildOfClass("Humanoid")
+        local humanoidRootPart = target:FindFirstChild("HumanoidRootPart")
+        
+        if humanoid and humanoidRootPart then
+            local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 20, 0)
+            plr.Character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
+            wait(0.1)
+
+            while humanoid.Health > 0 do
+                humanoid.Health = 0  
+                plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StartCharging", humanoidRootPart.CFrame, workspace.Cave.Stone)
+                plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StopCharging", humanoidRootPart.CFrame, workspace.IslandSnowyMountains.Stone.Stone, 100)
+                wait(0.1)
+            end
+        else
+            warn("เป้าหมาย " .. target.Name .. " ไม่มี Humanoid หรือ HumanoidRootPart")
+        end
+    end
     spawn(function()
         while wait() do
             if not Options.MyToggleLightFarm.Value then return end;
                 pcall(function()
-                    local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
+                   --[[ local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
                     local plr = game:GetService("Players").LocalPlayer
 
                     if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
@@ -1390,6 +1418,14 @@ do
                             warn("ศัตรู " .. enemy.Name .. " ไม่มี Humanoid หรือ HumanoidRootPart")
                         end
                     end
+                    end]]
+                    for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        attack(enemy)
+                    end
+                    for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+                        if player ~= plr and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                            attack(player.Character)
+                        end
                     end
                 end)
             end
@@ -1411,7 +1447,7 @@ do
         fireclickdetector(game:GetService("Workspace").Merchants[Options.DropdownOpenGUI.Value].Clickable.ClickDetector);
     end);
 
-    local Section = Tabs.Teleport:AddSection("Teleport NPC")
+    local Section = Tabs.Teleport:AddSection("Teleport")
     local DropdownTeleportNPCC = Tabs.Teleport:AddDropdown("DropdownTeleportNPC", {
         Title = "Teleport NPC",
         Values = InstanceToName(game:GetService("Workspace").Merchants:GetChildren()),
