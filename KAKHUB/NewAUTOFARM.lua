@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.2"
+local Versionxx = "2.4.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1455,7 +1455,7 @@ do
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").Merchants[Options.DropdownTeleportNPC.Value].HumanoidRootPart.Position + Vector3.new(0, 5, 0));
     end);
 
-    local DropdownTeleportISLANDD = Tabs.Teleport:AddDropdown("DropdownTeleportIsland", {
+    --[[local DropdownTeleportISLANDD = Tabs.Teleport:AddDropdown("DropdownTeleportIsland", {
         Title = "Teleport Island",
         Values = Allset.DevSetting["ListTeleportIslandIndex"],
         Multi = false,
@@ -1464,7 +1464,7 @@ do
     DropdownTeleportISLANDD:OnChanged(function(Value)
         if not Options.DropdownTeleportIsland.Value or not Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value];
-    end);
+    end);]]
     
 
 
