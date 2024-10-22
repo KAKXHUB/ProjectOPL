@@ -1,4 +1,4 @@
-local Versionxx = "2.3.7"
+local Versionxx = "2.3.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -814,6 +814,7 @@ do
         end
     end)
     local hasCannonBall = false 
+    local messageSent = false
     local function handleCannonBall()
         local playersWithCannonBall = {}
         local resourceName = "Resources_" .. game.Players.LocalPlayer.UserId  -- สร้างชื่อ Resource
@@ -843,7 +844,7 @@ do
                 end
             end
             -- ส่งข้อความไปยังผู้เล่นที่ถือ CannonBall
-            local messageSent = false
+            
             for _, player in ipairs(playersWithCannonBall) do
                 if not messageSent then
                     local message = "/w " .. player.Name .. " Banned Cannon Ball"
