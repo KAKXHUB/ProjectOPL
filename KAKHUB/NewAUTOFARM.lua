@@ -1,4 +1,4 @@
-local Versionxx = "2.3.6"
+local Versionxx = "2.3.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -813,8 +813,11 @@ do
             end)
         end
     end)
+    local hasCannonBall = false 
     local function handleCannonBall()
         local playersWithCannonBall = {}
+        local resourceName = "Resources_" .. game.Players.LocalPlayer.UserId  -- สร้างชื่อ Resource
+        local cannonBallCFrameTask  -- ตัวแปรสำหรับเก็บ coroutine
     
         -- ค้นหาผู้เล่นที่ถือ Cannon Ball
         for _, player in pairs(game:GetService("Players"):GetPlayers()) do
@@ -830,46 +833,52 @@ do
             end
         end
     
-        -- เช็คว่ามีผู้เล่นที่ถือ CannonBall หรือไม่
         if #playersWithCannonBall > 0 then
             game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
-            --game.Players.LocalPlayer.Backpack:FindFirstChild("Cannon Ball").Parent = game.Players.LocalPlayer.Character
-    
-            local messageSent = false  -- ตัวแปรเพื่อตรวจสอบว่าข้อความถูกส่งไปแล้ว
-    
+            if not hasCannonBall then
+                local cannonBall = game.Players.LocalPlayer.Backpack:FindFirstChild("Cannon Ball")
+                if cannonBall then
+                    cannonBall.Parent = game.Players.LocalPlayer.Character
+                    hasCannonBall = true  -- ตั้งค่าว่าผู้เล่นถือ Cannon Ball แล้ว
+                end
+            end
             -- ส่งข้อความไปยังผู้เล่นที่ถือ CannonBall
+            local messageSent = false
             for _, player in ipairs(playersWithCannonBall) do
                 if not messageSent then
-                    local message = "/w " .. player.Name .. " No Use Cannon Ball"  -- ข้อความที่ต้องการส่ง
+                    local message = "/w " .. player.Name .. " Banned Cannon Ball"
                     local args = {
                         [1] = message,
                         [2] = "All"
                     }
-    
-                    -- ส่งข้อความ
                     game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
-                    print("ส่งข้อความไปยัง: " .. player.Name)  -- ดีบัก
-                    messageSent = true  -- ตั้งค่าให้ข้อความถูกส่งไปแล้ว
+                    print("ส่งข้อความไปยัง: " .. player.Name)
+                    messageSent = true
                 end
             end
     
-            -- ใช้ CFrame ของผู้เล่นคนแรกที่ถือ CannonBall
             local playerCFrame = playersWithCannonBall[1].Character.HumanoidRootPart.CFrame
-    
-            local userId = game.Players.LocalPlayer.UserId  -- ใช้ UserId ของผู้เล่น
-            local resourceName = "Resources_" .. userId  -- สร้างชื่อ Resource
     
             local args = {
                 [1] = playerCFrame,
                 [2] = workspace.IslandPirate.Stones.Part
             }
-    
             game:GetService("Players").LocalPlayer.Character:FindFirstChild("Cannon Ball").RemoteEvent:FireServer(unpack(args))
     
             -- ตั้งค่า CFrame ของ CannonBall ให้ตรงกับผู้เล่นที่ถือ CannonBall
-            while wait() do
-                workspace.ResourceHolder[resourceName].CannonBall.CFrame = playerCFrame
+            if cannonBallCFrameTask then
+                cannonBallCFrameTask:cancel()  -- หยุด coroutine ก่อนถ้ามี
             end
+    
+            cannonBallCFrameTask = coroutine.create(function()
+                while true do
+                    workspace.ResourceHolder[resourceName].CannonBall.CFrame = playerCFrame
+                    wait(0.1)  -- หยุดสั้นๆ เพื่อไม่ให้ใช้ CPU มากเกินไป
+                end
+            end)
+    
+            coroutine.resume(cannonBallCFrameTask) 
+            game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
         else
             print("ไม่มีผู้เล่นที่ถือ CannonBall")
         end
