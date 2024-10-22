@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.3"
+local Versionxx = "2.4.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1354,15 +1354,18 @@ do
     local Section = Tabs.Farming:AddSection("Farming Only With Fruits")
     local Toggle = Tabs.Farming:AddToggle("MyToggleLightFarm", {Title = "Light Fruit", Default = false })
 
-    local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
-    local plr = game:GetService("Players").LocalPlayer
-
 
 
     local function attack(target)
+        local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
+        local plr = game:GetService("Players").LocalPlayer
         local humanoid = target:FindFirstChildOfClass("Humanoid")
         local humanoidRootPart = target:FindFirstChild("HumanoidRootPart")
         
+        if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
+            warn("Powers.Light ไม่พบใน Character")
+            return
+        end
         if humanoid and humanoidRootPart then
             local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 20, 0)
             plr.Character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
@@ -1419,7 +1422,7 @@ do
                         attack(enemy)
                     end
                     for _, player in pairs(game:GetService("Players"):GetPlayers()) do
-                        if player ~= plr and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                        if player ~= game:GetService("Players").LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
                             attack(player.Character)
                         end
                     end
@@ -1431,7 +1434,7 @@ do
 
 
     local Section = Tabs.Teleport:AddSection("Open GUI")
-
+--[[
     local DropdownOpenGUIII = Tabs.Teleport:AddDropdown("DropdownOpenGUI", {
         Title = "Open GUI NPC",
         Values = InstanceToName(game:GetService("Workspace").Merchants:GetChildren()),
@@ -1455,7 +1458,7 @@ do
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").Merchants[Options.DropdownTeleportNPC.Value].HumanoidRootPart.Position + Vector3.new(0, 5, 0));
     end);
 
-    --[[local DropdownTeleportISLANDD = Tabs.Teleport:AddDropdown("DropdownTeleportIsland", {
+    local DropdownTeleportISLANDD = Tabs.Teleport:AddDropdown("DropdownTeleportIsland", {
         Title = "Teleport Island",
         Values = Allset.DevSetting["ListTeleportIslandIndex"],
         Multi = false,
