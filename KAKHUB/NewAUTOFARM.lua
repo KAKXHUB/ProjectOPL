@@ -1,4 +1,4 @@
-local Versionxx = "2.3.4"
+local Versionxx = "2.3.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -833,18 +833,24 @@ do
         -- เช็คว่ามีผู้เล่นที่ถือ CannonBall หรือไม่
         if #playersWithCannonBall > 0 then
             game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
-            
+            game.Players.LocalPlayer.Backpack:FindFirstChild("Cannon Ball").Parent = game.Players.LocalPlayer.Character
+    
+            local messageSent = false  -- ตัวแปรเพื่อตรวจสอบว่าข้อความถูกส่งไปแล้ว
     
             -- ส่งข้อความไปยังผู้เล่นที่ถือ CannonBall
             for _, player in ipairs(playersWithCannonBall) do
-                local message = "/w " .. player.Name .. " Banned Cannon Ball"  -- ข้อความที่ต้องการส่ง
-                local args = {
-                    [1] = message,
-                    [2] = "All"
-                }
+                if not messageSent then
+                    local message = "/w " .. player.Name .. " No Use Cannon Ball"  -- ข้อความที่ต้องการส่ง
+                    local args = {
+                        [1] = message,
+                        [2] = "All"
+                    }
     
-                -- ส่งข้อความ
-                game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+                    -- ส่งข้อความ
+                    game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+                    print("ส่งข้อความไปยัง: " .. player.Name)  -- ดีบัก
+                    messageSent = true  -- ตั้งค่าให้ข้อความถูกส่งไปแล้ว
+                end
             end
     
             -- ใช้ CFrame ของผู้เล่นคนแรกที่ถือ CannonBall
@@ -864,7 +870,6 @@ do
             while wait() do
                 workspace.ResourceHolder[resourceName].CannonBall.CFrame = playerCFrame
             end
-            game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
         else
             print("ไม่มีผู้เล่นที่ถือ CannonBall")
         end
