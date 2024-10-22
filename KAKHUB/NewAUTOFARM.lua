@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.5"
+local Versionxx = "2.4.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -61,7 +61,7 @@ Cache.DevConfig["FindFruitArgumet"] = loadstring(game:HttpGet"https://raw.github
 Cache.DevConfig["ListOfDveilFruit"] = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://raw.githubusercontent.com/KangKung02/just-bin/main/OPL_ALF.json"));
 Cache.DevConfig["ListOfMonter"] = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://raw.githubusercontent.com/KangKung02/just-bin/main/OPL_MT.lua"));
 
-local Allset = { DevSetting = {} };
+--[[local Allset = { DevSetting = {} };
 Allset.DevSetting["ListTeleportIsland"] = {
     ["Crab island"] = CFrame.new(-6.00764561, 215.999954, -304.312866);
     ["Vokun"] = CFrame.new(4564.3999, 526, 5712.5);
@@ -82,8 +82,8 @@ Allset.DevSetting["ListTeleportIsland"] = {
     ["Mountain"] = CFrame.new(2053.5, 492, -637);
     ["Boss Aura"] = CFrame.new(-1575.63281, 219.278564, 9939.50684);
 }
-Allset.DevSetting["ListTeleportIslandIndex"] = {"Crab island", "Vokun", "Purple", "Rocky", "Boss", "Sand Castle", "Boss sniper", "Snow", "Drink", "Tree", "Big Snow", "Cave", "Forest", "Pyramid", "Sam", "Fish Man", "Mountain", "Boss Aura" }
-
+Allset.DevSetting["ListTeleportIslandIndex"] = {"Crab island", "Vokun", "Purple", "Rocky", "Boss", "Sand Castle", "Boss sniper", "Snow", "Drink", "Tree", "Big Snow", "Cave", "Forest", "Pyramid", "Sam", "Fish Man", "Mountain", "Boss Aura" };
+]]
 
 local function IsSpawned()
     return not game.Players.LocalPlayer.PlayerGui.Load.Frame.Visible;
@@ -1424,7 +1424,7 @@ do
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(game:GetService("Workspace").Merchants[Options.DropdownTeleportNPC.Value].HumanoidRootPart.Position + Vector3.new(0, 5, 0));
     end);
 
-    local DropdownTeleportISLANDD = Tabs.Teleport:AddDropdown("DropdownTeleportIsland", {
+    --[[local DropdownTeleportISLANDD = Tabs.Teleport:AddDropdown("DropdownTeleportIsland", {
         Title = "Teleport Island",
         Values = Allset.DevSetting["ListTeleportIslandIndex"],
         Multi = false,
@@ -1433,7 +1433,7 @@ do
     DropdownTeleportISLANDD:OnChanged(function(Value)
         if not Options.DropdownTeleportIsland.Value or not Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value];
-    end);
+    end);]]
     
 
 
