@@ -1,4 +1,4 @@
-local Versionxx = "2.3.5"
+local Versionxx = "2.3.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -833,7 +833,7 @@ do
         -- เช็คว่ามีผู้เล่นที่ถือ CannonBall หรือไม่
         if #playersWithCannonBall > 0 then
             game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
-            game.Players.LocalPlayer.Backpack:FindFirstChild("Cannon Ball").Parent = game.Players.LocalPlayer.Character
+            --game.Players.LocalPlayer.Backpack:FindFirstChild("Cannon Ball").Parent = game.Players.LocalPlayer.Character
     
             local messageSent = false  -- ตัวแปรเพื่อตรวจสอบว่าข้อความถูกส่งไปแล้ว
     
