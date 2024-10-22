@@ -1,4 +1,4 @@
-local Versionxx = "2.3.3"
+local Versionxx = "2.3.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -833,7 +833,7 @@ do
         -- เช็คว่ามีผู้เล่นที่ถือ CannonBall หรือไม่
         if #playersWithCannonBall > 0 then
             game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
-            game.Players.LocalPlayer.Backpack:FindFirstChild("Cannon Ball").Parent = game.Players.LocalPlayer.Character
+            
     
             -- ส่งข้อความไปยังผู้เล่นที่ถือ CannonBall
             for _, player in ipairs(playersWithCannonBall) do
@@ -864,6 +864,7 @@ do
             while wait() do
                 workspace.ResourceHolder[resourceName].CannonBall.CFrame = playerCFrame
             end
+            game.Workspace.UserData["User_"..game.Players.LocalPlayer.UserId].UpdateHaki:FireServer()
         else
             print("ไม่มีผู้เล่นที่ถือ CannonBall")
         end
@@ -875,6 +876,7 @@ do
             pcall(function()
                 if not Options.MyToggleStartanticannon.Value then return end;
                 handleCannonBall()
+                wait(1)
             end)
         end
     end)
