@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.9"
+local Versionxx = "2.5.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1412,7 +1412,7 @@ do
         Title = "Open GUI NPC",
         Values = InstanceToName(game:GetService("Workspace").Merchants:GetChildren()),
         Multi = false,
-        Default = 1
+        Default = ""
     })
     DropdownOpenGUIII:OnChanged(function(Value)
         if not Options.DropdownOpenGUI.Value or not game:GetService("Workspace").Merchants[Options.DropdownOpenGUI.Value] or not CheckPath(game:GetService("Workspace").Merchants[Options.DropdownOpenGUI.Value], "Clickable", "ClickDetector") then return end;
@@ -1424,7 +1424,7 @@ do
         Title = "Teleport NPC",
         Values = InstanceToName(game:GetService("Workspace").Merchants:GetChildren()),
         Multi = false,
-        Default = 1
+        Default = ""
     })
     DropdownTeleportNPCC:OnChanged(function(Value)
         if not Options.DropdownTeleportNPC.Value or not game:GetService("Workspace").Merchants[Options.DropdownTeleportNPC.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
@@ -1435,7 +1435,7 @@ do
         Title = "Teleport Island",
         Values = Allset.DevSetting["ListTeleportIslandIndex"],
         Multi = false,
-        Default = 1
+        Default = ""
     })
     DropdownTeleportISLANDD:OnChanged(function(Value)
         if not Options.DropdownTeleportIsland.Value or not Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
