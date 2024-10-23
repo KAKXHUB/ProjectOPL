@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.5.2"
+local Versionxx = "2.5.3 "
 print("Version: "..Versionxx)
 ---------------
 
@@ -1397,8 +1397,7 @@ do
         for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
             local humanoid = enemy:FindFirstChildOfClass("Humanoid")
             if humanoid then
-                humanoid.Health = 0  -- ตั้งค่าเลือดให้เท่ากับ 0
-                attack(enemy)  -- เรียกใช้ฟังก์ชัน attack
+                attack(enemy) 
             end
         end
     end
