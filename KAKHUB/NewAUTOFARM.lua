@@ -16,11 +16,11 @@ end
 
 
 
-local Versionxx = "2.4.8"
+local Versionxx = "2.4.9"
 print("Version: "..Versionxx)
 ---------------
 
-
+local function loadData()
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -950,7 +950,11 @@ do
         end
     end
     local Section = Tabs.Playerss:AddSection("Anti Cannon")
-    local Toggle = Tabs.Playerss:AddToggle("MyToggleStartanticannon", {Title = "Anti Cannon Ball", Default = false })
+    local ToggleStartanticannon = Tabs.Playerss:AddToggle("MyToggleStartanticannon", {Title = "Anti Cannon Ball", Default = false })
+    ToggleStartanticannon:OnChanged(function() 
+        hasCannonBall = false 
+        messageSent = false
+    end)
     spawn(function()
         while wait() do
             pcall(function()
@@ -2203,3 +2207,14 @@ Fluent:Notify({
 -- which has been marked to be one that auto loads!
 SaveManager:LoadAutoloadConfig()
 
+print("โหลดข้อมูลเสร็จแล้ว")
+end
+
+
+local function onGuiLoad()
+    local co = coroutine.create(loadData)
+    coroutine.resume(co)  -- เรียกใช้ coroutine เพื่อทำงานในเธรดแยก
+end
+
+-- เรียกใช้ฟังก์ชันเมื่อ GUI โหลด
+onGuiLoad()
