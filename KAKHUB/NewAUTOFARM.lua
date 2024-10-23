@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.5.1"
+local Versionxx = "2.5.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -1365,45 +1365,64 @@ do
 
 
 
+    local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
+    local plr = game:GetService("Players").LocalPlayer
+    
+    if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
+        warn("Powers.Light ไม่พบใน Character")
+        return
+    end
+    
+    
+    local function attack(target)
+        local humanoid = target:FindFirstChildOfClass("Humanoid")
+        local humanoidRootPart = target:FindFirstChild("HumanoidRootPart")
+        
+        if humanoid and humanoidRootPart then
+            local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 20, 0)
+            plr.Character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
+            wait(0.1)
+    
+            while humanoid.Health > 0 do
+                plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StartCharging", humanoidRootPart.CFrame, workspace.Cave.Stone)
+                plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StopCharging", humanoidRootPart.CFrame, workspace.IslandSnowyMountains.Stone.Stone, 100)
+                wait(0.1)
+            end
+        else
+            warn("เป้าหมาย " .. target.Name .. " ไม่มี Humanoid หรือ HumanoidRootPart")
+        end
+    end
+    
+    local function attackEnemies()
+        for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+            local humanoid = enemy:FindFirstChildOfClass("Humanoid")
+            if humanoid then
+                humanoid.Health = 0  -- ตั้งค่าเลือดให้เท่ากับ 0
+                attack(enemy)  -- เรียกใช้ฟังก์ชัน attack
+            end
+        end
+    end
+    
+    local function attackPlayers(maxHeight)
+        for _, player in pairs(game:GetService("Players"):GetPlayers()) do
+            if player ~= plr and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                local humanoidRootPart = player.Character.HumanoidRootPart
+                if humanoidRootPart.Position.Y <= maxHeight then
+                    attack(player.Character)
+                end
+            end
+        end
+    end
+    
     spawn(function()
         while wait() do
-            if not Options.MyToggleLightFarm.Value then return end;
             pcall(function()
-                local vtc = getsenv(game.Players.LocalPlayer.Character.Powers.Light)["VTCrv"]
-                local plr = game:GetService("Players").LocalPlayer
-                
-                if not plr.Character:FindFirstChild("Powers") or not plr.Character.Powers:FindFirstChild("Light") then
-                    warn("Powers.Light ไม่พบใน Character")
-                    return
-                end
-                
-                for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                    local humanoid = enemy:FindFirstChildOfClass("Humanoid")
-                    local humanoidRootPart = enemy:FindFirstChild("HumanoidRootPart")
-                    
-                    if humanoid and humanoidRootPart then
-                        
-                        local teleportPosition = humanoidRootPart.Position + Vector3.new(0, 20, 0)
-                
-                        plr.Character:SetPrimaryPartCFrame(CFrame.new(teleportPosition))
-                
-                        wait(0.1)
-                
-                
-                        while humanoid.Health > 0 do
-                            humanoid.Health = 0
-                            plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StartCharging", humanoidRootPart.CFrame, workspace.Cave.Stone)
-                            plr.Character.Powers.Light.RemoteEvent:FireServer(vtc, "LightPower8", "StopCharging", humanoidRootPart.CFrame, workspace.IslandSnowyMountains.Stone.Stone, 100)
-                            wait(0.1)
-                        end
-                    else
-                        warn("ศัตรู " .. enemy.Name .. " ไม่มี Humanoid หรือ HumanoidRootPart")
-                    end
-                end
+                if not Options.MyToggleLightFarm.Value then return end;
+                spawn(attackEnemies)
+                spawn(function() attackPlayers(200000) end)
             end)
         end
-    end)
-
+    end);
 
 
     local Section = Tabs.Teleport:AddSection("Open GUI")
@@ -1412,7 +1431,6 @@ do
         Title = "Open GUI NPC",
         Values = InstanceToName(game:GetService("Workspace").Merchants:GetChildren()),
         Multi = false,
-        Default = ""
     })
     DropdownOpenGUIII:OnChanged(function(Value)
         if not Options.DropdownOpenGUI.Value or not game:GetService("Workspace").Merchants[Options.DropdownOpenGUI.Value] or not CheckPath(game:GetService("Workspace").Merchants[Options.DropdownOpenGUI.Value], "Clickable", "ClickDetector") then return end;
@@ -1424,7 +1442,6 @@ do
         Title = "Teleport NPC",
         Values = InstanceToName(game:GetService("Workspace").Merchants:GetChildren()),
         Multi = false,
-        Default = ""
     })
     DropdownTeleportNPCC:OnChanged(function(Value)
         if not Options.DropdownTeleportNPC.Value or not game:GetService("Workspace").Merchants[Options.DropdownTeleportNPC.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
@@ -1435,7 +1452,6 @@ do
         Title = "Teleport Island",
         Values = Allset.DevSetting["ListTeleportIslandIndex"],
         Multi = false,
-        Default = ""
     })
     DropdownTeleportISLANDD:OnChanged(function(Value)
         if not Options.DropdownTeleportIsland.Value or not Allset.DevSetting.ListTeleportIsland[Options.DropdownTeleportIsland.Value] or not CheckPath(game.Players.LocalPlayer.Character, "HumanoidRootPart") then return end;
