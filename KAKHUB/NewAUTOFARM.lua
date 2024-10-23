@@ -16,11 +16,11 @@ end
 
 
 
-local Versionxx = "2.5.0"
+local Versionxx = "2.5.1"
 print("Version: "..Versionxx)
 ---------------
 
-local function loadData()
+
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
@@ -2207,14 +2207,3 @@ Fluent:Notify({
 -- which has been marked to be one that auto loads!
 SaveManager:LoadAutoloadConfig()
 
-print("โหลดข้อมูลเสร็จแล้ว")
-end
-
-
-local function onGuiLoad()
-    local co = coroutine.create(loadData)
-    coroutine.resume(co)  -- เรียกใช้ coroutine เพื่อทำงานในเธรดแยก
-end
-
--- เรียกใช้ฟังก์ชันเมื่อ GUI โหลด
-onGuiLoad()
