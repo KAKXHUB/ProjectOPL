@@ -16,7 +16,7 @@ end
 
 
 
-local Versionxx = "2.4.7"
+local Versionxx = "2.4.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -906,7 +906,7 @@ do
             end
             -- ส่งข้อความไปยังผู้เล่นที่ถือ CannonBall
             
-            for _, player in ipairs(playersWithCannonBall) do
+            --[[for _, player in ipairs(playersWithCannonBall) do
                 if not messageSent then
                     local message = "/w " .. player.Name .. " Banned Cannon Ball"
                     local args = {
@@ -917,7 +917,7 @@ do
                     print("ส่งข้อความไปยัง: " .. player.Name)
                     messageSent = true
                 end
-            end
+            end]]
     
             local playerCFrame = playersWithCannonBall[1].Character.HumanoidRootPart.CFrame
     
@@ -934,7 +934,11 @@ do
     
             cannonBallCFrameTask = coroutine.create(function()
                 while true do
-                    workspace.ResourceHolder[resourceName].CannonBall.CFrame = playerCFrame
+                    for _, item in pairs(workspace.ResourceHolder[resourceName]:GetChildren()) do
+                        if item.Name == "CannonBall" then  -- ตรวจสอบชื่อว่าเป็น "CannonBall" หรือไม่
+                            item.CFrame = playerCFrame
+                        end
+                    end
                     wait(0.1)  -- หยุดสั้นๆ เพื่อไม่ให้ใช้ CPU มากเกินไป
                 end
             end)
