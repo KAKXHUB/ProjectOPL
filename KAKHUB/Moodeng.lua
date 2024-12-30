@@ -1,4 +1,4 @@
-local Versionxx = "1.1.3"
+local Versionxx = "1.1.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -93,6 +93,15 @@ do
             end)
         end
     end)
+    Tabs.Main:AddButton({
+        Title = "Check",
+        Description = "Open Affinity",
+        Callback = function()
+            for i,v in pairs(Options.MultiDropdownFindItem.Value) do
+                print(v)
+            end
+        end
+    })
 
 
 
