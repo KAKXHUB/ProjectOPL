@@ -1,4 +1,4 @@
-local Versionxx = "1.2.1"
+local Versionxx = "1.2.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -155,7 +155,7 @@ do
                     workspace.Map.Mon.Slime
                 }
                 for _, zone in pairs(zones) do
-                    for _, v in pairs(zone:GetDescendants()) do
+                    for _, v in pairs(zone:GetChildren()) do
                         local humanoid = v:FindFirstChild("Humanoid")
                         if humanoid and humanoid.Health > 0 then
                             repeat
