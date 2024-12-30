@@ -1,4 +1,4 @@
-local Versionxx = "1.2.6"
+local Versionxx = "1.2.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -74,7 +74,7 @@ do
         Default = {},
     })
     local Toggle = Tabs.Main:AddToggle("MyToggleFindItem", {Title = "Start", Default = false })
-    --[[spawn(function()
+    spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleFindItem.Value then return end;
@@ -104,7 +104,7 @@ do
                             until Options.MyToggleFindItem.Value == false or humanoidAlaGod.Health <= 0
                         end
                     end
-                elseif Options.MultiDropdownFindItem.Value = "Orb Dark" then
+                elseif Options.MultiDropdownFindItem.Value == "Orb Dark" then
                     local Asta = workspace:FindFirstChild("Asta [Boss]")
                     local humanoidRootPartAsta = Asta:FindFirstChild("HumanoidRootPart")
                     local humanoidAsta = Asta:FindFirstChild("Humanoid")
@@ -120,8 +120,8 @@ do
                 end
             end)
         end
-    end)]]
-    --[[spawn(function()
+    end)
+    spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleFindItem.Value then return end;    
@@ -134,7 +134,7 @@ do
                 end
             end)
         end
-    end)]]
+    end)
     Tabs.Main:AddButton({
         Title = "Check",
         Description = "Open Affinity",
