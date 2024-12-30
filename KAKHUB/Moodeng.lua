@@ -75,24 +75,22 @@ do
     local Toggle = Tabs.Main:AddToggle("MyToggleFindItem", {Title = "Start", Default = false })
     spawn(function()
         while wait() do
-            if not Options.MyToggleFindItem.Value then
-                pcall(function()
-                    game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid;
-                end)
-            end
+            if not Options.MyToggleFindItem.Value then return end;
+            pcall(function()
+                game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid;
+            end)
         end
     end)
     spawn(function()
         while wait() do
-            if not Options.MyToggleFindItem.Value then
-                pcall(function()
-                    for _, itemName in pairs(itemNames) do
-                        if player.Backpack:FindFirstChild(itemName) then
-                            print(itemName)
-                        end
+            if not Options.MyToggleFindItem.Value then return end;
+            pcall(function()
+                for _, itemName in pairs(itemNames) do
+                    if player.Backpack:FindFirstChild(itemName) then
+                        print(itemName)
                     end
-                end)
-            end
+                end
+            end)
         end
     end)
 
