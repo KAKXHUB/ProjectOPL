@@ -74,7 +74,7 @@ do
         Default = {},
     })
     local Toggle = Tabs.Main:AddToggle("MyToggleFindItem", {Title = "Start", Default = false })
-    spawn(function()
+    --[[spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleFindItem.Value then return end;
@@ -120,7 +120,7 @@ do
                 end
             end)
         end
-    end)
+    end)]]
     --[[spawn(function()
         while wait() do
             pcall(function()
