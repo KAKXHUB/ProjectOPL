@@ -1,4 +1,4 @@
-local Versionxx = "1.2.4"
+local Versionxx = "1.2.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -78,7 +78,7 @@ do
         while wait() do
             pcall(function()
                 if not Options.MyToggleFindItem.Value then return end;
-                if Options.MultiDropdownFindItem.Value = "Bible Shadow" or "Orb Atomic" or "Red Shard" then
+                if Options.MultiDropdownFindItem.Value == "Bible Shadow" or Options.MultiDropdownFindItem.Value == "Orb Atomic" or Options.MultiDropdownFindItem.Value == "Red Shard" then
                     local SungJinWoo = workspace:FindFirstChild("Sung Jin Woo [Boss]")
                     local humanoidRootPartSungJinWoo = SungJinWoo:FindFirstChild("HumanoidRootPart")
                     local humanoidSungJinWoo = SungJinWoo:FindFirstChild("Humanoid")
@@ -91,7 +91,7 @@ do
                             until Options.MyToggleFindItem.Value == false or humanoidSungJinWoo.Health <= 0
                         end
                     end
-                elseif Options.MultiDropdownFindItem.Value = "Orb Mystery" or "Spiritual Orb" then
+                elseif Options.MultiDropdownFindItem.Value == "Orb Mystery" or Options.MultiDropdownFindItem.Value == "Spiritual Orb" then
                     local AlaGod = workspace:FindFirstChild("Ala God [Boss]")
                     local humanoidRootPartAlaGod = AlaGod:FindFirstChild("HumanoidRootPart")
                     local humanoidAlaGod = AlaGod:FindFirstChild("Humanoid")
