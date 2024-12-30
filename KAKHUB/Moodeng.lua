@@ -1,4 +1,4 @@
-local Versionxx = "1.3.4"
+local Versionxx = "1.3.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -151,6 +151,8 @@ do
                                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartSungJinWoo.CFrame * CFrame.new(0, 0, 15)
                                         game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
                                     until Options.MyToggleFindItem.Value == false or humanoidSungJinWoo.Health <= 0
+                                elseif humanoidSungJinWoo.Health <= 0 then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,500,0)
                                 end
                             end
                         end
@@ -166,6 +168,8 @@ do
                                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartAlaGod.CFrame * CFrame.new(0, 0, 15)
                                         game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
                                     until Options.MyToggleFindItem.Value == false or humanoidAlaGod.Health <= 0
+                                elseif humanoidAlaGod.Health <= 0 then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,500,0)
                                 end
                             end
                         end
@@ -181,6 +185,8 @@ do
                                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartAsta.CFrame * CFrame.new(0, 0, 15)
                                         game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
                                     until Options.MyToggleFindItem.Value == false or humanoidAsta.Health <= 0
+                                elseif humanoidAsta.Health <= 0 then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,500,0)
                                 end
                             end
                         end
