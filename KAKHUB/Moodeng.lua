@@ -123,8 +123,8 @@ do
     end)]]
     spawn(function()
         while wait() do
-            if not Options.MyToggleFindItem.Value then return end
             pcall(function()
+                if not Options.MyToggleFindItem.Value then return end
                 if Options.MultiDropdownFindItem.Value == "Bible Shadow" or 
                    Options.MultiDropdownFindItem.Value == "Orb Atomic" or 
                    Options.MultiDropdownFindItem.Value == "Red Shard" then
