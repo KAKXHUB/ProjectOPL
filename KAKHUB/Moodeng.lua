@@ -1,4 +1,4 @@
-local Versionxx = "1.1.4"
+local Versionxx = "1.1.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -85,7 +85,7 @@ do
         while wait() do
             if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
-                for _, itemName in pairs(Options.MultiDropdownFindItem.Value) do
+                for itemName,v itemName in pairs(Options.MultiDropdownFindItem.Value) do
                     if game.Players.LocalPlayer.Backpack:FindFirstChild(itemName) then
                         print(itemName)
                     end
