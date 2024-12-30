@@ -1,4 +1,4 @@
-local Versionxx = "1.2.0"
+local Versionxx = "1.2.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -143,7 +143,34 @@ do
     })
     local Toggle = Tabs.Farm:AddToggle("MyToggleFarmgems", {Title = "Gems", Default = false })
 
+
     spawn(function()
+        while wait() do
+            if not Options.MyToggleFarmgems.Value then return end
+            pcall(function()
+                local zones = {
+                    workspace.Map.Mon["10000-50000"],
+                    workspace.Map.Mon["50000-100000"],
+                    workspace.Map.Mon.Event,
+                    workspace.Map.Mon.Slime
+                }
+                for _, zone in pairs(zones) do
+                    for _, v in pairs(zone:GetDescendants()) do
+                        local humanoid = v:FindFirstChild("Humanoid")
+                        if humanoid and humanoid.Health > 0 then
+                            repeat
+                                task.wait()
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 8)
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWToollll.Value).Move3.Fire:FireServer()
+                            until Options.MyToggleFarmgems.Value == false or humanoid.Health <= 0
+                        end
+                    end
+                end
+            end)
+        end
+    end)
+    
+    --[[spawn(function()
         while wait() do
             if not Options.MyToggleFarmgems.Value then return end;
             pcall(function()
@@ -166,7 +193,7 @@ do
                 end
             end)
         end
-    end)
+    end)]]
 
 
 
