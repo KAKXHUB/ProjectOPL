@@ -1,4 +1,4 @@
-local Versionxx = "1.1.6"
+local Versionxx = "1.1.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -98,7 +98,9 @@ do
         Description = "Open Affinity",
         Callback = function()
             for i,v in pairs(Options.MultiDropdownFindItem.Value) do
-                print(i)
+                if game.Player.LocalPlayer.Backpack:FindFirstChild(i) then
+                    print(i)
+                end
             end
         end
     })
