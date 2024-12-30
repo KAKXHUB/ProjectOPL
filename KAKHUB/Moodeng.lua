@@ -1,4 +1,4 @@
-local Versionxx = "1.3.0"
+local Versionxx = "1.3.1"
 print("Version: "..Versionxx)
 ---------------
 
@@ -197,7 +197,9 @@ do
         Title = "Check",
         Description = "Open Affinity",
         Callback = function()
-            print(Options.MultiDropdownFindItem.Value)
+            for _, itemName in pairs(Options.MultiDropdownFindItem.Value) do
+                print(_, itemName)
+            end
         end
     })
     local Section = Tabs.Farm:AddSection("Gems")
