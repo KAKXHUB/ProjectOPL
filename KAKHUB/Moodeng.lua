@@ -1,4 +1,4 @@
-local Versionxx = "1.1.9"
+local Versionxx = "1.2.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -143,26 +143,30 @@ do
     })
     local Toggle = Tabs.Farm:AddToggle("MyToggleFarmgems", {Title = "Gems", Default = false })
 
-    while Options.MyToggleFarmgems.Value do wait()
-        pcall(function()
-            local zones = {
-                workspace.Map.Mon["10000-50000"],
-                workspace.Map.Mon["50000-100000"],
-                workspace.Map.Mon.Event,
-                workspace.Map.Mon.Slime
-            }
-            for _, zone in pairs(zones) do
-                for i,v in pairs(zone:GetDescendants()) do
-                    if v.Humanoid >= 0 then
-                        repeat task.wait()
-                            game.Players.LocalPlayer.Character.humanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,8)
-                            game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWToollll.Value).Move3.Fire:FireServer()
+    spawn(function()
+        while wait() do
+            if not Options.MyToggleFarmgems.Value then return end;
+            pcall(function()
+                local zones = {
+                    workspace.Map.Mon["10000-50000"],
+                    workspace.Map.Mon["50000-100000"],
+                    workspace.Map.Mon.Event,
+                    workspace.Map.Mon.Slime
+                }
+                for _, zone in pairs(zones) do
+                    for i,v in pairs(zone:GetDescendants()) do
+                        if v.Humanoid >= 0 then
+                            repeat 
+                                task.wait()
+                                game.Players.LocalPlayer.Character.humanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,8)
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWToollll.Value).Move3.Fire:FireServer()
                             until Options.MyToggleFarmgems.Value == false or v.Humanoid.Health <= 0
                         end
                     end
                 end
             end)
         end
+    end)
 
 
 
