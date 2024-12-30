@@ -155,7 +155,7 @@ do
                 }
                 for _, zone in pairs(zones) do
                     for i,v in pairs(zone:GetDescendants()) do
-                        if v.Humanoid >= 0 then
+                        if v.Humanoid.Health >= 0 then
                             repeat 
                                 task.wait()
                                 game.Players.LocalPlayer.Character.humanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,8)
