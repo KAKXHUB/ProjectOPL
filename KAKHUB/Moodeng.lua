@@ -1,4 +1,4 @@
-local Versionxx = "1.3.6"
+local Versionxx = "1.3.7"
 print("Version: "..Versionxx)
 ---------------
 
@@ -85,6 +85,21 @@ do
     })
     local Toggle = Tabs.Main:AddToggle("MyToggleFindItem", {Title = "Start", Default = false })
     local Toggle = Tabs.Main:AddToggle("MyToggleStopFindItem", {Title = "Auto Stop", Default = false })
+    local Toggle = Tabs.Main:AddToggle("MyToggleDestrory", {Title = "Destrory item", Default = false })
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if not Options.MyToggleDestrory.Value then return end;
+                local itemsToRemove = {"Blade", "Fake Finger", "Heart", "Orb Blue", "White Hair", "Orb Slime", "Hogkoyu Fragment", "Grimoire"}
+                for _, itemName in ipairs(itemsToRemove) do
+                    local item = game.Players.LocalPlayer.Backpack:FindFirstChild(itemName)
+                    if item then
+                        item:Destroy()
+                    end
+                end;
+            end)
+        end
+    end);
     --[[spawn(function()
         while wait() do
             pcall(function()
