@@ -98,7 +98,7 @@ do
         Description = "Open Affinity",
         Callback = function()
             for i,v in pairs(Options.MultiDropdownFindItem.Value) do
-                if game.Player.LocalPlayer.Backpack:FindFirstChild(i) then
+                if game.Players.LocalPlayer.Backpack:FindFirstChild(i) then
                     print(i)
                 end
             end
