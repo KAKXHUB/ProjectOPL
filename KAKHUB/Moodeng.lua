@@ -1,4 +1,4 @@
-local Versionxx = "1.2.5"
+local Versionxx = "1.2.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -121,7 +121,7 @@ do
             end)
         end
     end)
-    spawn(function()
+    --[[spawn(function()
         while wait() do
             pcall(function()
                 if not Options.MyToggleFindItem.Value then return end;    
@@ -134,7 +134,7 @@ do
                 end
             end)
         end
-    end)
+    end)]]
     Tabs.Main:AddButton({
         Title = "Check",
         Description = "Open Affinity",
