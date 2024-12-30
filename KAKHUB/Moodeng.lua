@@ -197,7 +197,7 @@ do
         Title = "Check",
         Description = "Open Affinity",
         Callback = function()
-            print(ptions.MultiDropdownFindItem.Value)
+            print(Options.MultiDropdownFindItem.Value)
         end
     })
     local Section = Tabs.Farm:AddSection("Gems")
