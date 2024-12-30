@@ -85,7 +85,7 @@ do
         while wait() do
             if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
-                for itemName,v itemName in pairs(Options.MultiDropdownFindItem.Value) do
+                for itemName,v in pairs(Options.MultiDropdownFindItem.Value) do
                     if game.Players.LocalPlayer.Backpack:FindFirstChild(itemName) then
                         print(itemName)
                     end
