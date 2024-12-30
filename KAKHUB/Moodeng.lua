@@ -1,4 +1,4 @@
-local Versionxx = "1.1.5"
+local Versionxx = "1.1.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -98,7 +98,7 @@ do
         Description = "Open Affinity",
         Callback = function()
             for i,v in pairs(Options.MultiDropdownFindItem.Value) do
-                print(v)
+                print(i)
             end
         end
     })
