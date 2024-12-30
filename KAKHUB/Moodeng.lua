@@ -1,4 +1,4 @@
-local Versionxx = "1.1.7"
+local Versionxx = "1.1.8"
 print("Version: "..Versionxx)
 ---------------
 
@@ -73,21 +73,21 @@ do
         Default = {},
     })
     local Toggle = Tabs.Main:AddToggle("MyToggleFindItem", {Title = "Start", Default = false })
-    spawn(function()
+    --[[spawn(function()
         while wait() do
             if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
                 
             end)
         end
-    end)
+    end)]]
     spawn(function()
         while wait() do
             if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
-                for itemName,v in pairs(Options.MultiDropdownFindItem.Value) do
-                    if game.Players.LocalPlayer.Backpack:FindFirstChild(itemName) then
-                        print(itemName)
+                for i,v in pairs(Options.MultiDropdownFindItem.Value) do
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild(i) then
+                        print(i)
                     end
                 end
             end)
