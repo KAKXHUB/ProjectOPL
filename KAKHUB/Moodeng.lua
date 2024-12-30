@@ -1,4 +1,4 @@
-local Versionxx = "1.3.1"
+local Versionxx = "1.3.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -126,7 +126,7 @@ do
             pcall(function()
                 if not Options.MyToggleFindItem.Value then return end
                 -- ตรวจสอบแต่ละค่าภายใน MultiDropdownFindItem.Value
-                for _, itemName in pairs(Options.MultiDropdownFindItem.Value) do
+                for itemName,_ in pairs(Options.MultiDropdownFindItem.Value) do
                     -- ตรวจสอบว่า itemName ตรงกับไอเท็มที่ต้องการหรือไม่
                     if itemName == "Bible Shadow" or itemName == "Orb Atomic" or itemName == "Red Shard" then
                         local SungJinWoo = workspace:FindFirstChild("Sung Jin Woo [Boss]")
