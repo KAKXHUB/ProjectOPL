@@ -1,4 +1,4 @@
-local Versionxx = "1.3.3"
+local Versionxx = "1.3.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -65,6 +65,16 @@ do
             updateDropdownWToolOptions()
         end
     })
+    local Toggle = Tabs.Main:AddToggle("MyToggleATRQ", {Title = "Auto Equip Tool", Default = false })
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if Options.MyToggleATRQ.Value and not game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value) then
+                    game.Players.LocalPlayer.Backpack:FindFirstChild(Options.DropdownWTool.Value).Parent = game.Players.LocalPlayer.Character
+                end
+            end)
+        end
+    end)
     local Section = Tabs.Main:AddSection("Find Item")
     local MultiDropdownFIndItemm = Tabs.Main:AddDropdown("MultiDropdownFindItem", {
         Title = "Selec Item",
@@ -237,6 +247,16 @@ do
             updateDropdownWToolOptionsss()
         end
     })
+    local Toggle = Tabs.Farm:AddToggle("MyToggleATRQsss", {Title = "Auto Equip Tool", Default = false })
+    spawn(function()
+        while wait() do
+            pcall(function()
+                if Options.MyToggleATRQsss.Value and not game.Players.LocalPlayer.Character:FindFirstChild(Options.DropdownWToollll.Value) then
+                    game.Players.LocalPlayer.Backpack:FindFirstChild(Options.DropdownWToollll.Value).Parent = game.Players.LocalPlayer.Character
+                end
+            end)
+        end
+    end)
     local Toggle = Tabs.Farm:AddToggle("MyToggleFarmgems", {Title = "Gems", Default = false })
 
 
