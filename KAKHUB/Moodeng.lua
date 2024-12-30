@@ -1,4 +1,4 @@
-local Versionxx = "1.1.1"
+local Versionxx = "1.1.2"
 print("Version: "..Versionxx)
 ---------------
 
@@ -70,7 +70,7 @@ do
         Description = "You can select multiple values.",
         Values = {"Bible Shadow", "Orb Atomic", "Red Shard", "Orb Mystery", "Spiritual Orb"},
         Multi = true,
-        Default = "",
+        Default = {},
     })
     local Toggle = Tabs.Main:AddToggle("MyToggleFindItem", {Title = "Start", Default = false })
     spawn(function()
