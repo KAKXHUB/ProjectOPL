@@ -1,4 +1,4 @@
-local Versionxx = "1.2.8"
+local Versionxx = "1.2.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -197,11 +197,7 @@ do
         Title = "Check",
         Description = "Open Affinity",
         Callback = function()
-            for i,v in pairs(Options.MultiDropdownFindItem.Value) do
-                if game.Players.LocalPlayer.Backpack:FindFirstChild(i) then
-                    print(i)
-                end
-            end
+            print(ptions.MultiDropdownFindItem.Value)
         end
     })
     local Section = Tabs.Farm:AddSection("Gems")
