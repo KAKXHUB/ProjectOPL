@@ -1,4 +1,4 @@
-local Versionxx = "1.2.2"
+local Versionxx = "1.2.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -146,8 +146,8 @@ do
 
     spawn(function()
         while wait() do
-            if not Options.MyToggleFarmgems.Value then return end
             pcall(function()
+                if not Options.MyToggleFarmgems.Value then return end
                 local zones = {
                     workspace.Map.Mon["10000-50000"],
                     workspace.Map.Mon["50000-100000"],
