@@ -1,4 +1,4 @@
-local Versionxx = "1.2.3"
+local Versionxx = "1.2.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -76,20 +76,59 @@ do
     local Toggle = Tabs.Main:AddToggle("MyToggleFindItem", {Title = "Start", Default = false })
     spawn(function()
         while wait() do
-            if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
-                
+                if not Options.MyToggleFindItem.Value then return end;
+                if Options.MultiDropdownFindItem.Value = "Bible Shadow" or "Orb Atomic" or "Red Shard" then
+                    local SungJinWoo = workspace:FindFirstChild("Sung Jin Woo [Boss]")
+                    local humanoidRootPartSungJinWoo = SungJinWoo:FindFirstChild("HumanoidRootPart")
+                    local humanoidSungJinWoo = SungJinWoo:FindFirstChild("Humanoid")
+                    if humanoidSungJinWoo and humanoidRootPartSungJinWoo then
+                        if humanoidSungJinWoo.Health > 0 then
+                            repeat
+                                task.wait()
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartSungJinWoo.CFrame * CFrame.new(0, 0, 8)
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
+                            until Options.MyToggleFindItem.Value == false or humanoidSungJinWoo.Health <= 0
+                        end
+                    end
+                elseif Options.MultiDropdownFindItem.Value = "Orb Mystery" or "Spiritual Orb" then
+                    local AlaGod = workspace:FindFirstChild("Ala God [Boss]")
+                    local humanoidRootPartAlaGod = AlaGod:FindFirstChild("HumanoidRootPart")
+                    local humanoidAlaGod = AlaGod:FindFirstChild("Humanoid")
+                    if humanoidAlaGod and humanoidRootPartAlaGod then
+                        if humanoidAlaGod.Health > 0 then
+                            repeat
+                                task.wait()
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartAlaGod.CFrame * CFrame.new(0, 0, 8)
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
+                            until Options.MyToggleFindItem.Value == false or humanoidAlaGod.Health <= 0
+                        end
+                    end
+                elseif Options.MultiDropdownFindItem.Value = "Orb Dark" then
+                    local Asta = workspace:FindFirstChild("Asta [Boss]")
+                    local humanoidRootPartAsta = Asta:FindFirstChild("HumanoidRootPart")
+                    local humanoidAsta = Asta:FindFirstChild("Humanoid")
+                    if humanoidAsta and humanoidRootPartAsta then
+                        if humanoidAsta.Health > 0 then
+                            repeat
+                                task.wait()
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartAsta.CFrame * CFrame.new(0, 0, 8)
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
+                            until Options.MyToggleFindItem.Value == false or humanoidAsta.Health <= 0
+                        end
+                    end
+                end
             end)
         end
     end)
     spawn(function()
         while wait() do
-            if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
+                if not Options.MyToggleFindItem.Value then return end;    
                 for i,v in pairs(Options.MultiDropdownFindItem.Value) do
                     if game.Players.LocalPlayer.Backpack:FindFirstChild(i) then
                         MultiDropdownFIndItemm:SetValue({
-                            i = true
+                            i = false
                         })
                     end
                 end
