@@ -1,4 +1,4 @@
-local Versionxx = "1.1.8"
+local Versionxx = "1.1.9"
 print("Version: "..Versionxx)
 ---------------
 
@@ -18,6 +18,7 @@ local Window = Fluent:CreateWindow({
 
 local Tabs = {
     Main = Window:AddTab({ Title = "Find Item", Icon = "gem" }),
+    Farm = Window:AddTab({ Title = "Farm", Icon = "gem" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
@@ -65,29 +66,31 @@ do
         end
     })
     local Section = Tabs.Main:AddSection("Find Item")
-    local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdownFindItem", {
+    local MultiDropdownFIndItemm = Tabs.Main:AddDropdown("MultiDropdownFindItem", {
         Title = "Selec Item",
         Description = "You can select multiple values.",
-        Values = {"Bible Shadow", "Orb Atomic", "Red Shard", "Orb Mystery", "Spiritual Orb"},
+        Values = {"Bible Shadow", "Orb Atomic", "Red Shard", "Orb Mystery", "Spiritual Orb", "Orb Dark"},
         Multi = true,
         Default = {},
     })
     local Toggle = Tabs.Main:AddToggle("MyToggleFindItem", {Title = "Start", Default = false })
-    --[[spawn(function()
+    spawn(function()
         while wait() do
             if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
                 
             end)
         end
-    end)]]
+    end)
     spawn(function()
         while wait() do
             if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
                 for i,v in pairs(Options.MultiDropdownFindItem.Value) do
                     if game.Players.LocalPlayer.Backpack:FindFirstChild(i) then
-                        print(i)
+                        MultiDropdownFIndItemm:SetValue({
+                            i = true
+                        })
                     end
                 end
             end)
@@ -104,9 +107,62 @@ do
             end
         end
     })
+    local Section = Tabs.Farm:AddSection("Gems")
+    local Weaponlisttt = {}
+    local Weapon = nil
+
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+        table.insert(Weaponlisttt,v.Name)
+    end
 
 
 
+    local DropdownWToollll = Tabs.Farm:AddDropdown("DropdownWToollll", {
+        Title = "Select Tools",
+        Values = Weaponlisttt,
+        Multi = false,
+        Default = ""
+    })
+
+
+
+    local function updateDropdownWToolOptionsss()
+        local WeaponlistNewww = {}
+        for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+            table.insert(WeaponlistNewww,v.Name)
+        end
+        DropdownWToollll.Values = WeaponlistNewww
+        DropdownWToollll:SetValue(Options.DropdownWToollll.Value)
+    end
+    Tabs.Farm:AddButton({
+        Title = "Refresh",
+        Description = "Refresh Tool list",
+        Callback = function()
+            updateDropdownWToolOptionsss()
+        end
+    })
+    local Toggle = Tabs.Farm:AddToggle("MyToggleFarmgems", {Title = "Gems", Default = false })
+
+    while Options.MyToggleFarmgems.Value do wait()
+        pcall(function()
+            local zones = {
+                workspace.Map.Mon["10000-50000"],
+                workspace.Map.Mon["50000-100000"],
+                workspace.Map.Mon.Event,
+                workspace.Map.Mon.Slime
+            }
+            for _, zone in pairs(zones) do
+                for i,v in pairs(zone:GetDescendants()) do
+                    if v.Humanoid >= 0 then
+                        repeat task.wait()
+                            game.Players.LocalPlayer.Character.humanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,8)
+                            game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWToollll.Value).Move3.Fire:FireServer()
+                            until Options.MyToggleFarmgems.Value == false or v.Humanoid.Health <= 0
+                        end
+                    end
+                end
+            end)
+        end
 
 
 
