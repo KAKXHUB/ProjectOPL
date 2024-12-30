@@ -1,4 +1,4 @@
-local Versionxx = "1.1.2"
+local Versionxx = "1.1.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -77,7 +77,7 @@ do
         while wait() do
             if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
-                game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid;
+                
             end)
         end
     end)
@@ -85,8 +85,8 @@ do
         while wait() do
             if not Options.MyToggleFindItem.Value then return end;
             pcall(function()
-                for _, itemName in pairs(itemNames) do
-                    if player.Backpack:FindFirstChild(itemName) then
+                for _, itemName in pairs(Options.MultiDropdownFindItem.Value) do
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild(itemName) then
                         print(itemName)
                     end
                 end
