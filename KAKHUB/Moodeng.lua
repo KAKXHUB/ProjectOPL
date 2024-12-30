@@ -1,4 +1,4 @@
-local Versionxx = "1.2.9"
+local Versionxx = "1.3.0"
 print("Version: "..Versionxx)
 ---------------
 
@@ -125,53 +125,52 @@ do
         while wait() do
             pcall(function()
                 if not Options.MyToggleFindItem.Value then return end
-                if Options.MultiDropdownFindItem.Value == "Bible Shadow" or 
-                   Options.MultiDropdownFindItem.Value == "Orb Atomic" or 
-                   Options.MultiDropdownFindItem.Value == "Red Shard" then
-    
-                    local SungJinWoo = workspace:FindFirstChild("Sung Jin Woo [Boss]")
-                    if SungJinWoo then
-                        local humanoidRootPartSungJinWoo = SungJinWoo:FindFirstChild("HumanoidRootPart")
-                        local humanoidSungJinWoo = SungJinWoo:FindFirstChild("Humanoid")
-                        if humanoidSungJinWoo and humanoidRootPartSungJinWoo then
-                            if humanoidSungJinWoo.Health > 0 then
-                                repeat
-                                    task.wait()
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartSungJinWoo.CFrame * CFrame.new(0, 0, 8)
-                                    game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
-                                until Options.MyToggleFindItem.Value == false or humanoidSungJinWoo.Health <= 0
+                -- ตรวจสอบแต่ละค่าภายใน MultiDropdownFindItem.Value
+                for _, itemName in pairs(Options.MultiDropdownFindItem.Value) do
+                    -- ตรวจสอบว่า itemName ตรงกับไอเท็มที่ต้องการหรือไม่
+                    if itemName == "Bible Shadow" or itemName == "Orb Atomic" or itemName == "Red Shard" then
+                        local SungJinWoo = workspace:FindFirstChild("Sung Jin Woo [Boss]")
+                        if SungJinWoo then
+                            local humanoidRootPartSungJinWoo = SungJinWoo:FindFirstChild("HumanoidRootPart")
+                            local humanoidSungJinWoo = SungJinWoo:FindFirstChild("Humanoid")
+                            if humanoidSungJinWoo and humanoidRootPartSungJinWoo then
+                                if humanoidSungJinWoo.Health > 0 then
+                                    repeat
+                                        task.wait()
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartSungJinWoo.CFrame * CFrame.new(0, 0, 8)
+                                        game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
+                                    until Options.MyToggleFindItem.Value == false or humanoidSungJinWoo.Health <= 0
+                                end
                             end
                         end
-                    end
-                elseif Options.MultiDropdownFindItem.Value == "Orb Mystery" or 
-                       Options.MultiDropdownFindItem.Value == "Spiritual Orb" then
-    
-                    local AlaGod = workspace:FindFirstChild("Ala God [Boss]")
-                    if AlaGod then
-                        local humanoidRootPartAlaGod = AlaGod:FindFirstChild("HumanoidRootPart")
-                        local humanoidAlaGod = AlaGod:FindFirstChild("Humanoid")
-                        if humanoidAlaGod and humanoidRootPartAlaGod then
-                            if humanoidAlaGod.Health > 0 then
-                                repeat
-                                    task.wait()
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartAlaGod.CFrame * CFrame.new(0, 0, 8)
-                                    game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
-                                until Options.MyToggleFindItem.Value == false or humanoidAlaGod.Health <= 0
+                    elseif itemName == "Orb Mystery" or itemName == "Spiritual Orb" then
+                        local AlaGod = workspace:FindFirstChild("Ala God [Boss]")
+                        if AlaGod then
+                            local humanoidRootPartAlaGod = AlaGod:FindFirstChild("HumanoidRootPart")
+                            local humanoidAlaGod = AlaGod:FindFirstChild("Humanoid")
+                            if humanoidAlaGod and humanoidRootPartAlaGod then
+                                if humanoidAlaGod.Health > 0 then
+                                    repeat
+                                        task.wait()
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartAlaGod.CFrame * CFrame.new(0, 0, 8)
+                                        game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
+                                    until Options.MyToggleFindItem.Value == false or humanoidAlaGod.Health <= 0
+                                end
                             end
                         end
-                    end
-                elseif Options.MultiDropdownFindItem.Value == "Orb Dark" then
-                    local Asta = workspace:FindFirstChild("Asta [Boss]")
-                    if Asta then
-                        local humanoidRootPartAsta = Asta:FindFirstChild("HumanoidRootPart")
-                        local humanoidAsta = Asta:FindFirstChild("Humanoid")
-                        if humanoidAsta and humanoidRootPartAsta then
-                            if humanoidAsta.Health > 0 then
-                                repeat
-                                    task.wait()
-                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartAsta.CFrame * CFrame.new(0, 0, 8)
-                                    game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
-                                until Options.MyToggleFindItem.Value == false or humanoidAsta.Health <= 0
+                    elseif itemName == "Orb Dark" then
+                        local Asta = workspace:FindFirstChild("Asta [Boss]")
+                        if Asta then
+                            local humanoidRootPartAsta = Asta:FindFirstChild("HumanoidRootPart")
+                            local humanoidAsta = Asta:FindFirstChild("Humanoid")
+                            if humanoidAsta and humanoidRootPartAsta then
+                                if humanoidAsta.Health > 0 then
+                                    repeat
+                                        task.wait()
+                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPartAsta.CFrame * CFrame.new(0, 0, 8)
+                                        game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Move3.Fire:FireServer()
+                                    until Options.MyToggleFindItem.Value == false or humanoidAsta.Health <= 0
+                                end
                             end
                         end
                     end
@@ -179,6 +178,7 @@ do
             end)
         end
     end)
+    
     spawn(function()
         while wait() do
             pcall(function()
