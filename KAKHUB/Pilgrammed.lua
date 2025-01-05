@@ -1,4 +1,4 @@
-local Versionxx = "1.1.5"
+local Versionxx = "1.1.6"
 print("Version: "..Versionxx)
 ---------------
 
@@ -107,7 +107,7 @@ do
                 for i,v in pairs(game:GetService("Workspace").Ores:GetDescendants()) do
                     for Orb,va in pairs(selectedOrbs) do
                         if v.Name == Orb then
-                            TP(v.Parent.CFrame * CFrame.new(0,0,4))
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame * CFrame.new(0,0,4)
                             game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Slash:FireServer(1)
                             game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
                         end
