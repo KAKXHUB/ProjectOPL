@@ -1,4 +1,4 @@
-local Versionxx = "1.1.3"
+local Versionxx = "1.1.4"
 print("Version: "..Versionxx)
 ---------------
 
@@ -53,7 +53,9 @@ do
     local Weapon = nil
 
     for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-        table.insert(Weaponlist,v.Name)
+        if v:IsA("Tool") and string.find(v.Name, "Pickaxe") then
+            table.insert(Weaponlist,v.Name)
+        end
     end
 
 
