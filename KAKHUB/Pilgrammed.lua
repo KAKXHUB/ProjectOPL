@@ -1,4 +1,4 @@
-local Versionxx = "1.1.4"
+local Versionxx = "1.1.5"
 print("Version: "..Versionxx)
 ---------------
 
@@ -25,7 +25,7 @@ local Tabs = {
 
  function TP(P)
    local Distance = (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude -- จุดที่จะไป Position Only
-   local Speed = 1000 -- ความเร็วของมึง
+   local Speed = 350 -- ความเร็วของมึง
    tweenService, tweenInfo = game:GetService("TweenService"), TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear)
    tween = tweenService:Create(game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart, tweenInfo, {CFrame = P})
    tween:Play()
