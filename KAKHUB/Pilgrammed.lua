@@ -1,4 +1,4 @@
-local Versionxx = "1.1.2"
+local Versionxx = "1.1.3"
 print("Version: "..Versionxx)
 ---------------
 
@@ -44,7 +44,7 @@ do
     local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdownSelecOrb", {
         Title = "Selec Orb",
         Description = "You can select multiple values.",
-        Values = {"Darksteel", "Zinc", "iron", "Tin", "Copper", "Diamond", "Mithril", "Sapphire", "Sulfur", "Demetal", "Silver"},
+        Values = {"Darksteel", "Zinc", "Iron", "Tin", "Copper", "Diamond", "Mithril", "Sapphire", "Sulfur", "Demetal", "Silver"},
         Multi = true,
         Default = {""},
     })
@@ -105,8 +105,9 @@ do
                 for i,v in pairs(game:GetService("Workspace").Ores:GetDescendants()) do
                     for Orb,va in pairs(selectedOrbs) do
                         if v.Name == Orb then
-                            TP(v.CFrame * CFrame.new(0,0,4))
+                            TP(v.Parent.CFrame * CFrame.new(0,0,4))
                             game:GetService("Players").LocalPlayer.Character:FindFirstChild(Options.DropdownWTool.Value).Slash:FireServer(1)
+                            game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
                         end
                     end
                 end
